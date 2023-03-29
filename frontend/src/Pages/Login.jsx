@@ -111,10 +111,10 @@ export default function Login() {
               <Button
                 loadingText="Submitting"
                 size="lg"
-                bg={"blue.400"}
+                bg="#ef534e"
                 color={"white"}
                 _hover={{
-                  bg: "blue.500",
+                  bg: "#e7818c",
                 }}
                 onClick={handleLoginForm}
               >
