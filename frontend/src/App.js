@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <AllRoutes />
-      {/* <Singledetails/> */}
+    
     </div>
   );
 }

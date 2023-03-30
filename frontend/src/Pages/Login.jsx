@@ -11,12 +11,14 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Login() {
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,24 +30,54 @@ export default function Login() {
 
   const handleLoginForm = () => {
     const signupData = JSON.parse(localStorage.getItem("signupuser"));
-    if (
-      signupData.email === LoginData.email &&
-      signupData.password === LoginData.password
-    ) {
-      localStorage.setItem("loginuser", JSON.stringify(LoginData));
-      console.log("Login Successfully");
-    } else if (
-      signupData.email !== LoginData.email &&
-      signupData.password === LoginData.password
-    ) {
-      console.log("Please enter valid email");
-    } else if (
-      signupData.email === LoginData.email &&
-      signupData.password !== LoginData.password
-    ) {
-      console.log("Please enter valid password");
+    if (signupData === null) {
+      toast({
+        title: "Please do SignUp first",
+        status: "error",
+        isClosable: true,
+      });
+    } else if (LoginData.email === "" || LoginData.password === "") {
+      toast({
+        title: "Please fill all information",
+        status: "warning",
+        isClosable: true,
+      });
     } else {
-      console.log("Invalid Credentials");
+      if (
+        signupData.email === LoginData.email &&
+        signupData.password === LoginData.password
+      ) {
+        localStorage.setItem("loginuser", JSON.stringify(LoginData));
+        toast({
+          title: "Login Successfully",
+          status: "success",
+          isClosable: true,
+        });
+      } else if (
+        signupData.email !== LoginData.email &&
+        signupData.password === LoginData.password
+      ) {
+        toast({
+          title: "Please enter valid email",
+          status: "warning",
+          isClosable: true,
+        });
+      } else if (
+        signupData.email === LoginData.email &&
+        signupData.password !== LoginData.password
+      ) {
+        toast({
+          title: "Please enter valid password",
+          status: "warning",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Invalid Credentials",
+          status: "error",
+          isClosable: true,
+        });
+      }
     }
   };
 
