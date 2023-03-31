@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import GiftCards from "../Pages/GiftCards";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Payment from "../Pages/Payment/Payment";
@@ -18,6 +19,10 @@ const AllRoutes = () => {
       <Route
         path="/restaurant/premium-restaurant"
         element={<PremiumRestaurant />}
+      />
+      <Route
+        path="/giftcards"
+        element={<GiftCards />}
       />
     </Routes>
   );

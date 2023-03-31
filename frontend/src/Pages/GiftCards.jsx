@@ -11,7 +11,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPremiumRestaurant } from "../../Redux/Restaurants/Action";
+import { getGiftCards } from "../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
@@ -19,7 +19,7 @@ import Slider from "react-slick";
 // import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
-const PremiumRestaurant = () => {
+const GiftCards = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [searchparams, setSearchParams] = useSearchParams();
@@ -28,14 +28,9 @@ const PremiumRestaurant = () => {
   const [place, setPlace] = useState(initialState || []);
   const [order, setOrder] = useState(initialOrder || "");
   const page_info =
-    "NEARBUY > DEALS IN NEW DELHI > PREMIUM MERCHANTS - FNB IN NEW DELHI";
-  let Aerocity = 0;
-  let connaught = 0;
-  let Mahipalpur = 0;
-  let Restaurants = 0;
-
-  let dynamicFilter={}
-  let filterArray=[];
+    "NEARBUY > DEALS IN NEW DELHI > ALL GIFT CARDS IN NEW DELHI";
+  let deal = 0;
+  let InStore = 0;
 
   let obj = {
     params: {
@@ -44,7 +39,6 @@ const PremiumRestaurant = () => {
       order: searchparams.get("order"),
     },
   };
-  console.log(obj);
 
   const handleChange = (e) => {
     let newPlace = [...place];
@@ -63,7 +57,7 @@ const PremiumRestaurant = () => {
   };
 
   useEffect(() => {
-    dispatch(getPremiumRestaurant(obj));
+    dispatch(getGiftCards(obj));
   }, [location.search]);
 
   useEffect(() => {
@@ -77,31 +71,16 @@ const PremiumRestaurant = () => {
   }, [place, order]);
 
   const premium_restaurant = useSelector(
-    (store) => store.restaurantReducer.premium_restaurant
+    (store) => store.restaurantReducer.giftCards
   );
 
   for (let i = 0; i < premium_restaurant.length; i++) {
-    if (premium_restaurant[i].place == "Aerocity") {
-      Aerocity++;
-    } else if (premium_restaurant[i].place == "Connaught Place") {
-      connaught++;
-    } else if (premium_restaurant[i].place == "Mahipalpur") {
-      Mahipalpur++;
+    if (premium_restaurant[i].place == "Online Deal") {
+      deal++;
     }
-    Restaurants++;
+    InStore++;
   }
 
-  for (let i = 0; i < premium_restaurant.length; i++) {
-    if (dynamicFilter[premium_restaurant[i].place] == undefined) {
-       dynamicFilter[premium_restaurant[i].place]=1;
-       filterArray.push(premium_restaurant[i].place);
-    }else{
-      dynamicFilter[premium_restaurant[i].place]++
-    }
-  }
-
-console.log(filterArray)
-  
   // slider
 
   // const settings = {
@@ -305,7 +284,7 @@ console.log(filterArray)
               </Box>
               <Box
                 className={"filter"}
-                height={["200px", "200px", "400px"]}
+                height={["200px", "200px", "200px"]}
                 border="1px solid"
                 marginTop={["0px", "0px", "20px"]}
                 backgroundColor="#ffffff"
@@ -334,11 +313,11 @@ console.log(filterArray)
                       marginTop={"10px"}
                       marginBottom="5px"
                     >
-                      Restaurants
+                      In Store
                     </Text>
                   </Box>
                   <Box>
-                    <Text fontSize={"12px"}>({Restaurants})</Text>
+                    <Text fontSize={"12px"}>({InStore})</Text>
                   </Box>
                 </Box>
                 <Text
@@ -350,98 +329,6 @@ console.log(filterArray)
                 >
                   New Delhi
                 </Text>
-                {/* //1 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      colorScheme={"red"}
-                      size={"sm"}
-                      value="Aerocity"
-                      onChange={handleChange}
-                      checked={place.includes("Aerocity")}
-                    >
-                      AeroCity
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({Aerocity})</Text>
-                  </Box>
-                </Box>
-                {/* //2 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Connaught Place"
-                      onChange={handleChange}
-                      checked={place.includes("Connaught Place")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Connaught Place
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({connaught})</Text>
-                  </Box>
-                </Box>
-                {/* //3 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Sacket"
-                      onChange={handleChange}
-                      checked={place.includes("Sacket")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Sacket
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>(1)</Text>
-                  </Box>
-                </Box>
-                {/* //4 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Surajmal Vihar"
-                      onChange={handleChange}
-                      checked={place.includes("Surajmal Vihar")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Surajmal Vihar
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>(4)</Text>
-                  </Box>
-                </Box>
                 {/* //5 */}
                 <Box
                   className={"places"}
@@ -452,17 +339,17 @@ console.log(filterArray)
                 >
                   <Box alignItems={"center"}>
                     <Checkbox
-                      value="Mahipalpur"
+                      value="Online Deal"
                       onChange={handleChange}
-                      checked={place.includes("Mahipalpur")}
+                      checked={place.includes("Online Deal")}
                       colorScheme={"red"}
                       size={"sm"}
                     >
-                      Mahipalpur
+                      Online Deals
                     </Checkbox>
                   </Box>
                   <Box>
-                    <Text fontSize={"12px"}>({Mahipalpur})</Text>
+                    <Text fontSize={"12px"}>({deal})</Text>
                   </Box>
                 </Box>
               </Box>
@@ -489,7 +376,7 @@ console.log(filterArray)
                 fontWeight="semibold"
                 marginBottom={["10px", "10px", "0px"]}
               >
-                Premium Merchants - FNB in New Delhi
+                All Gift Cards in New Delhi
               </Text>
               <div onChange={handleSort}>
                 <RadioGroup marginRight="20px">
@@ -630,7 +517,7 @@ console.log(filterArray)
                             px="7px"
                             color="#ffffff"
                             marginRight="8px"
-                            backgroundColor={"#f47b58"}
+                            backgroundColor={"#2eb0d0"}
                             fontSize="10px"
                             fontWeight={"thin"}
                           >
@@ -669,4 +556,4 @@ console.log(filterArray)
   );
 };
 
-export default PremiumRestaurant;
+export default GiftCards;
