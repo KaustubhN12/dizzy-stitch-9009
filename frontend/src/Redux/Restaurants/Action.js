@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PREMIUM_RESTAURANT_REQUEST, PRODUCT_FAILURE, PRODUCT_REQUEST } from "./ActionType";
+import { GET_GIFT_CARD_REQUEST, GET_PREMIUM_RESTAURANT_REQUEST, PRODUCT_FAILURE, PRODUCT_REQUEST } from "./ActionType";
 
 export const productRequst = () => {
     return {type:PRODUCT_REQUEST}
@@ -12,12 +12,27 @@ export const productFailure = () => {
 export const getPremiumRestaurantRequest = (payload) => {
     return {type:GET_PREMIUM_RESTAURANT_REQUEST,payload}
 }
+export const getGiftCardRequest = (payload) => {
+    return {type:GET_GIFT_CARD_REQUEST,payload}
+}
 
-export const getPremiumRestaurant = (dispatch) => {
+export const getPremiumRestaurant = (param) => (dispatch) => {
     dispatch(productRequst());
-    axios.get("http://localhost:8080/restaurants").then((res)=>{
-        // console.log(res.data);
+    console.log(param)
+    axios.get("http://localhost:8080/restaurants",param).then((res)=>{
+        console.log(res.data);
         dispatch(getPremiumRestaurantRequest(res.data));
+    }).catch((err)=>{
+        dispatch(productFailure());
+    })
+}
+
+export const getGiftCards = (param) => (dispatch) => {
+    dispatch(productRequst());
+    console.log(param)
+    axios.get("http://localhost:8080/giftcards",param).then((res)=>{
+        console.log(res.data);
+        dispatch(getGiftCardRequest(res.data));
     }).catch((err)=>{
         dispatch(productFailure());
     })
