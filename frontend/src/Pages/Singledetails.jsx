@@ -1,10 +1,11 @@
 import React from "react";
 import { Stack, HStack, VStack, Box, Heading, Table, Thead, Tr, Th, Tbody, Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Singlepageabout from "../Components/Singlepageabout";
 import SinglePagePhoto from "../Components/SinglePagePhoto";
 import SinglePageRecommend from "../Components/SinglePageRecommend";
 import axios from 'axios';
+import { useSelector } from "react-redux";
 // import data from "./db.json"
 
 
@@ -14,12 +15,32 @@ function Singledetails() {
   const [title, settitle] = useState("")
   const [flag,setflag]=useState("")
   const [recomenddata,setrecommendata]=useState([])
+  const order_data=useSelector((store)=>store.Orderreducer.user)
+  const [order,setorder]=useState([])
+ 
+  let sum=0
+
+  if(order.length>1){
+    for(var i=1;i<order.length;i++){
+      sum=sum+order[i].price
+    }
+  }
+
+ 
+
+  useEffect(() => {
+    setorder(order_data)
+    // console.log(order_data)
+    
+  }, [order_data]);
+  console.log("order",order)
 
 
 
   const handleabout=()=>{
     setflag("about")
     settitle("This is about")
+    
   
   }
   const handlefetch=async()=>{
@@ -55,16 +76,12 @@ function Singledetails() {
  
 
 
-
-
-
-
   return (
     <>
       <h4>Singledetails</h4>
 
       {/* Upper Section  */}
-      <HStack w={"100%"} h={["400px","400px","250px"]} border={"1px solid grey"} p={4}>
+      <HStack w={"100%"} h={["400px","400px","250px"]} border={""} p={4}>
         <VStack w="50%" h="100%" display={"inline"}>
           <Stack>
             <h5
@@ -150,9 +167,9 @@ function Singledetails() {
           <Table>
             <Thead>
               <Tr>
-                <Th onClick={handlerecommend}>Recommended</Th>
-                <Th onClick={handleabout}>About</Th>
-                <Th onClick={handlephoto}>Photo</Th>
+                <Th onClick={handlerecommend} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"} >Recommended</Th>
+                <Th onClick={handleabout} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"}>About</Th>
+                <Th onClick={handlephoto} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"}>Photo</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -170,20 +187,29 @@ function Singledetails() {
 
 
 
-      <Stack border={"1px solid red"} w={"50%"} marginTop={"100px"} p={"30px"}>
+      <Stack border={""} w={"50%"} marginTop={"100px"} p={"30px"}>
+
+                  <Stack textAlign={"center"} backgroundColor={"#e0e0e0"} p={"18px"} borderRadius={"4px"}>
+                    <p style={{fontWeight:"700", color:"#333"}}>Your Order</p>
+                  </Stack>
+                {order.map((el)=> (
+
+                
+                  <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
+                    <p>{el.title}</p>
+                    <p>{el.price}</p>
+                  </Stack>
+                  
+                  
+                
+                ))}
+
 
         
-              <Stack textAlign={"center"} backgroundColor={"#e0e0e0"} p={"18px"} borderRadius={"4px"}>
-                <p style={{fontWeight:"700", color:"#333"}}>Your Order</p>
-              </Stack>
-              <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
-                <p>Product</p>
-                <p>Price</p>
-              </Stack>
 
               <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
                 <p>Total:</p>
-                <p>Price</p>
+                <p>{sum}</p>
               </Stack>
 
               <Stack>
@@ -194,20 +220,6 @@ function Singledetails() {
 
       </Stack>
       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     </>
