@@ -7,6 +7,7 @@ import Payment from "../Pages/Payment/Payment";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
 import Signup from "../Pages/Signup";
+import Singledetails from "../Pages/Singledetails"
 
 const AllRoutes = () => {
   return (
@@ -20,10 +21,13 @@ const AllRoutes = () => {
         path="/restaurant/premium-restaurant"
         element={<PremiumRestaurant />}
       />
+
+      <Route path="/singledetails" element={<Singledetails/>}></Route>
       <Route
         path="/giftcards"
         element={<GiftCards />}
       />
+
     </Routes>
   );
 };
