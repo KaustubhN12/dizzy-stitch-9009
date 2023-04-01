@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getPremiumRestaurant } from "../../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { json, useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -29,13 +29,10 @@ const PremiumRestaurant = () => {
   const [order, setOrder] = useState(initialOrder || "");
   const page_info =
     "NEARBUY > DEALS IN NEW DELHI > PREMIUM MERCHANTS - FNB IN NEW DELHI";
-  let Aerocity = 0;
-  let connaught = 0;
-  let Mahipalpur = 0;
   let Restaurants = 0;
 
-  let dynamicFilter={}
-  let filterArray=[];
+  let dynamicFilter = {};
+  let filterArray = [];
 
   let obj = {
     params: {
@@ -44,7 +41,6 @@ const PremiumRestaurant = () => {
       order: searchparams.get("order"),
     },
   };
-  console.log(obj);
 
   const handleChange = (e) => {
     let newPlace = [...place];
@@ -80,28 +76,26 @@ const PremiumRestaurant = () => {
     (store) => store.restaurantReducer.premium_restaurant
   );
 
+  // for (let i = 0; i < premium_restaurant.length; i++) {
+  //   if (premium_restaurant[i].place == "Aerocity") {
+  //     Aerocity++;
+  //   } else if (premium_restaurant[i].place == "Connaught Place") {
+  //     connaught++;
+  //   } else if (premium_restaurant[i].place == "Mahipalpur") {
+  //     Mahipalpur++;
+  //   }
+  //   Restaurants++;
+  // }
+
   for (let i = 0; i < premium_restaurant.length; i++) {
-    if (premium_restaurant[i].place == "Aerocity") {
-      Aerocity++;
-    } else if (premium_restaurant[i].place == "Connaught Place") {
-      connaught++;
-    } else if (premium_restaurant[i].place == "Mahipalpur") {
-      Mahipalpur++;
-    }
     Restaurants++;
-  }
-
-  for (let i = 0; i < premium_restaurant.length; i++) {
     if (dynamicFilter[premium_restaurant[i].place] == undefined) {
-       dynamicFilter[premium_restaurant[i].place]=1;
-       filterArray.push(premium_restaurant[i].place);
-    }else{
-      dynamicFilter[premium_restaurant[i].place]++
+      dynamicFilter[premium_restaurant[i].place] = 1;
+      filterArray.push(premium_restaurant[i].place);
+    } else {
+      dynamicFilter[premium_restaurant[i].place]++;
     }
   }
-
-console.log(filterArray)
-  
   // slider
 
   // const settings = {
@@ -248,7 +242,6 @@ console.log(filterArray)
         className={"content-box"}
         width={["93%", "95%", "82%"]}
         margin="auto"
-        border="1px solid red"
         height="auto"
       >
         <Box className={"page-info"} paddingTop="10px" paddingBottom="10px">
@@ -259,7 +252,6 @@ console.log(filterArray)
         <Box className="hr-line" border="1px solid #e0e0e0"></Box>
         <Box
           className={"page-data"}
-          border="1px solid"
           height="auto"
           display={"flex"}
           flexDirection={["column", "column", "initial"]}
@@ -267,13 +259,11 @@ console.log(filterArray)
           <Box
             className={"sidebar"}
             width={["100%", "100%", "24%"]}
-            border="1px solid red"
           >
             <Box
               className={"sidebar-info"}
               paddingTop="10px"
               paddingBottom="10px"
-              border="1px solid"
             >
               <Text fontSize={"sm"} color="#623351" fontWeight="semibold">
                 Promos & Filters
@@ -305,12 +295,27 @@ console.log(filterArray)
               </Box>
               <Box
                 className={"filter"}
-                height={["200px", "200px", "400px"]}
-                border="1px solid"
+                height={["200px", "200px", "300px"]}
                 marginTop={["0px", "0px", "20px"]}
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
-                overflow={["scroll", "scroll", "hidden"]}
+                overflowY={["scroll", "scroll", "scroll"]}
+                paddingBottom="10px"
+                sx={{
+                  '&::-webkit-scrollbar': {
+                    width: '5px',
+                    borderRadius: '26px',
+                    backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: `RGB(240 138 135)`,
+                    borderRadius: "20px",
+                    border: "6px solid transparent"
+                  },
+                  '&::-webkit-scrollbar-thumb:hover': {
+                    backgroundColor: "RGB(236 37 30)"
+                  }
+                }}
               >
                 <Text
                   fontWeight={"thin"}
@@ -350,135 +355,44 @@ console.log(filterArray)
                 >
                   New Delhi
                 </Text>
-                {/* //1 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      colorScheme={"red"}
-                      size={"sm"}
-                      value="Aerocity"
-                      onChange={handleChange}
-                      checked={place.includes("Aerocity")}
+                {filterArray.map((el) => {
+                  return (
+                    <Box
+                      className={"places"}
+                      width={"93%"}
+                      margin="auto"
+                      justifyContent={"space-between"}
+                      display={"flex"}
                     >
-                      AeroCity
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({Aerocity})</Text>
-                  </Box>
-                </Box>
-                {/* //2 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Connaught Place"
-                      onChange={handleChange}
-                      checked={place.includes("Connaught Place")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Connaught Place
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({connaught})</Text>
-                  </Box>
-                </Box>
-                {/* //3 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Sacket"
-                      onChange={handleChange}
-                      checked={place.includes("Sacket")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Sacket
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>(1)</Text>
-                  </Box>
-                </Box>
-                {/* //4 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Surajmal Vihar"
-                      onChange={handleChange}
-                      checked={place.includes("Surajmal Vihar")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Surajmal Vihar
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>(4)</Text>
-                  </Box>
-                </Box>
-                {/* //5 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Mahipalpur"
-                      onChange={handleChange}
-                      checked={place.includes("Mahipalpur")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Mahipalpur
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({Mahipalpur})</Text>
-                  </Box>
-                </Box>
+                      <Box alignItems={"center"}>
+                        <Checkbox
+                          value={el}
+                          onChange={handleChange}
+                          checked={place.includes(el)}
+                          colorScheme={"red"}
+                          size={"sm"}
+                        >
+                          {el}
+                        </Checkbox>
+                      </Box>
+                      <Box>
+                        <Text fontSize={"12px"}>({dynamicFilter[el]})</Text>
+                      </Box>
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
           </Box>
           <Box
             className={"service-section"}
             width={["100%", "100%", "76%"]}
-            border="1px solid blue"
             paddingLeft={["0px", "0px", "20px"]}
           >
             <Box
               className={"service-info"}
               paddingTop="10px"
               paddingBottom="10px"
-              border="1px solid"
               display={"flex"}
               flexDirection={["column", "column", "initial"]}
               justifyContent="space-between"
