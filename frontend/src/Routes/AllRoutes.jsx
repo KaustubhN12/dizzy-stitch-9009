@@ -1,19 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
-
-import GiftCards from "../Pages/GiftCards";
-
 import Login from "../Pages/Login";
+import Signup from "../Pages/Signup";
+import Home from "../Pages/Homepage/Home";
+import GiftCards from "../Pages/GiftCards";
 import Payment from "../Pages/Payment/Payment";
+import Singledetails from "../Pages/Singledetails";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
-import Signup from "../Pages/Signup";
-
-import Home from "../Pages/Homepage/Home";
-
-import Singledetails from "../Pages/Singledetails"
-
 
 const AllRoutes = () => {
   return (
@@ -27,13 +21,8 @@ const AllRoutes = () => {
         path="/restaurant/premium-restaurant"
         element={<PremiumRestaurant />}
       />
-
-      <Route path="/singledetails" element={<Singledetails/>}></Route>
-      <Route
-        path="/giftcards"
-        element={<GiftCards />}
-      />
-
+      <Route path="/singledetails" element={<Singledetails />}></Route>
+      <Route path="/giftcards" element={<GiftCards />} />
     </Routes>
   );
 };
