@@ -14,21 +14,20 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-export default function Login() {
+export default function AdminLogin() {
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const LoginData = {
+  const AdminLoginData = {
     email: email,
     password: password,
   };
 
-  const handleLoginForm = () => {
+  const handleAdminLoginForm = () => {
     const signupData = JSON.parse(localStorage.getItem("signupuser"));
     if (signupData === null) {
       toast({
@@ -36,7 +35,7 @@ export default function Login() {
         status: "error",
         isClosable: true,
       });
-    } else if (LoginData.email === "" || LoginData.password === "") {
+    } else if (AdminLoginData.email === "" || AdminLoginData.password === "") {
       toast({
         title: "Please fill all information",
         status: "warning",
@@ -44,18 +43,18 @@ export default function Login() {
       });
     } else {
       if (
-        signupData.email === LoginData.email &&
-        signupData.password === LoginData.password
+        signupData.email === AdminLoginData.email &&
+        signupData.password === AdminLoginData.password
       ) {
-        localStorage.setItem("loginuser", JSON.stringify(LoginData));
+        localStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
         toast({
           title: "Login Successfully",
           status: "success",
           isClosable: true,
         });
       } else if (
-        signupData.email !== LoginData.email &&
-        signupData.password === LoginData.password
+        signupData.email !== AdminLoginData.email &&
+        signupData.password === AdminLoginData.password
       ) {
         toast({
           title: "Please enter valid email",
@@ -63,8 +62,8 @@ export default function Login() {
           isClosable: true,
         });
       } else if (
-        signupData.email === LoginData.email &&
-        signupData.password !== LoginData.password
+        signupData.email === AdminLoginData.email &&
+        signupData.password !== AdminLoginData.password
       ) {
         toast({
           title: "Please enter valid password",
@@ -98,11 +97,8 @@ export default function Login() {
       >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
-            Login
+            Admin Login
           </Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            welcome back again ✌️
-          </Text>
         </Stack>
         <Box
           rounded={"lg"}
@@ -148,32 +144,10 @@ export default function Login() {
                 _hover={{
                   bg: "#e7818c",
                 }}
-                onClick={handleLoginForm}
+                onClick={handleAdminLoginForm}
               >
                 Login
               </Button>
-            </Stack>
-            <Stack pt={6}>
-              <Text align={"center"}>
-                Are you new user?{" "}
-                <Link
-                  to="/signup"
-                  style={{ color: "blue", fontWeight: "bold" }}
-                >
-                  SignUp
-                </Link>
-              </Text>
-            </Stack>
-            <Stack pt={2}>
-              <Text align={"center"}>
-                Are you Admin ?{" "}
-                <Link
-                  to="/adminlogin"
-                  style={{ color: "blue", fontWeight: "bold" }}
-                >
-                  Login
-                </Link>
-              </Text>
             </Stack>
           </Stack>
         </Box>
