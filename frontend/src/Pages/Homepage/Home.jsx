@@ -1,6 +1,10 @@
-import { Box, HStack, Img, Text, VStack } from "@chakra-ui/react";
+import { Box, Divider, HStack, Img, Text, VStack } from "@chakra-ui/react";
 import React from "react";
-import { SliderCategories, SliderKatrina, SliderTopCompanies } from "./Slider";
+import { SliderBanner } from "./Slider/sliderOne/Slider";
+import { SliderCategories, SliderHangout, SliderNearBuy, SliderTopCompanies } from "./Slider/sliderTwo/Slider2";
+// import { SliderBanner } from "./Slider/Slider";
+// import { SliderCategories, SliderHangout, SliderNearBuy, SliderTopCompanies } from "./Slider/Slider2";
+
 
 const bannerSlider = [
   {
@@ -32,6 +36,25 @@ const itemSlider = [
     image: "https://img4.nbstatic.in/tr:w-2800/6418583022b317000b3cb0ff.jpg",
     alt: ""
   }
+]
+
+const buffets = [
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/63285c0bc10843000be89e58.jpg",
+    alt: "",
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/63285c1d54f372000bdf5ea4.jpg",
+    alt: "",
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/63285c2fc10843000be89e59.jpg",
+    alt: "",
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/63285c40c10843000be89e5a.jpg",
+    alt: "",
+  },
 ]
 
 const topBrands = [
@@ -199,6 +222,54 @@ const hangOut = [
 
 ]
 
+const nearbuy = [
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/641576a222b317000b3ca27d.jpg",
+    alt: "",
+    title: "Mashaya",
+    place: "Rajouri Garden",
+    service: "Drinks with Starters",
+    price: "949",
+    offer: "53%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/5dc50f33fa4f8c000b9530d2.jpg",
+    alt: "",
+    title: "Beauty Studio By Monica",
+    place: "Govindpuri",
+    service: "Salon Service",
+    price: "349",
+    offer: "61%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/63be5f7922b317000b89f8b5.jpeg",
+    alt: "",
+    title: "Anardana",
+    place: "RK Puram Sector 9",
+    service: "Drinks with Starters",
+    price: "849",
+    offer: "19%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/641840ca22b317000b3cae9b.jpg",
+    alt: "",
+    title: "Dr.Zombie",
+    place: "Connaught Place",
+    service: "Drinks with Starters",
+    price: "1,499",
+    offer: "60%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/6419ab5222b317000b3cb608.jpg",
+    alt: "",
+    title: "High Spirits - Hilton Garden Inn",
+    place: "Saket",
+    service: "Drinks with Starters",
+    price: "1,199",
+    offer: "47%"
+  }
+]
+
 const quickBites = [
   {
     image: "https://img4.nbstatic.in/tr:w-350/6422a2808db992000bb667f1.jpg",
@@ -283,6 +354,49 @@ const dutyFree = [
   {
     image: "https://img4.nbstatic.in/tr:w-2800/63bfe1fc22b317000b618aa9.jpg",
     alt: ""
+  }
+]
+
+const gift = [
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/63ff0de28db992000bf63e28.jpg",
+    alt: "",
+    title: "Flipkart",
+    service: "Flipkart E-Gift Vouchers",
+    price: "2,000",
+    offer: "2%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/63fe0d568db992000bf63c61.jpg",
+    alt: "",
+    title: "Google Play Recharge Gift",
+    service: "Google Play Recharge Code Gift Voucher",
+    price: "980",
+    offer: "2%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/5efb18a8dc0e82000bc004b5.jpg",
+    alt: "",
+    title: "Puma ",
+    service: "Puma E-Gift Cards",
+    price: "465",
+    offer: "7%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/601be805e1ecca000b594d84.jpg",
+    alt: "",
+    title: "Myntra",
+    service: "Myntra e-Gift Cards",
+    price: "465",
+    offer: "7%"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-700/63fdeaff8db992000bf63b97.jpg",
+    alt: "",
+    title: "Amazon Shopping Gift Card",
+    service: "Amazon Shopping Gift Vouchers",
+    price: "1,000",
+    offer: "5%"
   }
 ]
 
@@ -371,19 +485,77 @@ const javed = [
     alt: ""
   }
 ]
+
+const lastBanner = [
+  {
+    image: "https://img4.nbstatic.in/tr:w-2800/63bfe0228db992000b7a18ae.jpg",
+    alt: "",
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-2800/63bfe01522b317000b618a9a.jpg",
+    alt: "",
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-2800/63bfe0118db992000b7a18ab.jpg",
+    alt: "",
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-2800/63c0f44e8db992000b7a1be4.jpg",
+    alt: "",
+  },
+]
+
+const massage = [
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/60fe592d1e2731000b9be392.jpg",
+    alt: "",
+    name: "Aromatherapy",
+    offer: "22 Offers"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/60fe594a1e2731000b9be395.jpg",
+    alt: "",
+    name: "Balinese",
+    offer: "15 Offers"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/60fe59751e2731000b9be396.jpg",
+    alt: "",
+    name: "Ayurvedic",
+    offer: "21 Offers"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/60fe598d40e9df000b0f5bcb.jpg",
+    alt: "",
+    name: "Thai",
+    offer: "8 Offers"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/60fe59af1e2731000b9be397.jpg",
+    alt: "",
+    name: "Swedish",
+    offer: "20 Offers"
+  },
+  {
+    image: "https://img4.nbstatic.in/tr:w-350/60fe59ce1e2731000b9be399.jpg",
+    alt: "",
+    name: "Deep Tissue",
+    offer: "16 Offers"
+  }
+]
 const Home = () => {
   return (
     <Box>
-      <h1>Home page</h1>
+
       <Box
         width={"100%"}
         backgroundColor={"#f1f1f1"}
       >
-        <SliderKatrina data={bannerSlider} />
+        <SliderBanner data={bannerSlider} />
       </Box>
       <br />
       <Box
-        width={"82%"}
+        width={"88%"}
         margin="auto"
       >
         <Img
@@ -397,12 +569,44 @@ const Home = () => {
         width={"100%"}
         backgroundColor={"#f1f1f1"}
       >
-        <SliderKatrina data={itemSlider} />
+        <SliderBanner data={itemSlider} />
       </Box>
       <br />
+      {/*<------------------------------------------ Buffets----------------------------------------> */}
+      <Box>
+        <Text
+          fontSize={"24"}
+          fontWeight={"700"}
+          fontFamily="sans-serif"
+          marginLeft={"66px"}>
+          Everything Buffet! 🍱 🍲
+        </Text>
+        <br />
+        <HStack
+          // border={"3px solid blue"}
+          width={"60%"}
+          marginLeft={"66px"}
+        >
+          {buffets.map((e) => {
+            return <Box>
+              <Img width={"85%"} borderRadius={"6px"} src={e.image} alt="" />
+            </Box>
+          })}
+        </HStack>
+      </Box>
+
+      <br />
+      {/*<------------------------------------- Top Brands-------------------------------------> */}
+
       <Box
-        width={"82%"}
+        width={"92%"}
         margin="auto">
+        <Text
+          fontSize={"24"}
+          fontWeight={"700"}
+          fontFamily="sans-serif">
+          Top Brands
+        </Text>
         < SliderTopCompanies data={topBrands} />
       </Box>
       <br />
@@ -410,9 +614,45 @@ const Home = () => {
         width={"100%"}
         backgroundColor={"#f1f1f1"}
       >
-        <SliderKatrina data={spa} />
+        <SliderBanner data={spa} />
       </Box>
       <br />
+
+      {/*<------------------------------------------ Hangout ----------------------------------------->*/}
+
+      <Box
+        width={"92%"}
+        margin={"auto"}
+
+      >
+        <Text
+          fontSize={"24"}
+          fontWeight={"700"}
+          fontFamily="sans-serif"
+        // marginLeft={"40px"}
+        >Popular Hangouts</Text>
+        < SliderHangout data={hangOut} />
+      </Box>
+      <br />
+      {/*<------------------------------------------ NearBuy-------------------------------------------> */}
+      <Box
+        width={"92%"}
+        margin={"auto"}
+
+      >
+        <Text
+          fontSize={"24"}
+          fontWeight={"700"}
+          fontFamily="sans-serif"
+        >
+          New On Nearbuy! 🤩 🎊
+        </Text>
+
+        <SliderNearBuy data={nearbuy} />
+      </Box>
+
+      <br />
+      {/*<------------------------------------------ QuickBites-------------------------------------------> */}
       <Box
         width={"92%"}
         margin="auto">
@@ -423,33 +663,56 @@ const Home = () => {
         >Quick Bites 🍔</Text>
         < SliderCategories data={quickBites} />
       </Box>
+
+      {/*<------------------------------------------- dutyFree---------------------------------------------> */}
+
       <br />
       <Box
         width={"100%"}
-        border={"1px solid red"}
+        // border={"1px solid red"}
         backgroundColor={"#f1f1f1"}
       >
-        <SliderKatrina data={dutyFree} />
+        <SliderBanner data={dutyFree} />
+      </Box>
+
+      <br />
+
+      {/*<---------------------------------------- Gift-------------------------------------------------> */}
+      <Box
+        width={"92%"}
+        margin={"auto"}
+      >
+        <Text
+          fontSize={"24"}
+          fontWeight={"700"}
+          fontFamily="sans-serif"
+        >
+          Perfect Gift Picks! ✨
+        </Text>
+
+        <SliderNearBuy data={gift} />
       </Box>
       <br />
+      {/*<------------------------------------------- NextThings------------------------------------> */}
       <Box
         width={"80%"}
-        marginLeft="150px"
+        marginLeft={"66px"}
       >
         <Text
           fontSize={"24"}
           fontWeight={"700"}
           fontFamily="sans-serif"
         >Next Thing On Your Mind</Text>
-        <HStack border={"2px solid red"}>
+        <br />
+        <HStack >
           {next.map((e) => {
-            return <VStack>
-
+            return <VStack >
               <Img
+
                 width={"80%"}
                 src={e.image}
                 alt={e.name}
-                borderRadius="8px"
+                borderRadius="6px"
               />
             </VStack>
 
@@ -457,8 +720,10 @@ const Home = () => {
         </HStack>
       </Box>
       <br />
+
+      {/*<-------------------------------------- Saloon----------------------------------------> */}
       <Box
-        width={"80%"}
+        width={"90%"}
         margin="auto"
       >
         <Text
@@ -466,26 +731,67 @@ const Home = () => {
           fontWeight={"700"}
           fontFamily="sans-serif"
         >Popular Salon Services✂️</Text>
-        <HStack border={"2px solid red"}>
+        <br />
+        <HStack >
           {saloon.map((e) => {
-            return <VStack>
-
+            return <VStack >
               <Img
                 src={e.image}
                 alt={e.name}
+                borderRadius={"6px"}
+                width={"88%"}
               />
-              <Text>{e.name}</Text>
-              <Text>{e.offer}</Text>
+              <Text fontSize={"16px"} fontWeight={"700"} fontFamily={"sans-serif"} color="#333333" paddingLeft={"26px"} alignSelf={"start"}>{e.name}</Text>
+              <Text fontSize={"13px"} color="#666666" fontWeight={"400"} fontFamily={"sans-serif"} paddingLeft={"26px"} alignSelf={"start"}>{e.offer}</Text>
             </VStack>
 
           })}
         </HStack>
       </Box>
+
       <br />
+
+      {/*<---------------------------------------------- Banner-------------------------------------> */}
       <Box
         backgroundColor={"#f1f1f1"}>
-        <SliderKatrina data={javed} />
+        <SliderBanner data={javed} />
       </Box>
+      <br />
+      {/*<---------------------------------------------- LastBanner-------------------------------------> */}
+      <Box
+        backgroundColor={"#f1f1f1"}>
+        <SliderBanner data={lastBanner} />
+      </Box>
+      <br />
+
+      {/*<-------------------------------------- Saloon----------------------------------------> */}
+      <Box
+        width={"90%"}
+        margin="auto"
+      >
+        <Text
+          fontSize={"24"}
+          fontWeight={"700"}
+          fontFamily="sans-serif"
+        >Relaxing Massages</Text>
+        <br />
+        <HStack >
+          {massage.map((e) => {
+            return <VStack >
+              <Img
+                src={e.image}
+                alt={e.name}
+                borderRadius={"6px"}
+                width={"88%"}
+              />
+              <Text fontSize={"16px"} fontWeight={"700"} fontFamily={"sans-serif"} color="#333333" paddingLeft={"26px"} alignSelf={"start"}>{e.name}</Text>
+              <Text fontSize={"13px"} color="#666666" fontWeight={"400"} fontFamily={"sans-serif"} paddingLeft={"26px"} alignSelf={"start"}>{e.offer}</Text>
+            </VStack>
+
+          })}
+        </HStack>
+      </Box>
+
 
     </Box>
   );
