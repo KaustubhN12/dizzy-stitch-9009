@@ -18,9 +18,7 @@ export const getGiftCardRequest = (payload) => {
 
 export const getPremiumRestaurant = (param) => (dispatch) => {
     dispatch(productRequst());
-    console.log(param)
     axios.get("http://localhost:8080/restaurants",param).then((res)=>{
-        console.log(res.data);
         dispatch(getPremiumRestaurantRequest(res.data));
     }).catch((err)=>{
         dispatch(productFailure());
@@ -29,9 +27,7 @@ export const getPremiumRestaurant = (param) => (dispatch) => {
 
 export const getGiftCards = (param) => (dispatch) => {
     dispatch(productRequst());
-    console.log(param)
     axios.get("http://localhost:8080/giftcards",param).then((res)=>{
-        console.log(res.data);
         dispatch(getGiftCardRequest(res.data));
     }).catch((err)=>{
         dispatch(productFailure());
