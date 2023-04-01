@@ -8,8 +8,7 @@ import Payment from "../Pages/Payment/Payment";
 import Singledetails from "../Pages/Singledetails";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
-import Signup from "../Pages/Signup";
-import Singledetails from "../Pages/Singledetails";
+
 import AdminLogin from "../Pages/AdminLogin";
 
 const AllRoutes = () => {
@@ -26,6 +25,7 @@ const AllRoutes = () => {
         element={<PremiumRestaurant />}
       />
       <Route path="/singledetails" element={<Singledetails />}></Route>
+      <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
     </Routes>
   );
