@@ -14,9 +14,23 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Payment = () => {
+  const [orderData, setOrderData] = useState();
+
+  const getOrderData = () => {
+    axios
+      .get(`https://good-puce-hummingbird-garb.cyclic.app/order/get`)
+      .then((res) => console.log("OrderData:", res.data))
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
+    getOrderData();
+  }, []);
+
   return (
     <Stack
       w="90%"
