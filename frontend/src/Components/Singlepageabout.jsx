@@ -2,7 +2,7 @@ import { Stack } from "@chakra-ui/react";
 import React from "react";
 
 function Singlepageabout({ params_data }) {
-  console.log(params_data);
+  // console.log(params_data);
   return (
     <>
       <Stack>

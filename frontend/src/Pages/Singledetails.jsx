@@ -26,15 +26,17 @@ function Singledetails() {
   const [flag,setflag]=useState("")
   const [recomenddata,setrecommendata]=useState([])
   const order_data=useSelector((store)=>store.Orderreducer.user)
-  const [order,setorder]=useState([])
- 
-  let sum=0
+  const [order,setorder]=useState([]);
+  const order_total=useSelector((store)=>store.Orderreducer.totalPrice)
 
-  if(order.length>1){
-    for(var i=1;i<order.length;i++){
-      sum=sum+order[i].price
-    }
-  }
+ 
+  // let sum=0
+
+  // if(order.length>1){
+  //   for(var i=1;i<order.length;i++){
+  //     sum=sum+order[i].price
+  //   }
+  // }
 
  
 
@@ -43,7 +45,7 @@ function Singledetails() {
     // console.log(order_data)
     
   }, [order_data]);
-  console.log("order",order)
+  // console.log("order",order)
 
 
 
@@ -212,7 +214,7 @@ function Singledetails() {
                 
                   <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
                     <p>{el.title}</p>
-                    <p>{el.price}</p>
+                    <p>{el.price*el.count}</p>
                   </Stack>
                   
                   
@@ -224,7 +226,7 @@ function Singledetails() {
 
               <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
                 <p>Total:</p>
-                <p>{sum}</p>
+                <p>{order_total}</p>
               </Stack>
 
               <Stack>
