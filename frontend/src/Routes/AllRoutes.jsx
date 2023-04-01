@@ -5,11 +5,9 @@ import Admin from "../Pages/Admin";
 
 
 import Login from "../Pages/Login";
-
 import Home from "../Pages/Homepage/Home";
 import GiftCards from "../Pages/GiftCards";
 import Payment from "../Pages/Payment/Payment";
-import Singledetails from "../Pages/Singledetails";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
 import Signup from "../Pages/Signup";
@@ -21,6 +19,8 @@ import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
 
 
 import AdminLogin from "../Pages/AdminLogin";
+import Health from "../Pages/Health";
+import NightLife from "../Pages/NightLife";
 
 
 const AllRoutes = () => {
@@ -44,6 +44,9 @@ const AllRoutes = () => {
       <Route path="/singledetails" element={<Singledetails />}></Route>
       <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
+      <Route path="/health" element={<Health />} />
+      <Route path="/nightlife" element={<NightLife />} />
+      <Route path="/restaurant" element={<RestaurantHome />} />
     </Routes>
   );
 };
