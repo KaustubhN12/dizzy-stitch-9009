@@ -7,13 +7,11 @@ const SinglePagePhoto = ({ params_data }) => {
 
   return (
     <>
-          <Stack w="100%" h="100%" display={"flex"} direction={"row"}>
-      {photo?.map((el) => (
-        
-            <img src={el} alt="dummy" width={"32%"} height={"100%"} />
-            
-            ))}
-            </Stack>
+      <Stack w={["200%","200%","50%","40%"]} display={"flex"} direction={["column","column","row"]} border={"1px solid red"} height={250}>
+        {photo?.map((el) => (
+          <img src={el} alt="dummy" width={["100%","50%"]} height={"100%"} />
+        ))}
+      </Stack>
     </>
   );
 };
