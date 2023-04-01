@@ -11,6 +11,9 @@ import { Orderreducer } from "../Redux/Order/reducer.order";
 
 function SinglePageRecommend({ recomenddata }) {
   const dispatch = useDispatch();
+  const order_data=useSelector((store)=>store.Orderreducer.user)
+  console.log(order_data);
+
 
   
 
@@ -30,8 +33,10 @@ function SinglePageRecommend({ recomenddata }) {
     data.filter((el) => {
       if (el.id == id) {
         const payload={
+          id:el.id,
           title:el.title,
-          price:el.price
+          price:el.price,
+          count:1
         }
         dispatch(addorder_redux(payload))
       }
@@ -39,15 +44,13 @@ function SinglePageRecommend({ recomenddata }) {
   };
 
   const handleInc = (id) => {
-    data.filter((el) => {
+    order_data?.filter((el) => {
       if (el.id == id) {
-        // console.log(el.price)
         const payload={
-          id:el.id,
-          price:el.price
+          ...el,
         }
-        console.log(payload)
-        dispatch(orderinc_redux(payload));
+        payload.count++;
+        dispatch(orderinc_redux(payload))
       }
     });
   };
@@ -59,7 +62,7 @@ function SinglePageRecommend({ recomenddata }) {
           title:el.title,
           price:el.price
         }
-        dispatch(orderdec_redux(payload));
+        dispatch(orderdec_redux(payload))
       }
     });
   };
