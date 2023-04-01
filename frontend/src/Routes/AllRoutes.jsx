@@ -1,16 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "../Pages/Login";
-import Signup from "../Pages/Signup";
 import Home from "../Pages/Homepage/Home";
 import GiftCards from "../Pages/GiftCards";
 import Payment from "../Pages/Payment/Payment";
-import Singledetails from "../Pages/Singledetails";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
 import Signup from "../Pages/Signup";
 import Singledetails from "../Pages/Singledetails";
 import AdminLogin from "../Pages/AdminLogin";
+import Health from "../Pages/Health";
+import NightLife from "../Pages/NightLife";
 
 const AllRoutes = () => {
   return (
@@ -27,6 +27,9 @@ const AllRoutes = () => {
       />
       <Route path="/singledetails" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
+      <Route path="/health" element={<Health />} />
+      <Route path="/nightlife" element={<NightLife />} />
+      <Route path="/restaurant" element={<RestaurantHome />} />
     </Routes>
   );
 };
