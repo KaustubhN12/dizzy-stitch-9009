@@ -19,6 +19,7 @@ import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
 import SingleSalonAdmin from "../Pages/SingleSalonAdmin";
 import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
 
+
 import AdminLogin from "../Pages/AdminLogin";
 
 
@@ -41,6 +42,7 @@ const AllRoutes = () => {
         element={<PremiumRestaurant />}
       />
       <Route path="/singledetails" element={<Singledetails />}></Route>
+      <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
     </Routes>
   );

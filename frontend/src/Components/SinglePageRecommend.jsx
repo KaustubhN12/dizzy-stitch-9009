@@ -69,7 +69,7 @@ function SinglePageRecommend({ recomenddata }) {
   return (
     <>
       {data.map((el, i) => (
-        <Stack marginTop={"20px"} p={"10px"} key={el.id}>
+        <Stack marginTop={"20px"} p={"10px"} key={el.id} w={"131%"}>
           <Stack
             display={"flex"}
             direction={["column", "column", "row"]}
@@ -91,6 +91,7 @@ function SinglePageRecommend({ recomenddata }) {
               pb={"6px"}
               pr={"6px"}
               fontSize={"10px"}
+              w={["20%","20%","6%","6%"]}
             >
               <p style={{ color: "#34a853" }}>{el.discount}%off</p>
             </Stack>
@@ -192,12 +193,7 @@ function SinglePageRecommend({ recomenddata }) {
             >
               Dec
             </Button>
-            </HStack>
-
-
-
-
-           
+            </HStack>           
           </Stack>
         </Stack>
       ))}

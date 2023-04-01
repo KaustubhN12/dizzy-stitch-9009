@@ -37,10 +37,11 @@ function Singlepageabout({ params_data }) {
 
               <h4
                 style={{
-                  lineHeight: "1px",
+                  // lineHeight: "1px",
+                  // border:"1px solid red",
                   color: "#666",
                   fontSize: "15px",
-                  width: "100%",
+                  width: "130%",
                 }}
               >
                 {el.address}
