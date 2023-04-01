@@ -5,7 +5,7 @@ import Admin from "../Pages/Admin";
 
 
 import Login from "../Pages/Login";
-import Signup from "../Pages/Signup";
+
 import Home from "../Pages/Homepage/Home";
 import GiftCards from "../Pages/GiftCards";
 import Payment from "../Pages/Payment/Payment";
@@ -19,7 +19,6 @@ import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
 import SingleSalonAdmin from "../Pages/SingleSalonAdmin";
 import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
 
-import Singledetails from "../Pages/Singledetails";
 import AdminLogin from "../Pages/AdminLogin";
 
 
