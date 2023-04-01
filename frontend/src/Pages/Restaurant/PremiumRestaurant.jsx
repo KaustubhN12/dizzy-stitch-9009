@@ -8,16 +8,20 @@ import {
   RadioGroup,
   Stack,
   Radio,
-  HStack,
+  Input,
+  Button
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPremiumRestaurant } from "../../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
-import { json, useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useToast } from '@chakra-ui/react';
+
 
 const PremiumRestaurant = () => {
   const dispatch = useDispatch();
@@ -27,6 +31,7 @@ const PremiumRestaurant = () => {
   const initialOrder = searchparams.get("order");
   const [place, setPlace] = useState(initialState || []);
   const [order, setOrder] = useState(initialOrder || "");
+  const toast = useToast();
   const page_info =
     "NEARBUY > DEALS IN NEW DELHI > PREMIUM MERCHANTS - FNB IN NEW DELHI";
   let Restaurants = 0;
@@ -96,20 +101,11 @@ const PremiumRestaurant = () => {
       dynamicFilter[premium_restaurant[i].place]++;
     }
   }
-  // slider
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
-
+  
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-    <Box position="absolute" marginTop="160px" marginLeft="40px" zIndex={1}>
+    <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
       <ChevronLeftIcon
-        boxSize={10}
+        boxSize={7}
         background="gray.50"
         borderRadius="50%"
         color="gray.500"
@@ -120,9 +116,9 @@ const PremiumRestaurant = () => {
   );
 
   const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-    <Box position="absolute" marginTop="-160px" marginLeft="1310px">
+    <Box position="absolute" marginTop="-100px" marginLeft="260px">
       <ChevronRightIcon
-        boxSize={10}
+        boxSize={7}
         background="gray.50"
         borderRadius="50%"
         color="gray.500"
@@ -132,47 +128,47 @@ const PremiumRestaurant = () => {
     </Box>
   );
 
-  // var settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   prevArrow: <SlickArrowLeft />,
-  //   nextArrow: <SlickArrowRight />,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         initialSlide: 2,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //   ],
-  // };
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows:false
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          dots: false,
+          arrows:false
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+          arrows:false
+        },
+      },
+    ],
+  };
 
   const coupons = [
     {
@@ -235,7 +231,7 @@ const PremiumRestaurant = () => {
 
   return (
     <div
-      style={{ backgroundColor: "#e1e9ec", height: "auto" }}
+      style={{ backgroundColor: "#e1e9ec", height: "auto" , paddingBottom:"30px" }}
       className={"container"}
     >
       <Box
@@ -276,22 +272,41 @@ const PremiumRestaurant = () => {
               <Box
                 className={"coupon"}
                 height="200px"
-                border="1px solid brown"
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
+                marginBottom={["20px","initial","initial"]}
+                marginRight={["initial","20px","initial"]}
               >
-                {/* <Slider {...settings}>
-                  {sliderData1.map((el, index) => {
+                <Slider {...settings}>
+                  {coupons.map((el, index) => {
                     return (
                       <div key={index}>
-                        <Box padding="10px">
-                          <Image borderRadius="8px" src={el.image} />
+                        <Box>
+                          <Box padding="15px">
+                          <Text fontWeight="bold" fontStyle="sans-serif" fontSize="17px">{el.discount}</Text>
+                          <Text fontWeight="semibold" fontSize="xs" marginTop="35px">{el.title}</Text>
+                          <Box display={"flex"} marginTop="10px" >
+                            <Input size="sm" width="100px" value={el.code} color="#66aadc"/>
+                            <CopyToClipboard text={el.code}>
+                              <Button size="sm" onClick={()=>{
+                                toast({
+                                  title: 'Code copied.',
+                                  description:el.code ,
+                                  status: 'success',
+                                  duration: 3000,
+                                  isClosable: true,
+                                })
+                              }}>Copy</Button>
+                            </CopyToClipboard>
+                          </Box>
+                          </Box>
+                          <Box className="hr-line" border="1px solid #e8e8e8"></Box>
+                          <Text fontWeight="semibold" fontSize="xs" marginTop="4px" marginLeft={"15px"}>{el.validity}</Text>
                         </Box>
                       </div>
                     );
                   })}
-                </Slider> */}
-                dhfghfdhfgf
+                </Slider>
               </Box>
               <Box
                 className={"filter"}

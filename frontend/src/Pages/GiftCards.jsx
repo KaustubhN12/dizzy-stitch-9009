@@ -9,15 +9,19 @@ import {
   Stack,
   Radio,
   HStack,
+  Input,
+  Button,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGiftCards } from "../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { useToast } from '@chakra-ui/react';
 
 const GiftCards = () => {
   const dispatch = useDispatch();
@@ -27,6 +31,7 @@ const GiftCards = () => {
   const initialOrder = searchparams.get("order");
   const [place, setPlace] = useState(initialState || []);
   const [order, setOrder] = useState(initialOrder || "");
+  const toast = useToast();
   const page_info =
     "NEARBUY > DEALS IN NEW DELHI > ALL GIFT CARDS IN NEW DELHI";
   let deal = 0;
@@ -81,20 +86,10 @@ const GiftCards = () => {
     InStore++;
   }
 
-  // slider
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
-
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-    <Box position="absolute" marginTop="160px" marginLeft="40px" zIndex={1}>
+    <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
       <ChevronLeftIcon
-        boxSize={10}
+        boxSize={7}
         background="gray.50"
         borderRadius="50%"
         color="gray.500"
@@ -105,9 +100,9 @@ const GiftCards = () => {
   );
 
   const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-    <Box position="absolute" marginTop="-160px" marginLeft="1310px">
+    <Box position="absolute" marginTop="-100px" marginLeft="260px">
       <ChevronRightIcon
-        boxSize={10}
+        boxSize={7}
         background="gray.50"
         borderRadius="50%"
         color="gray.500"
@@ -117,47 +112,47 @@ const GiftCards = () => {
     </Box>
   );
 
-  // var settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   prevArrow: <SlickArrowLeft />,
-  //   nextArrow: <SlickArrowRight />,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         initialSlide: 2,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //   ],
-  // };
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows:false
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          dots: false,
+          arrows:false
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+          arrows:false
+        },
+      },
+    ],
+  };
 
   const coupons = [
     {
@@ -220,14 +215,13 @@ const GiftCards = () => {
 
   return (
     <div
-      style={{ backgroundColor: "#e1e9ec", height: "auto" }}
+      style={{ backgroundColor: "#e1e9ec", height: "auto", paddingBottom:"30px" }}
       className={"container"}
     >
       <Box
         className={"content-box"}
         width={["93%", "95%", "82%"]}
         margin="auto"
-        border="1px solid red"
         height="auto"
       >
         <Box className={"page-info"} paddingTop="10px" paddingBottom="10px">
@@ -238,7 +232,6 @@ const GiftCards = () => {
         <Box className="hr-line" border="1px solid #e0e0e0"></Box>
         <Box
           className={"page-data"}
-          border="1px solid"
           height="auto"
           display={"flex"}
           flexDirection={["column", "column", "initial"]}
@@ -246,13 +239,11 @@ const GiftCards = () => {
           <Box
             className={"sidebar"}
             width={["100%", "100%", "24%"]}
-            border="1px solid red"
           >
             <Box
               className={"sidebar-info"}
               paddingTop="10px"
               paddingBottom="10px"
-              border="1px solid"
             >
               <Text fontSize={"sm"} color="#623351" fontWeight="semibold">
                 Promos & Filters
@@ -265,31 +256,64 @@ const GiftCards = () => {
               <Box
                 className={"coupon"}
                 height="200px"
-                border="1px solid brown"
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
+                marginBottom={["20px","initial","initial"]}
+                marginRight={["initial","20px","initial"]}
               >
-                {/* <Slider {...settings}>
-                  {sliderData1.map((el, index) => {
+                 <Slider {...settings}>
+                  {coupons.map((el, index) => {
                     return (
                       <div key={index}>
-                        <Box padding="10px">
-                          <Image borderRadius="8px" src={el.image} />
+                        <Box>
+                          <Box padding="15px">
+                          <Text fontWeight="bold" fontStyle="sans-serif" fontSize="17px">{el.discount}</Text>
+                          <Text fontWeight="semibold" fontSize="xs" marginTop="35px">{el.title}</Text>
+                          <Box display={"flex"} marginTop="10px" >
+                            <Input size="sm" width="100px" value={el.code} color="#66aadc"/>
+                            <CopyToClipboard text={el.code}>
+                              <Button size="sm" onClick={()=>{
+                                toast({
+                                  title: 'Code copied.',
+                                  description:el.code ,
+                                  status: 'success',
+                                  duration: 3000,
+                                  isClosable: true,
+                                })
+                              }}>Copy</Button>
+                            </CopyToClipboard>
+                          </Box>
+                          </Box>
+                          <Box className="hr-line" border="1px solid #e8e8e8"></Box>
+                          <Text fontWeight="semibold" fontSize="xs" marginTop="4px" marginLeft={"15px"}>{el.validity}</Text>
                         </Box>
                       </div>
                     );
                   })}
-                </Slider> */}
-                dhfghfdhfgf
+                </Slider>
               </Box>
               <Box
                 className={"filter"}
                 height={["200px", "200px", "200px"]}
-                border="1px solid"
                 marginTop={["0px", "0px", "20px"]}
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
-                overflow={["scroll", "scroll", "hidden"]}
+                overflow={["scroll", "scroll", "scroll"]}
+                sx={{
+                  '&::-webkit-scrollbar': {
+                    width: '5px',
+                    borderRadius: '26px',
+                    backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: `RGB(240 138 135)`,
+                    borderRadius: "20px",
+                    border: "6px solid transparent"
+                  },
+                  '&::-webkit-scrollbar-thumb:hover': {
+                    backgroundColor: "RGB(236 37 30)"
+                  }
+                }}
               >
                 <Text
                   fontWeight={"thin"}
@@ -358,14 +382,12 @@ const GiftCards = () => {
           <Box
             className={"service-section"}
             width={["100%", "100%", "76%"]}
-            border="1px solid blue"
             paddingLeft={["0px", "0px", "20px"]}
           >
             <Box
               className={"service-info"}
               paddingTop="10px"
               paddingBottom="10px"
-              border="1px solid"
               display={"flex"}
               flexDirection={["column", "column", "initial"]}
               justifyContent="space-between"
