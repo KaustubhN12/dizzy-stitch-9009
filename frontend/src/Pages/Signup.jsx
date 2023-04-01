@@ -11,12 +11,14 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Signup() {
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
@@ -31,7 +33,38 @@ export default function Signup() {
   };
 
   const handleSignupForm = () => {
-    localStorage.setItem("signupuser", JSON.stringify(SignupData));
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (
+      SignupData.name === "" ||
+      SignupData.phone === "" ||
+      SignupData.email === "" ||
+      SignupData.password === ""
+    ) {
+      toast({
+        title: "Please fill all information",
+        status: "warning",
+        isClosable: true,
+      });
+    } else if (SignupData.phone.length !== 10) {
+      toast({
+        title: "Please fill valid phone number",
+        status: "warning",
+        isClosable: true,
+      });
+    } else if (!SignupData.email.match(mailformat)) {
+      toast({
+        title: "Please fill valid email address",
+        status: "warning",
+        isClosable: true,
+      });
+    } else {
+      localStorage.setItem("signupuser", JSON.stringify(SignupData));
+      toast({
+        title: `SignUp Successful ....`,
+        status: "success",
+        isClosable: true,
+      });
+    }
   };
 
   return (

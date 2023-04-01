@@ -1,24 +1,137 @@
 import React from "react";
-import { Stack, HStack, VStack, Box, Heading } from "@chakra-ui/react";
+import { Stack, HStack, VStack, Box, Heading, Table, Thead, Tr, Th, Tbody, Button } from "@chakra-ui/react";
+import { useState ,useEffect} from "react";
+import Singlepageabout from "../Components/Singlepageabout";
+import SinglePagePhoto from "../Components/SinglePagePhoto";
+import SinglePageRecommend from "../Components/SinglePageRecommend";
+import axios from 'axios';
+import { useSelector } from "react-redux";
+// import data from "./db.json"
+
 
 function Singledetails() {
+
+  
+  const [title, settitle] = useState("")
+  const [flag,setflag]=useState("")
+  const [recomenddata,setrecommendata]=useState([])
+  const order_data=useSelector((store)=>store.Orderreducer.user)
+  const [order,setorder]=useState([])
+ 
+  let sum=0
+
+  if(order.length>1){
+    for(var i=1;i<order.length;i++){
+      sum=sum+order[i].price
+    }
+  }
+
+ 
+
+  useEffect(() => {
+    setorder(order_data)
+    // console.log(order_data)
+    
+  }, [order_data]);
+  console.log("order",order)
+
+
+
+  const handleabout=()=>{
+    setflag("about")
+    settitle("This is about")
+    
+  
+  }
+  const handlefetch=async()=>{
+    try{
+      let res=await axios.get('./db.json').then((res)=>{
+        // console.log(res.data.data)
+        setrecommendata(res.data.data)
+
+      })
+    }
+    catch(error){
+      console.log(error)
+    }
+
+  }
+
+  const handlerecommend=()=>{
+    if(flag==true){
+      setflag(flag)
+    }
+    setflag("recommend")
+    settitle("This is Recommend")
+    handlefetch()
+
+  }
+
+
+  const handlephoto=()=>{
+   
+    setflag("photo")
+    settitle("This is Photo")
+  }
+ 
+
+
   return (
     <>
       <h4>Singledetails</h4>
 
-      <HStack w={"100%"} h={"250px"} border={"1px solid grey"}>
-        <VStack w="50%" h="100%">
+      {/* Upper Section  */}
+      <HStack w={"100%"} h={["400px","400px","250px"]} border={""} p={4}>
+        <VStack w="50%" h="100%" display={"inline"}>
           <Stack>
-            <h5>Sub Category</h5>
+            <h5
+              style={{
+                fontWeight: 700,
+                color: "#999",
+                textTransform: "uppercase",
+              }}
+            >
+              Sub Category
+            </h5>
+          </Stack>
+          <Stack display={"flex"} direction={["column", "column", "row"]}>
+            <Heading
+              textTransform={"capitalize"}
+              lineHeight={"30px"}
+              fontWeight={700}
+            >
+              Glanz Studio Unisex Salon{" "}
+            </Heading>
+            <Box
+              style={{ border: "1px solid grey", borderRadius: "1px" }}
+              w={["50%", "50%", "20%"]}
+            >
+              <Box
+                style={{
+                  color: "orange",
+                  marginRight: "10px",
+                  height: "12px",
+                  padding: "10px",
+                  fontSize: "20px",
+                }}
+              >
+                nb
+              </Box>
+              <Box ml={["40px", "40px"]} mt={["0px"]}>
+                |4.5/5
+              </Box>
+            </Box>
           </Stack>
           <HStack>
-            <Heading>Glanz Studio Unisex Salon </Heading>
-            <h4>
-              <span>nb</span>4.5/5
+            <h4
+              style={{
+                fontWeight: 600,
+                color: "#666",
+                textTransform: "capitalize",
+              }}
+            >
+              Central Market Lajpat Nagar 2, Lajpat Nagar 2{" "}
             </h4>
-          </HStack>
-          <HStack>
-            <h4>Central Market Lajpat Nagar 2, Lajpat Nagar 2 </h4>
           </HStack>
         </VStack>
 
@@ -46,6 +159,69 @@ function Singledetails() {
           </Box>
         </Stack>
       </HStack>
+
+      {/* Lower Section */}
+
+      <Stack border={"1px solid grey"} w={"100%"} display={"flex"} direction={"row"}>
+        <Stack w={"95%"}>
+          <Table>
+            <Thead>
+              <Tr>
+                <Th onClick={handlerecommend} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"} >Recommended</Th>
+                <Th onClick={handleabout} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"}>About</Th>
+                <Th onClick={handlephoto} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"}>Photo</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+
+              {flag=="about" ?  <Singlepageabout/>:"" }
+              {flag=="photo" ?  <SinglePagePhoto/>:"" }
+              {flag=="recommend" ?  <SinglePageRecommend recomenddata={recomenddata}/>:"" }
+              </Tr>
+              
+            </Tbody>
+            
+          </Table>
+        </Stack>
+
+
+
+      <Stack border={""} w={"50%"} marginTop={"100px"} p={"30px"}>
+
+                  <Stack textAlign={"center"} backgroundColor={"#e0e0e0"} p={"18px"} borderRadius={"4px"}>
+                    <p style={{fontWeight:"700", color:"#333"}}>Your Order</p>
+                  </Stack>
+                {order.map((el)=> (
+
+                
+                  <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
+                    <p>{el.title}</p>
+                    <p>{el.price}</p>
+                  </Stack>
+                  
+                  
+                
+                ))}
+
+
+        
+
+              <Stack display={"flex"} direction={"row"} justifyContent={"space-around"}>
+                <p>Total:</p>
+                <p>{sum}</p>
+              </Stack>
+
+              <Stack>
+                <Button colorScheme="red">Buy Now</Button>
+              </Stack>
+
+      </Stack>
+
+      </Stack>
+      
+
+
     </>
   );
 }
