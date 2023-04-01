@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 
 
 import GiftCards from "../Pages/GiftCards";
-import Home from "../Pages/Home";
 
 import Login from "../Pages/Login";
 import Payment from "../Pages/Payment/Payment";
