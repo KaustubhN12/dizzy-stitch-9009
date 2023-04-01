@@ -9,9 +9,19 @@ import { useSelector } from "react-redux";
 // import data from "./db.json"
 
 
+
+const params_data=[{
+  catageory:"BEAUTY SALON",
+  servicname:"Jawed Habib Hair & Beauty",
+  rating:4.5,
+  address:"Shop No. 119-120, 1st Floor, Vikas Surya Shopping Mall, Sector 3, Manglam Place Rohini, New Delhi",
+  phone:[ 8130671365, 1147080792],
+  photo:["https://img4.nbstatic.in/tr:w-500/5ba9f23152faff000d86a547.jpg","https://img4.nbstatic.in/tr:w-500/5ba9f239d60180000c503360.jpg","https://img4.nbstatic.in/tr:w-500/5c3432e0ee3588000d918041.jpg"]
+}]
+
+
 function Singledetails() {
 
-  
   const [title, settitle] = useState("")
   const [flag,setflag]=useState("")
   const [recomenddata,setrecommendata]=useState([])
@@ -78,11 +88,14 @@ function Singledetails() {
 
   return (
     <>
-      <h4>Singledetails</h4>
+      
 
       {/* Upper Section  */}
       <HStack w={"100%"} h={["400px","400px","250px"]} border={""} p={4}>
-        <VStack w="50%" h="100%" display={"inline"}>
+        {params_data?.map((el)=>(
+
+          <>
+            <VStack w="50%" h="100%" display={"inline"}>
           <Stack>
             <h5
               style={{
@@ -91,7 +104,7 @@ function Singledetails() {
                 textTransform: "uppercase",
               }}
             >
-              Sub Category
+              {el.catageory}
             </h5>
           </Stack>
           <Stack display={"flex"} direction={["column", "column", "row"]}>
@@ -100,10 +113,10 @@ function Singledetails() {
               lineHeight={"30px"}
               fontWeight={700}
             >
-              Glanz Studio Unisex Salon{" "}
+              {el.servicname}
             </Heading>
             <Box
-              style={{ border: "1px solid grey", borderRadius: "1px" }}
+              style={{ border: "1px solid #e0e0e0", borderRadius: "4px" ,padding:"6px"}}
               w={["50%", "50%", "20%"]}
             >
               <Box
@@ -111,14 +124,14 @@ function Singledetails() {
                   color: "orange",
                   marginRight: "10px",
                   height: "12px",
-                  padding: "10px",
+                  // padding: "10px",
                   fontSize: "20px",
                 }}
               >
                 nb
               </Box>
               <Box ml={["40px", "40px"]} mt={["0px"]}>
-                |4.5/5
+                |{el.rating}/5
               </Box>
             </Box>
           </Stack>
@@ -130,12 +143,12 @@ function Singledetails() {
                 textTransform: "capitalize",
               }}
             >
-              Central Market Lajpat Nagar 2, Lajpat Nagar 2{" "}
+              {el.address}
             </h4>
           </HStack>
-        </VStack>
+            </VStack>
 
-        <Stack
+            <Stack
           display={"flex"}
           direction={["column", "column", "row"]}
           w={"50%"}
@@ -143,7 +156,7 @@ function Singledetails() {
         >
           <Stack w="100%" h="100%">
             <img
-              src="https://img4.nbstatic.in/tr:w-500/5f0c2a0edc0e82000c3e9f60.jpg"
+              src={el.photo[0]}
               alt="dummy"
               width={"100%"}
               height={"100%"}
@@ -151,13 +164,15 @@ function Singledetails() {
           </Stack>
           <Box w="100%" h="100%">
             <img
-              src="https://img4.nbstatic.in/tr:w-500/5f0c2a0edc0e82000c3e9f60.jpg"
+              src={el.photo[1]}
               alt="dummy"
               width={"100%"}
               height={"100%"}
             />
           </Box>
-        </Stack>
+            </Stack>
+          </>
+        ))}
       </HStack>
 
       {/* Lower Section */}
@@ -168,15 +183,15 @@ function Singledetails() {
             <Thead>
               <Tr>
                 <Th onClick={handlerecommend} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"} >Recommended</Th>
-                <Th onClick={handleabout} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"}>About</Th>
+                <Th onClick={handleabout} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"} >About</Th>
                 <Th onClick={handlephoto} border={"1px solid grey"} cursor={"pointer"} backgroundColor={"#e0e0e0"}>Photo</Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
 
-              {flag=="about" ?  <Singlepageabout/>:"" }
-              {flag=="photo" ?  <SinglePagePhoto/>:"" }
+              {flag=="about" ?  <Singlepageabout params_data={params_data}/>:"" }
+              {flag=="photo" ?  <SinglePagePhoto params_data={params_data}/>:"" }
               {flag=="recommend" ?  <SinglePageRecommend recomenddata={recomenddata}/>:"" }
               </Tr>
               
