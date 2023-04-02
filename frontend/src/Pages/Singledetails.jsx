@@ -138,6 +138,7 @@ function Singledetails() {
                       fontSize: "20px",
                     }}
                   >
+                    
                     <img src="https://www.nearbuy.com/static/images/nb.png" alt="nb" style={{height:"12px",marginRight:"6px",paddingRight:"6px"}} />
                   </Box>
                   <Box ml={["40px", "27px"]} mt={["-5px","-4px"]} fontSize={["13px","15px"]} fontWeight={700}>
