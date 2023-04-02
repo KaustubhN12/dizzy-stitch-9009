@@ -26,6 +26,7 @@ import Promotion from "../Pages/UserAccount/Promotion";
 import Salon from "../Pages/salon";
 import Singledetails from "../Pages/Singledetails";
 import OrderSuccess from "../Pages/OrderSuccess";
+import Singledetailsalon from "../Pages/SingledetailsSalon";
 
 const AllRoutes = () => {
   return (
@@ -51,6 +52,8 @@ const AllRoutes = () => {
       />
 
       <Route path="/singledetails" element={<Singledetails />}></Route>
+      <Route path="/singledetailsalon" element={<Singledetailsalon />}></Route>
+      <Route path="/singledetailsalon/:userID" element={<Singledetailsalon />}></Route>
       <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
       <Route path="/health" element={<Health />} />
