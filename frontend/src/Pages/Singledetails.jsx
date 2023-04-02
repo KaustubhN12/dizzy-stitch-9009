@@ -49,7 +49,6 @@ function Singledetails() {
   const [singlepagedata,setsinglepagedata]=useState([])
   const order_total = useSelector((store) => store.Orderreducer.totalPrice);
   const singledata=useSelector((store)=>store.restaurantReducer.premium_restaurant)
-  
   // console.log(singledata[0]._id);
 
   const navigator=useNavigate()
