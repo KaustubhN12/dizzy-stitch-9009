@@ -88,7 +88,7 @@ function Singledetails() {
   const handlefetch = async () => {
     try {
       let res = await axios.get(`https://good-puce-hummingbird-garb.cyclic.app/restDeal/get`).then((res) => {
-        console.log(res.data.msg)
+        console.log("recommend_msg",res.data.msg)
         setrecommendata(res.data.msg);
       });
     } catch (error) {
