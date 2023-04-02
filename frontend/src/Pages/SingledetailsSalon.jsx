@@ -39,7 +39,7 @@ import { useParams } from "react-router-dom";
 //   },
 // ];
 
-function Singledetails() {
+function Singledetailsalon() {
   const [title, settitle] = useState("");
   const [flag, setflag] = useState("");
   
@@ -48,7 +48,8 @@ function Singledetails() {
   const [order, setorder] = useState([]);
   const [singlepagedata,setsinglepagedata]=useState([])
   const order_total = useSelector((store) => store.Orderreducer.totalPrice);
-  const singledata=useSelector((store)=>store.restaurantReducer.premium_restaurant)
+  const singledata=useSelector((store)=>store.restaurantReducer.salon)
+  
   // console.log(singledata[0]._id);
 
   const navigator=useNavigate()
@@ -320,4 +321,4 @@ function Singledetails() {
   );
 }
 
-export default Singledetails;
+export default Singledetailsalon;

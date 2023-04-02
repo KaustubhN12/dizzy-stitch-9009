@@ -14,7 +14,7 @@ const SinglePagePhoto = ({ singlepagedata }) => {
 
   return (
     <>
-      <Stack w={["200%","200%","50%","40%"]} display={"flex"} direction={["column","column","row"]} border={"1px solid red"} height={250}>
+      <Stack w={["200%","200%","50%","40%"]} display={"flex"} direction={["column","column","row"]} border={""} height={250}>
         {/* {photo?.map((el) => ( */}
           <img src={singlepagedata.Image} alt="dummy" width={["100%","50%"]} height={"100%"} />
         {/* ))} */}
