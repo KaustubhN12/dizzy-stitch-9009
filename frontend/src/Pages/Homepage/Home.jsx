@@ -546,7 +546,6 @@ const massage = [
 const Home = () => {
   return (
     <Box>
-
       <Box
         width={"100%"}
         backgroundColor={"#f1f1f1"}
