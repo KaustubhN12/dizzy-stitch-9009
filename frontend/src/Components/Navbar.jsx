@@ -1,9 +1,11 @@
-import { SearchIcon, UnlockIcon } from '@chakra-ui/icons'
-import { Box, Button, Grid, GridItem, HStack, Icon, Img, Input, Text } from '@chakra-ui/react'
+import { SearchIcon, UnlockIcon, } from '@chakra-ui/icons'
+
+import { Box, Button, Grid, GridItem, HStack, Icon, Img, Input, MenuButton, Text, Menu, MenuList, MenuItem, } from '@chakra-ui/react'
 import React from 'react'
 import { ImLocation } from 'react-icons/im'
 
 export const Navbar = () => {
+  const token = true;
   return (
     <Box width={"100%"} borderBottom={"1px solid gray"}>
       <Grid
@@ -27,7 +29,7 @@ export const Navbar = () => {
         <GridItem bg='#f1f1f1' area={'location'} alignItems={'center'} >
           <HStack pl={['0px', '0px', "140px"]} fontSize={"12px"} py={"auto"} height={"100%"}>
             <ImLocation color='#889a9d' />
-            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"}  color={"#889a9d"}  >Select Location</Text>
+            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#889a9d"}  >Select Location</Text>
           </HStack>
         </GridItem>
 
@@ -37,7 +39,32 @@ export const Navbar = () => {
             <Text fontWeight={"600"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#EF534E"}>We're hiring! &#x7C;</Text>
             <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}> How it Works &#x7C;</Text>
             <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}> List your Business &#x7C;</Text>
-            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}> <UnlockIcon /> Login / Sign Up</Text>
+            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}>
+
+              {token ? <Menu  >
+
+                <MenuButton> My Account
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>My Orders</MenuItem>
+                  <MenuItem>My Credits</MenuItem>
+                  <MenuItem>My Profile</MenuItem>
+                  <MenuItem>My Newsletters</MenuItem>
+                  <MenuItem>Refer a friend</MenuItem>
+                  <MenuItem>My Proms</MenuItem>
+                  <MenuItem>Sign Out</MenuItem>
+
+                </MenuList>
+              </Menu>
+                :
+                <Text>
+                  <UnlockIcon />
+                  Login / Sign Up
+                </Text>
+
+              }
+
+            </Text>
           </HStack>
         </GridItem>
 
@@ -49,7 +76,7 @@ export const Navbar = () => {
 
         <GridItem bg='white' pr={['0px', '0px', '140px']} area={'search'} my={'auto'}>
           <HStack gap={"0"} width={["100%"]} >
-            <Input backgroundColor={'white'} borderRadius={"2"} type='text' placeholder=' Search restaurants, spa, events' />
+            <Input width={["70%", "80%", "100%"]} backgroundColor={'white'} borderRadius={"2"} type='text' placeholder=' Search restaurants, spa, events' />
             <Button colorScheme='red' color={'white'} borderRadius={"2"} >Search</Button>
           </HStack>
         </GridItem>
