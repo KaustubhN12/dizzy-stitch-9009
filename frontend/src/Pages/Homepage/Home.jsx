@@ -544,21 +544,61 @@ const massage = [
   }
 ]
 const Home = () => {
+
+  const [category,setcategory] = React.useState([])
+
+  React.useEffect(()=>{
+    getcategory()
+  },[])
+
+   const getcategory=()=>{
+
+       fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+         "Content-type":"application/json"
+       }).then((res)=>res.json())
+         .then((res)=>setcategory(res.msg))
+         .catch((err)=>console.log("err"))
+
+   }
+
+    console.log(category)
+
+
   return (
     <Box>
+
+
+       <HStack  >
+
+        {
+          category.map((el)=>{
+            return <Box key={el._id} >
+                     <Img src={el.img} height={"80px"} width={"100%"} alt="pic" />
+                     <p>{el.title}</p>
+                  </Box>
+          })
+        }
+ 
+
+       </HStack>
+
+
+
       <Box
-        width={"100%"}
+
+        // border={"2px solid red"}
         backgroundColor={"#f1f1f1"}
       >
         <SliderBanner data={bannerSlider} />
       </Box>
       <br />
       <Box
-        width={"88%"}
+        width={["5%", "40%", "88%"]}
+
         margin="auto"
       >
         <Img
-          borderRadius="6px"
+          borderRadius={["2px", "4px", "6px"]}
           src="https://img4.nbstatic.in/tr:w-2800/6409c9d58db992000b50b90d.jpg"
           alt="" />
       </Box>
@@ -630,6 +670,7 @@ const Home = () => {
           fontFamily="sans-serif"
         // marginLeft={"40px"}
         >Popular Hangouts</Text>
+        <br />
         < SliderHangout data={hangOut} />
       </Box>
       <br />
@@ -791,8 +832,9 @@ const Home = () => {
         </HStack>
       </Box>
 
-
+      <br />
     </Box>
+
   );
 };
 

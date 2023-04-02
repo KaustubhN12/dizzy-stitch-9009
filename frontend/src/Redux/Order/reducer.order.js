@@ -6,9 +6,7 @@ const initialState = {
 };
 
 export const Orderreducer = (state = initialState, { type, payload }) => {
-//   console.log(payload)
 
-  // console.log("reducer",state.user)
   switch (type) {
     case types.ORDER_ADD:{
       return {
@@ -17,14 +15,7 @@ export const Orderreducer = (state = initialState, { type, payload }) => {
       };
     }
     case types.ORDER_INC: {
-      // const Id = payload.id;
-      // const user = state.user.find((el) => el.id === Id);
-      // const updateduser = { ...user, price: user.price + payload.price };
-      // const updatedusers = state.user.map((t) =>
-      //   t.id === Id ? updateduser : t
-      // );
-      // return { ...state, user: updatedusers };
-      
+    
       for(let i=0;i<state.user.length;i++){
         if(payload==state.user[i].id){
             state.user[i].count++;
@@ -53,6 +44,7 @@ export const Orderreducer = (state = initialState, { type, payload }) => {
           if(state.user[i].count!=0){
             state.user[i].count--;
           }
+          
         }
       }
       let price=0;

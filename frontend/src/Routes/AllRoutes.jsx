@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import GiftCards from "../Pages/GiftCards";
 import Admin from "../Pages/Admin";
 import Login from "../Pages/Login";
 import Home from "../Pages/Homepage/Home";
@@ -7,6 +8,7 @@ import GiftCards from "../Pages/GiftCards";
 import Payment from "../Pages/Payment/Payment";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
+import AdminSignup from "../Pages/AdminSignup";
 import Signup from "../Pages/Signup";
 import SingleCompany from "../Pages/SingleCompany";
 import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
@@ -22,7 +24,7 @@ import NewsLetter from "../Pages/UserAccount/NewsLetter";
 import Refer from "../Pages/UserAccount/Refer";
 import Promotion from "../Pages/UserAccount/Promotion";
 import Salon from "../Pages/salon";
-
+import Singledetails from "../Pages/Singledetails";
 
 const AllRoutes = () => {
   return (
@@ -32,6 +34,7 @@ const AllRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/adminlogin" element={<AdminLogin />} />
+      <Route path="/adminsignup" element={<AdminSignup />} />
       <Route path="/restaurant" element={<RestaurantHome />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/update/:id" element={<SingleCompany />} />

@@ -122,12 +122,12 @@ function Singledetails() {
                 <Box
                   style={{
                     border: "1px solid #e0e0e0",
-                    borderRadius: "4px",
+                    borderRadius: "5px",
                     padding: "6px",
                     
                     display:"inline"
                   }}
-                  w={["80%", "55%", "55%","16%"]}
+                  w={["80%", "28%", "55%","13%"]}
                 >
                   <Box
                     style={{
@@ -138,9 +138,10 @@ function Singledetails() {
                       fontSize: "20px",
                     }}
                   >
-                    nb
+                    
+                    <img src="https://www.nearbuy.com/static/images/nb.png" alt="nb" style={{height:"12px",marginRight:"6px",paddingRight:"6px"}} />
                   </Box>
-                  <Box ml={["40px", "40px"]} mt={["0px"]}>
+                  <Box ml={["40px", "27px"]} mt={["-5px","-4px"]} fontSize={["13px","15px"]} fontWeight={700}>
                     {el.rating}/5
                   </Box>
                 </Box>
@@ -274,6 +275,7 @@ function Singledetails() {
               justifyContent={"space-around"}
             >
               <p style={{color:"#333",fontSize:"12px",}}>{el.title}</p>
+              <p style={{color:"#333",fontSize:"12px",}}>X{el.count}</p>
               <p style={{fontWeight:700,color:"#666" ,fontSize:".8125rem"}}>₹{el.price * el.count}</p>
             </Stack>
           ))}
