@@ -544,8 +544,43 @@ const massage = [
   }
 ]
 const Home = () => {
+
+  const [category,setcategory] = React.useState([])
+
+  React.useEffect(()=>{
+    getcategory()
+  },[])
+
+   const getcategory=()=>{
+
+       fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+         "Content-type":"application/json"
+       }).then((res)=>res.json())
+         .then((res)=>setcategory(res.msg))
+         .catch((err)=>console.log("err"))
+
+   }
+
+    console.log(category)
+
+
   return (
     <Box>
+
+       <HStack  >
+
+        {
+          category.map((el)=>{
+            return <Box key={el._id} >
+                     <Img src={el.img} height={"80px"} width={"100%"} alt="pic" />
+                     <p>{el.title}</p>
+                  </Box>
+          })
+        }
+ 
+
+       </HStack>
+
 
       <Box
         width={"100%"}
