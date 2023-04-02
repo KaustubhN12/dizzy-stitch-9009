@@ -45,6 +45,7 @@ export default function Login() {
         localStorage.setItem("user-token", res.data.token);
         localStorage.setItem("user-details", JSON.stringify(res.data.user[0]));
         navigate("/");
+        window.location.reload();
       })
       .catch((e) => console.log("Login-Error:", e));
   };

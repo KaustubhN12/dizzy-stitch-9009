@@ -39,7 +39,7 @@ function SinglePageRecommend({ recomenddata }) {
       if (el._id == _id) {
         const payload={
           id:el._id,
-          title:el.Title,
+          Title:el.Title,
           price:Number(el.offerprice),
           count:1
         }
