@@ -23,41 +23,63 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 
-const params_data = [
-  {
-    catageory: "BEAUTY SALON",
-    servicname: "Jawed Habib Hair & Beauty",
-    rating: 4.5,
-    address:
-      "Shop No. 119-120, 1st Floor, Vikas Surya Shopping Mall, Sector 3, Manglam Place Rohini, New Delhi",
-    phone: [8130671365, 1147080792],
-    photo: [
-      "https://img4.nbstatic.in/tr:w-500/5ba9f23152faff000d86a547.jpg",
-      "https://img4.nbstatic.in/tr:w-500/5ba9f239d60180000c503360.jpg",
-      "https://img4.nbstatic.in/tr:w-500/5c3432e0ee3588000d918041.jpg",
-    ],
-  },
-];
+// const params_data = [
+//   {
+//     catageory: "BEAUTY SALON",
+//     servicname: "Jawed Habib Hair & Beauty",
+//     rating: 4.5,
+//     address:
+//       "Shop No. 119-120, 1st Floor, Vikas Surya Shopping Mall, Sector 3, Manglam Place Rohini, New Delhi",
+//     phone: [8130671365, 1147080792],
+//     photo: [
+//       "https://img4.nbstatic.in/tr:w-500/5ba9f23152faff000d86a547.jpg",
+//       "https://img4.nbstatic.in/tr:w-500/5ba9f239d60180000c503360.jpg",
+//       "https://img4.nbstatic.in/tr:w-500/5c3432e0ee3588000d918041.jpg",
+//     ],
+//   },
+// ];
 
 function Singledetails() {
   const [title, settitle] = useState("");
   const [flag, setflag] = useState("");
+  
   const [recomenddata, setrecommendata] = useState([]);
   const order_data = useSelector((store) => store.Orderreducer.user);
   const [order, setorder] = useState([]);
+  const [singlepagedata,setsinglepagedata]=useState([])
   const order_total = useSelector((store) => store.Orderreducer.totalPrice);
-  // const singledata=useSelector((store)=>store.restaurantReducer)
-  // console.log(singledata);
+  const singledata=useSelector((store)=>store.restaurantReducer.salon)
+  // console.log(singledata[0]._id);
 
   const navigator=useNavigate()
   const {userID}=useParams()
-  
+  // console.log(userID)
 
+  
   useEffect(() => {
     setorder(order_data);
     // console.log(order_data)
   }, [order_data]);
   // console.log("order",order)
+
+  useEffect(()=>{
+    // setsinglepagedata(singledata)
+    for(var i=0;i<singledata.length;i++){
+      if(singledata[i]._id==userID){
+        // console.log(singledata[i])
+        setsinglepagedata(singledata[i])
+      }
+    }
+    
+  },[singledata])
+  // console.log(singlepagedata)
+
+
+  
+
+
+
+
 
   const handleabout = () => {
     setflag("about");
@@ -65,9 +87,9 @@ function Singledetails() {
   };
   const handlefetch = async () => {
     try {
-      let res = await axios.get("./db.json").then((res) => {
-        // console.log(res.data.data)
-        setrecommendata(res.data.data);
+      let res = await axios.get(`https://good-puce-hummingbird-garb.cyclic.app/restDeal/get`).then((res) => {
+        console.log(res.data.msg)
+        setrecommendata(res.data.msg);
       });
     } catch (error) {
       console.log(error);
@@ -97,7 +119,7 @@ function Singledetails() {
     <>
       {/* Upper Section  */}
       <HStack w={"100%"} h={["400px", "400px", "250px"]} border={""} p={4}>
-        {params_data?.map((el) => (
+        
           <>
             <VStack w="50%" h="100%" display={"inline"}>
               <Stack>
@@ -108,7 +130,7 @@ function Singledetails() {
                     textTransform: "uppercase",
                   }}
                 >
-                  {el.catageory}
+                  {singlepagedata.bought}
                 </h5>
               </Stack>
               <Stack display={"flex"} direction={["column", "column", "row"]}>
@@ -117,7 +139,7 @@ function Singledetails() {
                   lineHeight={"30px"}
                   fontWeight={700}
                 >
-                  {el.servicname}
+                  {singlepagedata.Title}
                 </Heading>
                 <Box
                   style={{
@@ -142,7 +164,7 @@ function Singledetails() {
                     <img src="https://www.nearbuy.com/static/images/nb.png" alt="nb" style={{height:"12px",marginRight:"6px",paddingRight:"6px"}} />
                   </Box>
                   <Box ml={["40px", "27px"]} mt={["-5px","-4px"]} fontSize={["13px","15px"]} fontWeight={700}>
-                    {el.rating}/5
+                    {singlepagedata.rating}/5
                   </Box>
                 </Box>
               </Stack>
@@ -154,7 +176,7 @@ function Singledetails() {
                     textTransform: "capitalize",
                   }}
                 >
-                  {el.address}
+                  {singlepagedata.place}
                 </h4>
               </HStack>
             </VStack>
@@ -167,7 +189,7 @@ function Singledetails() {
             >
               <Stack w="100%" h="100%">
                 <img
-                  src={el.photo[0]}
+                  src={singlepagedata.Image}
                   alt="dummy"
                   width={"100%"}
                   height={"100%"}
@@ -175,7 +197,7 @@ function Singledetails() {
               </Stack>
               <Box w="100%" h="100%">
                 <img
-                  src={el.photo[1]}
+                  src={singlepagedata.Image}
                   alt="dummy"
                   width={"100%"}
                   height={"100%"}
@@ -183,7 +205,7 @@ function Singledetails() {
               </Box>
             </Stack>
           </>
-        ))}
+        
       </HStack>
 
       {/* Lower Section */}
@@ -240,12 +262,12 @@ function Singledetails() {
             <Tbody>
               <Tr>
                 {flag == "about" ? (
-                  <Singlepageabout params_data={params_data} />
+                  <Singlepageabout singlepagedata={singlepagedata} />
                 ) : (
                   ""
                 )}
                 {flag == "photo" ? (
-                  <SinglePagePhoto params_data={params_data} />
+                  <SinglePagePhoto singlepagedata={singlepagedata} />
                 ) : (
                   ""
                 )}

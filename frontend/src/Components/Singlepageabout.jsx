@@ -1,12 +1,15 @@
 import { Stack } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function Singlepageabout({ params_data }) {
-  // console.log(params_data);
+function Singlepageabout( {singlepagedata} ) {
+  console.log("about",singlepagedata);
+
+
+ 
   return (
     <>
       <Stack>
-        {params_data?.map((el) => (
+        {/* {singlepagedata.map((el) => ( */}
           <>
             <Stack marginTop={"12px"} p={2}>
               <h4
@@ -18,7 +21,7 @@ function Singlepageabout({ params_data }) {
                   color: "#999",
                 }}
               >
-                {el.servicname}
+                {singlepagedata.Title}
               </h4>
             </Stack>
 
@@ -44,7 +47,7 @@ function Singlepageabout({ params_data }) {
                   width: "130%",
                 }}
               >
-                {el.address}
+                {singlepagedata.place}
               </h4>
               <p
                 style={{
@@ -55,11 +58,11 @@ function Singlepageabout({ params_data }) {
                   marginTop: "12px",
                 }}
               >
-                Phone:-{el.phone}
+                Phone:-12345678
               </p>
             </Stack>
           </>
-        ))}
+        {/* ))} */}
       </Stack>
     </>
   );
