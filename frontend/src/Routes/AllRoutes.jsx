@@ -14,7 +14,7 @@ import GiftCards from "../Pages/GiftCards";
 import Payment from "../Pages/Payment/Payment";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
-import AdminLogin from "../Pages/AdminLogin";
+
 import AdminSignup from "../Pages/AdminSignup";
 import Signup from "../Pages/Signup";
 import SingleCompany from "../Pages/SingleCompany";
@@ -24,6 +24,7 @@ import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
 import AdminLogin from "../Pages/AdminLogin";
 import Health from "../Pages/Health";
 import NightLife from "../Pages/NightLife";
+import Singledetails from "../Pages/Singledetails";
 
 const AllRoutes = () => {
   return (
