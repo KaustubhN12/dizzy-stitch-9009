@@ -8,22 +8,22 @@ import {
   RadioGroup,
   Stack,
   Radio,
-  HStack,
   Input,
-  Button,
+  Button
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getGiftCards } from "../Redux/Restaurants/Action";
+import { getPremiumRestaurant } from "../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import CopyToClipboard from "react-copy-to-clipboard";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useToast } from '@chakra-ui/react';
 
-const GiftCards = () => {
+
+const NightLife = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [searchparams, setSearchParams] = useSearchParams();
@@ -33,9 +33,11 @@ const GiftCards = () => {
   const [order, setOrder] = useState(initialOrder || "");
   const toast = useToast();
   const page_info =
-    "NEARBUY > DEALS IN NEW DELHI > ALL GIFT CARDS IN NEW DELHI";
-  let deal = 0;
-  let InStore = 0;
+    "NEARBUY > DEALS IN NEW DELHI > DRINKS & NIGHTLIFE TAGS - ALL IN NEW DELHI";
+  let Restaurants = 0;
+
+  let dynamicFilter = {};
+  let filterArray = [];
 
   let obj = {
     params: {
@@ -62,7 +64,7 @@ const GiftCards = () => {
   };
 
   useEffect(() => {
-    dispatch(getGiftCards(obj));
+    dispatch(getPremiumRestaurant(obj));
   }, [location.search]);
 
   useEffect(() => {
@@ -76,16 +78,42 @@ const GiftCards = () => {
   }, [place, order]);
 
   const premium_restaurant = useSelector(
-    (store) => store.restaurantReducer.giftCards
+    (store) => store.restaurantReducer.premium_restaurant
   );
 
-  for (let i = 0; i < premium_restaurant.length; i++) {
-    if (premium_restaurant[i].place == "Online Deal") {
-      deal++;
-    }
-    InStore++;
-  }
+  // for (let i = 0; i < premium_restaurant.length; i++) {
+  //   if (premium_restaurant[i].place == "Aerocity") {
+  //     Aerocity++;
+  //   } else if (premium_restaurant[i].place == "Connaught Place") {
+  //     connaught++;
+  //   } else if (premium_restaurant[i].place == "Mahipalpur") {
+  //     Mahipalpur++;
+  //   }
+  //   Restaurants++;
+  // }
 
+  const shuffleArray = (array) => {
+    let len = array.length,
+        currentIndex;
+    for (currentIndex = len - 1; currentIndex > 0; currentIndex--) {
+        let randIndex = Math.floor(Math.random() * (currentIndex + 1) );
+        var temp = array[currentIndex];
+        array[currentIndex] = array[randIndex];
+        array[randIndex] = temp;
+    }
+}
+shuffleArray(premium_restaurant);
+
+  for (let i = 0; i < premium_restaurant.length; i++) {
+    Restaurants++;
+    if (dynamicFilter[premium_restaurant[i].place] == undefined) {
+      dynamicFilter[premium_restaurant[i].place] = 1;
+      filterArray.push(premium_restaurant[i].place);
+    } else {
+      dynamicFilter[premium_restaurant[i].place]++;
+    }
+  }
+  
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
       <ChevronLeftIcon
@@ -215,7 +243,7 @@ const GiftCards = () => {
 
   return (
     <div
-      style={{ backgroundColor: "#e1e9ec", height: "auto", paddingBottom:"30px" }}
+      style={{ backgroundColor: "#e1e9ec", height: "auto" , paddingBottom:"30px" }}
       className={"container"}
     >
       <Box
@@ -261,7 +289,7 @@ const GiftCards = () => {
                 marginBottom={["20px","initial","initial"]}
                 marginRight={["initial","20px","initial"]}
               >
-                 <Slider {...settings}>
+                <Slider {...settings}>
                   {coupons.map((el, index) => {
                     return (
                       <div key={index}>
@@ -294,11 +322,12 @@ const GiftCards = () => {
               </Box>
               <Box
                 className={"filter"}
-                height={["200px", "200px", "200px"]}
+                height={["200px", "200px", "300px"]}
                 marginTop={["0px", "0px", "20px"]}
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
-                overflow={["scroll", "scroll", "scroll"]}
+                overflowY={["scroll", "scroll", "scroll"]}
+                paddingBottom="10px"
                 sx={{
                   '&::-webkit-scrollbar': {
                     width: '5px',
@@ -337,11 +366,11 @@ const GiftCards = () => {
                       marginTop={"10px"}
                       marginBottom="5px"
                     >
-                      In Store
+                      Restaurants
                     </Text>
                   </Box>
                   <Box>
-                    <Text fontSize={"12px"}>({InStore})</Text>
+                    <Text fontSize={"12px"}>({Restaurants})</Text>
                   </Box>
                 </Box>
                 <Text
@@ -353,29 +382,32 @@ const GiftCards = () => {
                 >
                   New Delhi
                 </Text>
-                {/* //5 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Online Deal"
-                      onChange={handleChange}
-                      checked={place.includes("Online Deal")}
-                      colorScheme={"red"}
-                      size={"sm"}
+                {filterArray.map((el) => {
+                  return (
+                    <Box
+                      className={"places"}
+                      width={"93%"}
+                      margin="auto"
+                      justifyContent={"space-between"}
+                      display={"flex"}
                     >
-                      Online Deals
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({deal})</Text>
-                  </Box>
-                </Box>
+                      <Box alignItems={"center"}>
+                        <Checkbox
+                          value={el}
+                          onChange={handleChange}
+                          checked={place.includes(el)}
+                          colorScheme={"red"}
+                          size={"sm"}
+                        >
+                          {el}
+                        </Checkbox>
+                      </Box>
+                      <Box>
+                        <Text fontSize={"12px"}>({dynamicFilter[el]})</Text>
+                      </Box>
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
           </Box>
@@ -398,7 +430,7 @@ const GiftCards = () => {
                 fontWeight="semibold"
                 marginBottom={["10px", "10px", "0px"]}
               >
-                All Gift Cards in New Delhi
+               Drinks & Nightlife Tags - All in New Delhi
               </Text>
               <div onChange={handleSort}>
                 <RadioGroup marginRight="20px">
@@ -539,7 +571,7 @@ const GiftCards = () => {
                             px="7px"
                             color="#ffffff"
                             marginRight="8px"
-                            backgroundColor={"#2eb0d0"}
+                            backgroundColor={"#f47b58"}
                             fontSize="10px"
                             fontWeight={"thin"}
                           >
@@ -578,4 +610,4 @@ const GiftCards = () => {
   );
 };
 
-export default GiftCards;
+export default NightLife;

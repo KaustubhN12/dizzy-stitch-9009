@@ -66,10 +66,18 @@ export const orderdec_redux = (payload) =>async(dispatch)=> {
 
 }
 export const orderinc_redux = (payload) =>async(dispatch)=> {
-
+       
         dispatch(OrderRequiest())
     try{
-        dispatch(inc_order(payload))
+
+
+            await dispatch(inc_order(payload))
+
+        // let response=await axios.post("http://localhost:3000/singledetails",payload).then((res)=>{
+
+        // })
+        
+        // console.log(response)
     }
     catch(error){
             dispatch(OrderFailure())

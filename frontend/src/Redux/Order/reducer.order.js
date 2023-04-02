@@ -1,52 +1,68 @@
-
-
-import * as types from "../Order/actiontype.order"
-
-
+import * as types from "../Order/actiontype.order";
 
 const initialState = {
+  user: [],
+  totalPrice:0
+};
+
+export const Orderreducer = (state = initialState, { type, payload }) => {
+
+  switch (type) {
+    case types.ORDER_ADD:{
+      return {
+        ...state,
+        user: [...state.user, payload],totalPrice:state.totalPrice+payload.price
+      };
+    }
+    case types.ORDER_INC: {
     
-    user:[{
-        title:String,
-        price:Number
-    }]
-}
-
-export const Orderreducer = (state=initialState,{type,payload}) => {
-    console.log(payload)
-    // console.log("reducer",state.user)
-    switch(type){
-        case types.ORDER_ADD:
-            return{
-                ...state,
-                user:[...state.user,payload]
-            }
-        case types.ORDER_INC:
-
-        const id=payload.id
-
-        const new_user=state.user.map((el)=>{
-            if(el.id==id){
-               el.price= el.price+payload.price
-            }
-        })
-        console.log("new_user",new_user)
-
-            return {
-                ...state,
-                user:{...state.user,new_user}
-            } 
-        case types.ORDER_DEC:
-            return {
-                ...state,
-                user:state.user.filter((el)=>{
-                    if(el.title==payload.title){
-                        el.price=el.price-payload.price
-                    }
-                })
-            }              
-        default:
-            return state;
+      for(let i=0;i<state.user.length;i++){
+        if(payload==state.user[i].id){
+            state.user[i].count++;
+        }
+      }
+      let price=0;
+      for(let i=0;i<state.user.length;i++){
+        if(state.user[i].count){
+          price+=state.user[i].price*state.user[i].count
+        }else{
+          price+=state.user[i].price
+        }
+        
+      }
+      console.log("users",state.user);
+      console.log(state.totalPrice)
+      return{
+       ...state,totalPrice:price
+      }
     }
 
-}
+    case types.ORDER_DEC:{
+     
+      for(let i=0;i<state.user.length;i++){
+        if(payload==state.user[i].id){
+          if(state.user[i].count!=0){
+            state.user[i].count--;
+          }
+          
+        }
+      }
+      let price=0;
+      for(let i=0;i<state.user.length;i++){
+        if(state.user[i].count){
+          price+=state.user[i].price*state.user[i].count
+        }else{
+          price+=state.user[i].price
+        }
+        
+      }
+      console.log("users",state.user);
+      console.log(state.totalPrice)
+      return {
+        ...state,totalPrice:price
+      };
+    }
+    default:
+      return state;
+  }
+};

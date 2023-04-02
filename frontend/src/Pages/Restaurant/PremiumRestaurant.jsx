@@ -8,16 +8,20 @@ import {
   RadioGroup,
   Stack,
   Radio,
-  HStack,
+  Input,
+  Button
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPremiumRestaurant } from "../../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useToast } from '@chakra-ui/react';
+
 
 const PremiumRestaurant = () => {
   const dispatch = useDispatch();
@@ -27,15 +31,13 @@ const PremiumRestaurant = () => {
   const initialOrder = searchparams.get("order");
   const [place, setPlace] = useState(initialState || []);
   const [order, setOrder] = useState(initialOrder || "");
+  const toast = useToast();
   const page_info =
     "NEARBUY > DEALS IN NEW DELHI > PREMIUM MERCHANTS - FNB IN NEW DELHI";
-  let Aerocity = 0;
-  let connaught = 0;
-  let Mahipalpur = 0;
   let Restaurants = 0;
 
-  let dynamicFilter={}
-  let filterArray=[];
+  let dynamicFilter = {};
+  let filterArray = [];
 
   let obj = {
     params: {
@@ -44,7 +46,6 @@ const PremiumRestaurant = () => {
       order: searchparams.get("order"),
     },
   };
-  console.log(obj);
 
   const handleChange = (e) => {
     let newPlace = [...place];
@@ -80,42 +81,31 @@ const PremiumRestaurant = () => {
     (store) => store.restaurantReducer.premium_restaurant
   );
 
+  // for (let i = 0; i < premium_restaurant.length; i++) {
+  //   if (premium_restaurant[i].place == "Aerocity") {
+  //     Aerocity++;
+  //   } else if (premium_restaurant[i].place == "Connaught Place") {
+  //     connaught++;
+  //   } else if (premium_restaurant[i].place == "Mahipalpur") {
+  //     Mahipalpur++;
+  //   }
+  //   Restaurants++;
+  // }
+
   for (let i = 0; i < premium_restaurant.length; i++) {
-    if (premium_restaurant[i].place == "Aerocity") {
-      Aerocity++;
-    } else if (premium_restaurant[i].place == "Connaught Place") {
-      connaught++;
-    } else if (premium_restaurant[i].place == "Mahipalpur") {
-      Mahipalpur++;
-    }
     Restaurants++;
-  }
-
-  for (let i = 0; i < premium_restaurant.length; i++) {
     if (dynamicFilter[premium_restaurant[i].place] == undefined) {
-       dynamicFilter[premium_restaurant[i].place]=1;
-       filterArray.push(premium_restaurant[i].place);
-    }else{
-      dynamicFilter[premium_restaurant[i].place]++
+      dynamicFilter[premium_restaurant[i].place] = 1;
+      filterArray.push(premium_restaurant[i].place);
+    } else {
+      dynamicFilter[premium_restaurant[i].place]++;
     }
   }
-
-console.log(filterArray)
   
-  // slider
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
-
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-    <Box position="absolute" marginTop="160px" marginLeft="40px" zIndex={1}>
+    <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
       <ChevronLeftIcon
-        boxSize={10}
+        boxSize={7}
         background="gray.50"
         borderRadius="50%"
         color="gray.500"
@@ -126,9 +116,9 @@ console.log(filterArray)
   );
 
   const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-    <Box position="absolute" marginTop="-160px" marginLeft="1310px">
+    <Box position="absolute" marginTop="-100px" marginLeft="260px">
       <ChevronRightIcon
-        boxSize={10}
+        boxSize={7}
         background="gray.50"
         borderRadius="50%"
         color="gray.500"
@@ -138,47 +128,47 @@ console.log(filterArray)
     </Box>
   );
 
-  // var settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   prevArrow: <SlickArrowLeft />,
-  //   nextArrow: <SlickArrowRight />,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         initialSlide: 2,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         dots: false,
-  //         arrows:false
-  //       },
-  //     },
-  //   ],
-  // };
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows:false
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          dots: false,
+          arrows:false
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+          arrows:false
+        },
+      },
+    ],
+  };
 
   const coupons = [
     {
@@ -241,14 +231,13 @@ console.log(filterArray)
 
   return (
     <div
-      style={{ backgroundColor: "#e1e9ec", height: "auto" }}
+      style={{ backgroundColor: "#e1e9ec", height: "auto" , paddingBottom:"30px" }}
       className={"container"}
     >
       <Box
         className={"content-box"}
         width={["93%", "95%", "82%"]}
         margin="auto"
-        border="1px solid red"
         height="auto"
       >
         <Box className={"page-info"} paddingTop="10px" paddingBottom="10px">
@@ -259,7 +248,6 @@ console.log(filterArray)
         <Box className="hr-line" border="1px solid #e0e0e0"></Box>
         <Box
           className={"page-data"}
-          border="1px solid"
           height="auto"
           display={"flex"}
           flexDirection={["column", "column", "initial"]}
@@ -267,13 +255,11 @@ console.log(filterArray)
           <Box
             className={"sidebar"}
             width={["100%", "100%", "24%"]}
-            border="1px solid red"
           >
             <Box
               className={"sidebar-info"}
               paddingTop="10px"
               paddingBottom="10px"
-              border="1px solid"
             >
               <Text fontSize={"sm"} color="#623351" fontWeight="semibold">
                 Promos & Filters
@@ -286,31 +272,65 @@ console.log(filterArray)
               <Box
                 className={"coupon"}
                 height="200px"
-                border="1px solid brown"
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
+                marginBottom={["20px","initial","initial"]}
+                marginRight={["initial","20px","initial"]}
               >
-                {/* <Slider {...settings}>
-                  {sliderData1.map((el, index) => {
+                <Slider {...settings}>
+                  {coupons.map((el, index) => {
                     return (
                       <div key={index}>
-                        <Box padding="10px">
-                          <Image borderRadius="8px" src={el.image} />
+                        <Box>
+                          <Box padding="15px">
+                          <Text fontWeight="bold" fontStyle="sans-serif" fontSize="17px">{el.discount}</Text>
+                          <Text fontWeight="semibold" fontSize="xs" marginTop="35px">{el.title}</Text>
+                          <Box display={"flex"} marginTop="10px" >
+                            <Input size="sm" width="100px" value={el.code} color="#66aadc"/>
+                            <CopyToClipboard text={el.code}>
+                              <Button size="sm" onClick={()=>{
+                                toast({
+                                  title: 'Code copied.',
+                                  description:el.code ,
+                                  status: 'success',
+                                  duration: 3000,
+                                  isClosable: true,
+                                })
+                              }}>Copy</Button>
+                            </CopyToClipboard>
+                          </Box>
+                          </Box>
+                          <Box className="hr-line" border="1px solid #e8e8e8"></Box>
+                          <Text fontWeight="semibold" fontSize="xs" marginTop="4px" marginLeft={"15px"}>{el.validity}</Text>
                         </Box>
                       </div>
                     );
                   })}
-                </Slider> */}
-                dhfghfdhfgf
+                </Slider>
               </Box>
               <Box
                 className={"filter"}
-                height={["200px", "200px", "400px"]}
-                border="1px solid"
+                height={["200px", "200px", "300px"]}
                 marginTop={["0px", "0px", "20px"]}
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
-                overflow={["scroll", "scroll", "hidden"]}
+                overflowY={["scroll", "scroll", "scroll"]}
+                paddingBottom="10px"
+                sx={{
+                  '&::-webkit-scrollbar': {
+                    width: '5px',
+                    borderRadius: '26px',
+                    backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: `RGB(240 138 135)`,
+                    borderRadius: "20px",
+                    border: "6px solid transparent"
+                  },
+                  '&::-webkit-scrollbar-thumb:hover': {
+                    backgroundColor: "RGB(236 37 30)"
+                  }
+                }}
               >
                 <Text
                   fontWeight={"thin"}
@@ -350,135 +370,44 @@ console.log(filterArray)
                 >
                   New Delhi
                 </Text>
-                {/* //1 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      colorScheme={"red"}
-                      size={"sm"}
-                      value="Aerocity"
-                      onChange={handleChange}
-                      checked={place.includes("Aerocity")}
+                {filterArray.map((el) => {
+                  return (
+                    <Box
+                      className={"places"}
+                      width={"93%"}
+                      margin="auto"
+                      justifyContent={"space-between"}
+                      display={"flex"}
                     >
-                      AeroCity
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({Aerocity})</Text>
-                  </Box>
-                </Box>
-                {/* //2 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Connaught Place"
-                      onChange={handleChange}
-                      checked={place.includes("Connaught Place")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Connaught Place
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({connaught})</Text>
-                  </Box>
-                </Box>
-                {/* //3 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Sacket"
-                      onChange={handleChange}
-                      checked={place.includes("Sacket")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Sacket
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>(1)</Text>
-                  </Box>
-                </Box>
-                {/* //4 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Surajmal Vihar"
-                      onChange={handleChange}
-                      checked={place.includes("Surajmal Vihar")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Surajmal Vihar
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>(4)</Text>
-                  </Box>
-                </Box>
-                {/* //5 */}
-                <Box
-                  className={"places"}
-                  width={"93%"}
-                  margin="auto"
-                  justifyContent={"space-between"}
-                  display={"flex"}
-                >
-                  <Box alignItems={"center"}>
-                    <Checkbox
-                      value="Mahipalpur"
-                      onChange={handleChange}
-                      checked={place.includes("Mahipalpur")}
-                      colorScheme={"red"}
-                      size={"sm"}
-                    >
-                      Mahipalpur
-                    </Checkbox>
-                  </Box>
-                  <Box>
-                    <Text fontSize={"12px"}>({Mahipalpur})</Text>
-                  </Box>
-                </Box>
+                      <Box alignItems={"center"}>
+                        <Checkbox
+                          value={el}
+                          onChange={handleChange}
+                          checked={place.includes(el)}
+                          colorScheme={"red"}
+                          size={"sm"}
+                        >
+                          {el}
+                        </Checkbox>
+                      </Box>
+                      <Box>
+                        <Text fontSize={"12px"}>({dynamicFilter[el]})</Text>
+                      </Box>
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
           </Box>
           <Box
             className={"service-section"}
             width={["100%", "100%", "76%"]}
-            border="1px solid blue"
             paddingLeft={["0px", "0px", "20px"]}
           >
             <Box
               className={"service-info"}
               paddingTop="10px"
               paddingBottom="10px"
-              border="1px solid"
               display={"flex"}
               flexDirection={["column", "column", "initial"]}
               justifyContent="space-between"

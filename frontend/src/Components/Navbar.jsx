@@ -7,7 +7,7 @@ import { ImLocation } from 'react-icons/im'
 export const Navbar = () => {
   const token = true;
   return (
-    <Box width={"100%"} borderBottom={"1px solid gray"}>
+    <Box width={"100%"} borderBottom={"1px solid RGB(226 226 226)"}>
       <Grid
         width={["40%", "100%", "100%"]}
         margin={"auto"}
