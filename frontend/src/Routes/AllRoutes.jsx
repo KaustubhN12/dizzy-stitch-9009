@@ -15,6 +15,8 @@ import SingleCompany from "../Pages/SingleCompany";
 import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
 import SingleSalonAdmin from "../Pages/SingleSalonAdmin";
 import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
+
+
 import Health from "../Pages/Health";
 import NightLife from "../Pages/NightLife";
 import Orders from "../Pages/UserAccount/Orders";
@@ -27,6 +29,7 @@ import Salon from "../Pages/salon";
 import Singledetails from "../Pages/Singledetails";
 import OrderSuccess from "../Pages/OrderSuccess";
 import Singledetailsalon from "../Pages/SingledetailsSalon";
+
 
 const AllRoutes = () => {
   return (

@@ -19,12 +19,13 @@ const HealthAdmin = () => {
 
   const [detail,setdetail] = React.useState(obj)
   const [company,setcompany] = React.useState([])
+  const [count,setcount] = React.useState(0)
 
   const navigate = useNavigate()
 
   React.useEffect(()=>{
     get()
-  },[])
+  },[count])
 
   const get=()=>{
     fetch("https://good-puce-hummingbird-garb.cyclic.app/health/get",{
@@ -59,7 +60,7 @@ const HealthAdmin = () => {
    const addNewCompany=()=>{
     postcompany()
     setdetail(obj)
-    get()
+    setcount(count+1)
    }
 
    const delitem=(id)=>{
@@ -75,7 +76,7 @@ const HealthAdmin = () => {
 
     const delfun=(id)=>{
         delitem(id)
-        get()
+        setcount(count+1)
     }
 
     const updatefun=(id)=>{

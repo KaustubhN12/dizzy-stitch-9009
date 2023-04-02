@@ -552,14 +552,19 @@ const Home = () => {
     getcategory()
   },[])
 
+
+
+
    const getcategory= async()=>{
 
      await  fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+
          "Content-type":"application/json"
        }).then((res)=>res.json())
          .then((res)=>setcategory(res.msg))
          .catch((err)=>console.log("err"))
    }
+
 
 
   return (
