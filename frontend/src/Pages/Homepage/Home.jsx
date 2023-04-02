@@ -567,6 +567,7 @@ const Home = () => {
   return (
     <Box>
 
+
        <HStack  >
 
         {
@@ -580,6 +581,7 @@ const Home = () => {
  
 
        </HStack>
+
 
 
       <Box
