@@ -4,7 +4,7 @@ import GiftCards from "../Pages/GiftCards";
 import Admin from "../Pages/Admin";
 import Login from "../Pages/Login";
 import Home from "../Pages/Homepage/Home";
-import GiftCards from "../Pages/GiftCards";
+
 import Payment from "../Pages/Payment/Payment";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
@@ -42,8 +42,8 @@ const AllRoutes = () => {
       <Route path="/updatesalon/:id" element={<SingleSalonAdmin />} />
       <Route path="/updategift/:id" element={<SingleGiftAdmin />} />
       <Route path="/restaurant/premium-restaurant" element={<PremiumRestaurant />}/>
-      {/* <Route path="/singledetails" element={<Singledetails />}></Route> */}
-      {/* <Route path="/singledetails/:userID" element={<Singledetails />}></Route> */}
+      <Route path="/singledetails" element={<Singledetails />}></Route>
+      <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
       <Route path="/health" element={<Health />} />
       <Route path="/nightlife" element={<NightLife />} />
