@@ -13,15 +13,36 @@ export function SliderHangout(props) {
         infinite: true,
         speed: 500,
         slidesToShow: 6,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 2,
+                    dots: false,
+
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: false,
+
+                },
+            },
+        ],
     };
 
     return (
-        <div style={{ width: "100%", padding: "20px", margin: "auto" }} >
+        <div style={{ width: "100%",paddingBlock:[ "0px","0px","20px"], margin: "auto" }} >
             <Slider {...settings}>
                 {data && data.map((item) => {
                     return <Container centerContent overflow={"hidden"} maxW={"fit-content"} key={item.title}>
-                        <Box height={"300px"} width={"200px"} boxShadow={"inset 0px -140px 98px -17px rgba(0,0,0,0.83)"} backgroundImage={`url(${item.image})`} position={'relative'}
+                        <Box height={["300px"]} width={["300px","250px","200px"]} boxShadow={"inset 0px -140px 98px -17px rgba(0,0,0,0.83)"} backgroundImage={`url(${item.image})`} position={'relative'}
 
                             alignContent={"center"} justifyContent={"center"} borderRadius={"10"}>
 
@@ -47,7 +68,38 @@ export function SliderTopCompanies(props) {
         infinite: true,
         speed: 500,
         slidesToShow: 7,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: false
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 2,
+                    dots: false,
+
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: false,
+
+                },
+            },
+        ],
     };
 
     return (
@@ -77,7 +129,38 @@ export function SliderCategories(props) {
         infinite: true,
         speed: 500,
         slidesToShow: 6,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: false
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 2,
+                    dots: false,
+
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: false,
+
+                },
+            },
+        ],
     };
 
     return (
@@ -104,7 +187,38 @@ export function SliderNearBuy(props) {
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false,
+                    arrows: false
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 2,
+                    dots: false,
+
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: false,
+
+                },
+            },
+        ],
     };
 
     return (
@@ -115,11 +229,11 @@ export function SliderNearBuy(props) {
                         width="82%"
                         paddingLeft={"20px"}
                         paddingY={"25px"}
-                        // border={"2px solid red"}
+                    // border={"2px solid red"}
                     >
                         <Box
 
-                            _hover={{  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+                            _hover={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
                             borderRadius={"8px"}
                             // border={"2px solid green"}
                             boxShadow={"rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; 0px 1px"}

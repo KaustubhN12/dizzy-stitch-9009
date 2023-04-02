@@ -1,5 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
+
+
+import GiftCards from "../Pages/GiftCards";
+
+
+
 import Admin from "../Pages/Admin";
 import Login from "../Pages/Login";
 import Home from "../Pages/Homepage/Home";
