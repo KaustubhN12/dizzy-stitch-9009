@@ -3,6 +3,7 @@ import { SearchIcon, UnlockIcon, } from '@chakra-ui/icons'
 import { Box, Button, Grid, GridItem, HStack, Icon, Img, Input, MenuButton, Text, Menu, MenuList, MenuItem, } from '@chakra-ui/react'
 import React from 'react'
 import { ImLocation } from 'react-icons/im'
+import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
   const token = true;
@@ -46,12 +47,12 @@ export const Navbar = () => {
                 <MenuButton> My Account
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>My Orders</MenuItem>
-                  <MenuItem>My Credits</MenuItem>
-                  <MenuItem>My Profile</MenuItem>
-                  <MenuItem>My Newsletters</MenuItem>
-                  <MenuItem>Refer a friend</MenuItem>
-                  <MenuItem>My Proms</MenuItem>
+                <Link to="/orders"><MenuItem>My Orders</MenuItem></Link>
+                <Link to="/credits"><MenuItem>My Credits</MenuItem></Link>
+                <Link to="/profile"><MenuItem>My Profile</MenuItem></Link>
+                <Link to="/newsletter"><MenuItem>My Newsletters</MenuItem></Link>
+                <Link to="/refer"><MenuItem>Refer a friend</MenuItem></Link>
+                <Link to="/promotion"><MenuItem>My Proms</MenuItem></Link>
                   <MenuItem>Sign Out</MenuItem>
 
                 </MenuList>
@@ -70,7 +71,9 @@ export const Navbar = () => {
 
 
         <GridItem bg='white' area={'logo'}>
+          <Link to={"/"}>
           <Box pl={['0px', '0px', "140px"]} py={"5px"} width={"100%"}><Img width={["150px", "150px", "250px"]} height={["45px", "45px", "55px"]} src={"https://i.ibb.co/nQRNKjQ/nearBuy.png"} /></Box>
+          </Link>
         </GridItem>
 
 

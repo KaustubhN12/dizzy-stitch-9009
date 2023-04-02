@@ -1,7 +1,8 @@
-import { Box, Divider, HStack, Img, Text, VStack } from "@chakra-ui/react";
+import { Box, Divider, HStack, Image, Img, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { SliderBanner } from "./Slider/sliderOne/Slider";
 import { SliderCategories, SliderHangout, SliderNearBuy, SliderTopCompanies } from "./Slider/sliderTwo/Slider2";
+import { Link } from "react-router-dom";
 // import { SliderBanner } from "./Slider/Slider";
 // import { SliderCategories, SliderHangout, SliderNearBuy, SliderTopCompanies } from "./Slider/Slider2";
 
@@ -551,37 +552,51 @@ const Home = () => {
     getcategory()
   },[])
 
-   const getcategory=()=>{
+   const getcategory= async()=>{
 
-       fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+     await  fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
          "Content-type":"application/json"
        }).then((res)=>res.json())
          .then((res)=>setcategory(res.msg))
          .catch((err)=>console.log("err"))
-
    }
-
-    console.log(category)
 
 
   return (
     <Box>
 
-
-       <HStack  >
-
-        {
-          category.map((el)=>{
-            return <Box key={el._id} >
-                     <Img src={el.img} height={"80px"} width={"100%"} alt="pic" />
-                     <p>{el.title}</p>
-                  </Box>
-          })
-        }
- 
-
-       </HStack>
-
+<Box className={"deals-route"} borderBottom="1px solid RGB(226 226 226)">
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(8,1fr)"
+          alignItems="left"
+          marginLeft="120px"
+        >
+          {category.map((el) => {
+            return (
+              <Link to={el.route?el.route:"/"}>
+              <Box
+                alignItems={"center"}
+                justifyContent="center"
+                padding="20px"
+                _hover={{ backgroundColor: "#f1f1f1" }}
+                textAlign={"center"}
+              >
+                <Image
+                  width="25%"
+                  src={el.img}
+                  marginLeft={"35px"}
+                  marginBottom={"5px"}
+                />
+                <Text fontSize="12px" fontWeight="semibold">
+                  {el.title}
+                </Text>
+              </Box>
+              </Link>
+            );
+          })}
+        </Box>
+      </Box>
 
 
       <Box

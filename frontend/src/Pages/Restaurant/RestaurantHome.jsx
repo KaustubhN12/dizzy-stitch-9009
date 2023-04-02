@@ -6,33 +6,34 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { SliderBanner } from "../Homepage/Slider/sliderOne/Slider";
+import { Link } from "react-router-dom";
 
 const RestaurantHome = () => {
   const deals = [
     {
       img: "https://img4.nbstatic.in/tr:w-/636ce20122156b000b884b63.png",
       title: "Buffet Deals",
-      route: "",
+      route: "/restaurant/premium-restaurant",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5f7d8150b7b01c000b8d348c.png",
       title: "Premium Restaurants",
-      route: "",
+      route: "/restaurant/premium-restaurant",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5f7c375cb7b01c000b8d3118.png",
       title: "Deals on Nightlife",
-      route: "",
+      route: "/nightlife",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5f7d81ceb7b01c000b8d3492.png",
       title: "Set Menu Meals",
-      route: "",
+      route: "/nightlife",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5fa225165cc6f2000bcb6dbb.png",
       title: "Buffet Deals",
-      route: "",
+      route: "/restaurant/premium-restaurant",
     },
   ];
 
@@ -266,6 +267,7 @@ const RestaurantHome = () => {
         >
           {deals.map((el) => {
             return (
+             <Link to={el.route}>
               <Box
                 alignItems={"center"}
                 justifyContent="center"
@@ -283,6 +285,7 @@ const RestaurantHome = () => {
                   {el.title}
                 </Text>
               </Box>
+             </Link>
             );
           })}
         </Box>
