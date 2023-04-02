@@ -12,7 +12,7 @@ import { Orderreducer } from "../Redux/Order/reducer.order";
 function SinglePageRecommend({ recomenddata }) {
   const dispatch = useDispatch();
   const order_data=useSelector((store)=>store.Orderreducer.user)
-  console.log(recomenddata);
+  // console.log(recomenddata)
 
 
   
@@ -21,9 +21,10 @@ function SinglePageRecommend({ recomenddata }) {
  
   
   useEffect(() => {
+    // console.log("Recommend")
     setdata(recomenddata);
 
-  }, [data]);
+  }, [recomenddata]);
 
 
   const handleadd = (_id) => {
@@ -92,7 +93,7 @@ function SinglePageRecommend({ recomenddata }) {
               pb={"6px"}
               pr={"6px"}
               fontSize={"10px"}
-              w={["20%","20%","6%","6%"]}
+              w={["20%","20%","6%","7%"]}
             >
               <p style={{ color: "#34a853" }}>{el.discount}</p>
             </Stack>
@@ -116,7 +117,7 @@ function SinglePageRecommend({ recomenddata }) {
                 mins) + Shower (10 mins) */}
               {el.Title}
             </h3>
-            <p style={{ fontWeight: "700" }}>₹{el.originalprice}</p>
+            <p style={{ fontWeight: "700" }}>₹{el.offerprice}</p>
           </Stack>
           <Stack
             display={"flex"}
