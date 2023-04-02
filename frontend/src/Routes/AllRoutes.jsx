@@ -26,6 +26,7 @@ import Salon from "../Pages/salon";
 import Singledetails from "../Pages/Singledetails";
 import OrderSuccess from "../Pages/OrderSuccess";
 import Singledetailsalon from "../Pages/SingledetailsSalon";
+import PrivateRoute from "./PrivateRoute";
 
 const AllRoutes = () => {
   return (
@@ -33,7 +34,7 @@ const AllRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/payment" element={<Payment />} />
+      <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
       <Route path="/adminlogin" element={<AdminLogin />} />
       <Route path="/adminsignup" element={<AdminSignup />} />
       <Route path="/restaurant" element={<RestaurantHome />} />
