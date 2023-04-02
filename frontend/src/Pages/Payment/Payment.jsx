@@ -14,22 +14,34 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { useSelector } from "react-redux";
 
 const Payment = () => {
-  const [orderData, setOrderData] = useState();
+  const total = useSelector(
+    (store) => console.log("Store", store.Orderreducer.user.price)
+    // store.Orderreducer.user.price;
+  );
 
-  const getOrderData = () => {
-    axios
-      .get(`https://good-puce-hummingbird-garb.cyclic.app/order/get`)
-      .then((res) => console.log("OrderData:", res.data))
-      .catch((e) => console.log(e));
-  };
+  const count = useSelector(
+    (store) => console.log("Store", store.Orderreducer.user.count)
+    // store.Orderreducer.user.count;
+  );
 
-  useEffect(() => {
-    getOrderData();
-  }, []);
+  const title = useSelector(
+    (store) => console.log("Store", store.Orderreducer.user.title)
+    // store.Orderreducer.user.title;
+  );
+
+  let subTotal = 0;
+
+  if (total < 500) {
+    subTotal = total - total * 0.05;
+  } else if (total > 500) {
+    subTotal = total - total * 0.1;
+  }
+
+  const final_total = subTotal + 20;
 
   return (
     <Stack
@@ -57,16 +69,20 @@ const Payment = () => {
           </Box>
           <Box>
             <Text>product name</Text>
+            {/* <Text>${title}</Text> */}
           </Box>
           <HStack justifyContent="space-evenly">
             <Text fontWeight="bold">Qty: 5</Text>
+            {/* <Text fontWeight="bold">Qty: ${count}</Text> */}
             <Text fontWeight="bold">₹ 1500</Text>
+            {/* <Text fontWeight="bold">₹ ${total}</Text> */}
           </HStack>
         </Box>
         <Box m="10px" w="90%" p="10px" border="1px solid black">
           <HStack pb="15px" justifyContent="space-between">
-            <Text>Subtotal(Qty.1)</Text>
+            <Text>Subtotal</Text>
             <Text fontWeight="bold">₹ 1000</Text>
+            {/* <Text fontWeight="bold">₹ ${subTotal}</Text> */}
           </HStack>
           <hr />
           <HStack pb="15px" justifyContent="space-between">
@@ -77,6 +93,7 @@ const Payment = () => {
           <HStack pb="15px" justifyContent="space-between">
             <Text>Total</Text>
             <Text fontWeight="bold">₹ 1020</Text>
+            {/* <Text fontWeight="bold">₹ ${final_total} </Text> */}
           </HStack>
           <hr />
         </Box>
