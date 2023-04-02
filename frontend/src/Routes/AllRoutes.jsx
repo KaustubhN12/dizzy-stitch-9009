@@ -25,6 +25,7 @@ import Refer from "../Pages/UserAccount/Refer";
 import Promotion from "../Pages/UserAccount/Promotion";
 import Salon from "../Pages/salon";
 import Singledetails from "../Pages/Singledetails";
+import OrderSuccess from "../Pages/OrderSuccess";
 
 const AllRoutes = () => {
   return (
@@ -62,6 +63,7 @@ const AllRoutes = () => {
       <Route path="/refer" element={<Refer />} />
       <Route path="/promotion" element={<Promotion />} />
       <Route path="/salon" element={<Salon />} />
+      <Route path="/ordersuccess" element={<OrderSuccess />} />
     </Routes>
   );
 };

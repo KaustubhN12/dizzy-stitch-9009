@@ -3,6 +3,9 @@ import { Box, Input, Text, Button } from '@chakra-ui/react'
 import React from 'react'
 
 const Profile = () => {
+
+  const user = JSON.parse(localStorage.getItem("user-details"));
+
   return (
     <div style={{ backgroundColor: "#e1e9ec", height: "auto" , paddingBottom:"30px" }}>
       
@@ -25,9 +28,9 @@ const Profile = () => {
 
         <Box width="50%"  margin={"auto"}>
             <Text fontSize="sm" marginBottom="5px">Name</Text>
-            <Input backgroundColor={"#ffffff"}  marginBottom="15px"/>
+            <Input backgroundColor={"#ffffff"} value={user.name}  marginBottom="15px"/>
             <Text fontSize="sm" marginBottom="5px">Mobile Number</Text>
-            <Text fontSize="sm" marginBottom="5px" fontWeight="semibold">9834143462</Text>
+            <Text fontSize="sm" marginBottom="5px" fontWeight="semibold">{user.phone}</Text>
             <Button _hover={{boxShadow:"lg"}} size="sm" color="#ffffff" backgroundColor="#ef534e" borderRadius="none">SAVE CHANGES</Button>
         </Box>
 

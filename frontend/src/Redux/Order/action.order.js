@@ -31,6 +31,11 @@ const dec_order=(payload)=>{
     }
 }
 
+const clearOrder = () => {
+    return {
+        type:types.ORDER_CLEAR
+    }
+}
 
 // export const getPremiumRestaurantRequest = (payload) => {
 //     return {type:GET_PREMIUM_RESTAURANT_REQUEST,payload}
@@ -69,20 +74,22 @@ export const orderinc_redux = (payload) =>async(dispatch)=> {
        
         dispatch(OrderRequiest())
     try{
-
-
-            await dispatch(inc_order(payload))
-
-        // let response=await axios.post("http://localhost:3000/singledetails",payload).then((res)=>{
-
-        // })
-        
-        // console.log(response)
+         await dispatch(inc_order(payload))
     }
     catch(error){
             dispatch(OrderFailure())
     }
 
+}
+
+export const clear_order = async(dispatch) =>{
+    dispatch(OrderRequiest())
+    try{
+        await dispatch(clearOrder())
+   }
+   catch(error){
+           dispatch(OrderFailure())
+   }
 }
 
 
