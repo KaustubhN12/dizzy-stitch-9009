@@ -12,7 +12,7 @@ import { Orderreducer } from "../Redux/Order/reducer.order";
 function SinglePageRecommend({ recomenddata }) {
   const dispatch = useDispatch();
   const order_data=useSelector((store)=>store.Orderreducer.user)
-  console.log(order_data);
+  // console.log(order_data);
 
 
   
@@ -28,9 +28,15 @@ function SinglePageRecommend({ recomenddata }) {
 
 
   const handleadd = (id) => {
-    console.log("filter", id);
+    // console.log("filter", id);
 
     data.filter((el) => {
+      for(let i=0;i<order_data.length;i++){
+        if(order_data[i].id==el.id){
+          console.log("item present in order");
+          return ;
+        }
+      }
       if (el.id == id) {
         const payload={
           id:el.id,
@@ -44,33 +50,26 @@ function SinglePageRecommend({ recomenddata }) {
   };
 
   const handleInc = (id) => {
+    console.log(id);
     order_data?.filter((el) => {
       if (el.id == id) {
-        const payload={
-          ...el,
-        }
-        payload.count++;
-        dispatch(orderinc_redux(payload))
+        dispatch(orderinc_redux(id));   
       }
     });
   };
 
   const handledec = (id) => {
-    data.filter((el) => {
+    order_data?.filter((el) => {
       if (el.id == id) {
-        const payload={
-          title:el.title,
-          price:el.price
-        }
-        dispatch(orderdec_redux(payload))
+        dispatch(orderdec_redux(id))
       }
     });
   };
-
+  
   return (
     <>
       {data.map((el, i) => (
-        <Stack marginTop={"20px"} p={"10px"} key={el.id}>
+        <Stack marginTop={"20px"} p={"10px"} key={el.id} w={"131%"}>
           <Stack
             display={"flex"}
             direction={["column", "column", "row"]}
@@ -92,6 +91,7 @@ function SinglePageRecommend({ recomenddata }) {
               pb={"6px"}
               pr={"6px"}
               fontSize={"10px"}
+              w={["20%","20%","6%","6%"]}
             >
               <p style={{ color: "#34a853" }}>{el.discount}%off</p>
             </Stack>
@@ -193,12 +193,7 @@ function SinglePageRecommend({ recomenddata }) {
             >
               Dec
             </Button>
-            </HStack>
-
-
-
-
-           
+            </HStack>           
           </Stack>
         </Stack>
       ))}
