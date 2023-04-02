@@ -14,9 +14,10 @@ import SingleCompany from "../Pages/SingleCompany";
 import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
 import SingleSalonAdmin from "../Pages/SingleSalonAdmin";
 import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
-import AdminLogin from "../Pages/AdminLogin";
+
 import Health from "../Pages/Health";
 import NightLife from "../Pages/NightLife";
+import Singledetails from "../Pages/Singledetails"
 
 const AllRoutes = () => {
   return (

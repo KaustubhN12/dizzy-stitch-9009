@@ -551,9 +551,9 @@ const Home = () => {
     getcategory()
   },[])
 
-   const getcategory=()=>{
+   const getcategory=async()=>{
 
-       fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+       await fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
          "Content-type":"application/json"
        }).then((res)=>res.json())
          .then((res)=>setcategory(res.msg))
@@ -561,8 +561,7 @@ const Home = () => {
 
    }
 
-    console.log(category)
-
+  
 
   return (
     <Box>
