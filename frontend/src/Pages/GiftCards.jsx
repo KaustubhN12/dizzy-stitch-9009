@@ -22,9 +22,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 
 const GiftCards = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const [searchparams, setSearchParams] = useSearchParams();
   const initialState = searchparams.getAll("place");
@@ -468,6 +470,9 @@ const GiftCards = () => {
                     backgroundColor="#ffffff"
                     borderRadius="5px"
                     boxShadow="md"
+                    onClick={()=>{
+                      navigate(`/singledetails/${el._id}`)
+                  }}
                   >
                     <Box
                       maxW="sm"
