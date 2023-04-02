@@ -7,13 +7,13 @@ import Home from "../Pages/Homepage/Home";
 import Payment from "../Pages/Payment/Payment";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
+import AdminLogin from "../Pages/AdminLogin";
 import AdminSignup from "../Pages/AdminSignup";
 import Signup from "../Pages/Signup";
 import SingleCompany from "../Pages/SingleCompany";
 import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
 import SingleSalonAdmin from "../Pages/SingleSalonAdmin";
 import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
-import AdminLogin from "../Pages/AdminLogin";
 import Health from "../Pages/Health";
 import NightLife from "../Pages/NightLife";
 import Orders from "../Pages/UserAccount/Orders";
@@ -41,6 +41,10 @@ const AllRoutes = () => {
       <Route path="/updatesalon/:id" element={<SingleSalonAdmin />} />
       <Route path="/updategift/:id" element={<SingleGiftAdmin />} />
       <Route path="/restaurant/premium-restaurant" element={<PremiumRestaurant />}/>
+      <Route
+        path="/restaurant/premium-restaurant"
+        element={<PremiumRestaurant />}
+      />
       <Route path="/singledetails" element={<Singledetails />}></Route>
       <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
