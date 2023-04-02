@@ -13,12 +13,14 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Login() {
   const toast = useToast();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,57 +30,82 @@ export default function Login() {
     password: password,
   };
 
-  const handleLoginForm = () => {
-    const signupData = JSON.parse(localStorage.getItem("signupuser"));
-    if (signupData === null) {
-      toast({
-        title: "Please do SignUp first",
-        status: "error",
-        isClosable: true,
-      });
-    } else if (LoginData.email === "" || LoginData.password === "") {
+  const CheckUser = () => {
+    axios
+      .post(
+        `https://good-puce-hummingbird-garb.cyclic.app/user/login`,
+        LoginData
+      )
+      .then((res) => {
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+        localStorage.setItem("user-token", res.data.token);
+        localStorage.setItem("user-details", JSON.stringify(res.data.user[0]));
+        navigate("/");
+      })
+      .catch((e) => console.log("Login-Error:", e));
+  };
+
+  const handleUserLoginForm = () => {
+    // const signupData = JSON.parse(localStorage.getItem("signupuser"));
+    // if (signupData === null) {
+    //   toast({
+    //     title: "Please do SignUp first",
+    //     status: "error",
+    //     isClosable: true,
+    //   });
+    // } else
+    if (LoginData.email === "" || LoginData.password === "") {
       toast({
         title: "Please fill all information",
         status: "warning",
         isClosable: true,
       });
     } else {
-      if (
-        signupData.email === LoginData.email &&
-        signupData.password === LoginData.password
-      ) {
-        localStorage.setItem("loginuser", JSON.stringify(LoginData));
-        toast({
-          title: "Login Successfully",
-          status: "success",
-          isClosable: true,
-        });
-      } else if (
-        signupData.email !== LoginData.email &&
-        signupData.password === LoginData.password
-      ) {
-        toast({
-          title: "Please enter valid email",
-          status: "warning",
-          isClosable: true,
-        });
-      } else if (
-        signupData.email === LoginData.email &&
-        signupData.password !== LoginData.password
-      ) {
-        toast({
-          title: "Please enter valid password",
-          status: "warning",
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Invalid Credentials",
-          status: "error",
-          isClosable: true,
-        });
-      }
+      // if (
+      //   signupData.email === LoginData.email &&
+      //   signupData.password === LoginData.password
+      // ) {
+      localStorage.setItem("loginuser", JSON.stringify(LoginData));
+      // toast({
+      //   title: "Login Successfully Localstorage",
+      //   status: "success",
+      //   isClosable: true,
+      // });
+      // } else if (
+      //   signupData.email !== LoginData.email &&
+      //   signupData.password === LoginData.password
+      // ) {
+      //   toast({
+      //     title: "Please enter valid email",
+      //     status: "warning",
+      //     isClosable: true,
+      //   });
+      // } else if (
+      //   signupData.email === LoginData.email &&
+      //   signupData.password !== LoginData.password
+      // ) {
+      //   toast({
+      //     title: "Please enter valid password",
+      //     status: "warning",
+      //     isClosable: true,
+      //   });
+      // } else {
+      //   toast({
+      //     title: "Invalid Credentials",
+      //     status: "error",
+      //     isClosable: true,
+      //   });
+      // }
     }
+  };
+
+  const CallFunctions = () => {
+    CheckUser();
+    handleUserLoginForm();
   };
 
   return (
@@ -148,7 +175,7 @@ export default function Login() {
                 _hover={{
                   bg: "#e7818c",
                 }}
-                onClick={handleLoginForm}
+                onClick={CallFunctions}
               >
                 Login
               </Button>
