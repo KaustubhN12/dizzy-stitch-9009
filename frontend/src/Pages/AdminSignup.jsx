@@ -48,7 +48,13 @@ export default function AdminSignup() {
         });
         navigate("/adminlogin");
       })
-      .catch((e) => console.log("Signup-Error:", e));
+      .catch((e) => 
+      toast({
+        title:e.message,
+        status: "error",
+        isClosable: true,
+      })
+      );
   };
 
   const handleAdminSignupForm = () => {

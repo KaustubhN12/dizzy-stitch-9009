@@ -47,7 +47,13 @@ export default function Login() {
         navigate("/");
         window.location.reload();
       })
-      .catch((e) => console.log("Login-Error:", e));
+      .catch((e) => 
+        toast({
+            title:"Invalid Credentials",
+            status: "error",
+            isClosable: true,
+          })
+      );
   };
 
   const handleUserLoginForm = () => {

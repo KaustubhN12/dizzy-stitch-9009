@@ -48,7 +48,13 @@ export default function Signup() {
         });
         navigate("/login");
       })
-      .catch((e) => console.log("Signup-Error:", e));
+      .catch((e) => 
+      toast({
+        title:e.message,
+        status: "error",
+        isClosable: true,
+      })
+      );
   };
 
   const handleUserSignupForm = () => {

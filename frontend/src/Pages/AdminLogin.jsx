@@ -45,7 +45,12 @@ export default function AdminLogin() {
         localStorage.setItem("admin-token", res.data.token);
         navigate("/admin");
       })
-      .catch((e) => console.log("Login-Error:", e));
+      .catch((e) =>         
+      toast({
+        title:"Invalid Credentials",
+        status: "error",
+        isClosable: true,
+      }));
   };
 
   const handleAdminLoginForm = () => {
