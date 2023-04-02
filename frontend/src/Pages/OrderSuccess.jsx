@@ -1,9 +1,9 @@
-import { Button, VStack } from '@chakra-ui/react'
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button, VStack } from "@chakra-ui/react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const OrderSuccess = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div>
       <VStack
@@ -18,7 +18,7 @@ const OrderSuccess = () => {
             "box-shadow: rgb(206, 10, 85) 0px 10px 36px 0px, rgba(225, 18, 97, 0.06) 0px 0px 0px 1px;",
         }}
       >
-        <div style={{border:"0px solid black" , height:"380px"}}>
+        <div style={{ border: "0px solid black", height: "380px" }}>
           <img
             src="https://www.pinkwigscloset.com/images/success-tick.gif"
             alt="gif-img"
@@ -48,7 +48,7 @@ const OrderSuccess = () => {
         </Button>
       </VStack>
     </div>
-  )
-}
+  );
+};
 
-export default OrderSuccess
+export default OrderSuccess;

@@ -9,7 +9,7 @@ import {
   Stack,
   Radio,
   Input,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPremiumRestaurant } from "../Redux/Restaurants/Action";
@@ -19,10 +19,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import { useToast } from '@chakra-ui/react';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
 
 const NightLife = () => {
   const dispatch = useDispatch();
@@ -85,15 +84,15 @@ const NightLife = () => {
 
   const shuffleArray = (array) => {
     let len = array.length,
-        currentIndex;
+      currentIndex;
     for (currentIndex = len - 1; currentIndex > 0; currentIndex--) {
-        let randIndex = Math.floor(Math.random() * (currentIndex + 1) );
-        var temp = array[currentIndex];
-        array[currentIndex] = array[randIndex];
-        array[randIndex] = temp;
+      let randIndex = Math.floor(Math.random() * (currentIndex + 1));
+      var temp = array[currentIndex];
+      array[currentIndex] = array[randIndex];
+      array[randIndex] = temp;
     }
-}
-shuffleArray(premium_restaurant);
+  };
+  shuffleArray(premium_restaurant);
 
   for (let i = 0; i < premium_restaurant.length; i++) {
     Restaurants++;
@@ -148,7 +147,7 @@ shuffleArray(premium_restaurant);
           slidesToScroll: 1,
           infinite: true,
           dots: false,
-          arrows:false
+          arrows: false,
         },
       },
       {
@@ -158,7 +157,7 @@ shuffleArray(premium_restaurant);
           slidesToScroll: 1,
           initialSlide: 2,
           dots: false,
-          arrows:false
+          arrows: false,
         },
       },
       {
@@ -167,7 +166,7 @@ shuffleArray(premium_restaurant);
           slidesToShow: 1,
           slidesToScroll: 1,
           dots: false,
-          arrows:false
+          arrows: false,
         },
       },
     ],
@@ -232,11 +231,30 @@ shuffleArray(premium_restaurant);
     },
   ];
 
-  const localFilter=['Connaught Place', 'Aerocity', 'Mahipalpur', 'Soul City Mall, Sector 13 Dwarka', 'Mayur Vihar Phase 1', 'Sector 10 Dwarka', 'IGI T3 Road, Mahipalpur', 'Bijwasan Road, Kapashera', 'Maharaja Surajmal Road, Surajmal Vihar', 'Samalka', 'Nelson Mandela Road, Vasant Kunj Sector C', '\n araja Surajmal Road, Surajmal Vihar', 'Outer Ring Road, Paschim Vihar', '']
+  const localFilter = [
+    "Connaught Place",
+    "Aerocity",
+    "Mahipalpur",
+    "Soul City Mall, Sector 13 Dwarka",
+    "Mayur Vihar Phase 1",
+    "Sector 10 Dwarka",
+    "IGI T3 Road, Mahipalpur",
+    "Bijwasan Road, Kapashera",
+    "Maharaja Surajmal Road, Surajmal Vihar",
+    "Samalka",
+    "Nelson Mandela Road, Vasant Kunj Sector C",
+    "\n araja Surajmal Road, Surajmal Vihar",
+    "Outer Ring Road, Paschim Vihar",
+    "",
+  ];
 
   return (
     <div
-      style={{ backgroundColor: "#e1e9ec", height: "auto" , paddingBottom:"30px" }}
+      style={{
+        backgroundColor: "#e1e9ec",
+        height: "auto",
+        paddingBottom: "30px",
+      }}
       className={"container"}
     >
       <Box
@@ -257,10 +275,7 @@ shuffleArray(premium_restaurant);
           display={"flex"}
           flexDirection={["column", "column", "initial"]}
         >
-          <Box
-            className={"sidebar"}
-            width={["100%", "100%", "24%"]}
-          >
+          <Box className={"sidebar"} width={["100%", "100%", "24%"]}>
             <Box
               className={"sidebar-info"}
               paddingTop="10px"
@@ -279,8 +294,8 @@ shuffleArray(premium_restaurant);
                 height="200px"
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
-                marginBottom={["20px","initial","initial"]}
-                marginRight={["initial","20px","initial"]}
+                marginBottom={["20px", "initial", "initial"]}
+                marginRight={["initial", "20px", "initial"]}
               >
                 <Slider {...settings}>
                   {coupons.map((el, index) => {
@@ -288,25 +303,57 @@ shuffleArray(premium_restaurant);
                       <div key={index}>
                         <Box>
                           <Box padding="15px">
-                          <Text fontWeight="bold" fontStyle="sans-serif" fontSize="17px">{el.discount}</Text>
-                          <Text fontWeight="semibold" fontSize="xs" marginTop="35px">{el.title}</Text>
-                          <Box display={"flex"} marginTop="10px" >
-                            <Input size="sm" width="100px" value={el.code} color="#66aadc"/>
-                            <CopyToClipboard text={el.code}>
-                              <Button size="sm" onClick={()=>{
-                                toast({
-                                  title: 'Code copied.',
-                                  description:el.code ,
-                                  status: 'success',
-                                  duration: 3000,
-                                  isClosable: true,
-                                })
-                              }}>Copy</Button>
-                            </CopyToClipboard>
+                            <Text
+                              fontWeight="bold"
+                              fontStyle="sans-serif"
+                              fontSize="17px"
+                            >
+                              {el.discount}
+                            </Text>
+                            <Text
+                              fontWeight="semibold"
+                              fontSize="xs"
+                              marginTop="35px"
+                            >
+                              {el.title}
+                            </Text>
+                            <Box display={"flex"} marginTop="10px">
+                              <Input
+                                size="sm"
+                                width="100px"
+                                value={el.code}
+                                color="#66aadc"
+                              />
+                              <CopyToClipboard text={el.code}>
+                                <Button
+                                  size="sm"
+                                  onClick={() => {
+                                    toast({
+                                      title: "Code copied.",
+                                      description: el.code,
+                                      status: "success",
+                                      duration: 3000,
+                                      isClosable: true,
+                                    });
+                                  }}
+                                >
+                                  Copy
+                                </Button>
+                              </CopyToClipboard>
+                            </Box>
                           </Box>
-                          </Box>
-                          <Box className="hr-line" border="1px solid #e8e8e8"></Box>
-                          <Text fontWeight="semibold" fontSize="xs" marginTop="4px" marginLeft={"15px"}>{el.validity}</Text>
+                          <Box
+                            className="hr-line"
+                            border="1px solid #e8e8e8"
+                          ></Box>
+                          <Text
+                            fontWeight="semibold"
+                            fontSize="xs"
+                            marginTop="4px"
+                            marginLeft={"15px"}
+                          >
+                            {el.validity}
+                          </Text>
                         </Box>
                       </div>
                     );
@@ -322,19 +369,19 @@ shuffleArray(premium_restaurant);
                 overflowY={["scroll", "scroll", "scroll"]}
                 paddingBottom="10px"
                 sx={{
-                  '&::-webkit-scrollbar': {
-                    width: '5px',
-                    borderRadius: '26px',
+                  "&::-webkit-scrollbar": {
+                    width: "5px",
+                    borderRadius: "26px",
                     backgroundColor: `rgba(0, 0, 0, 0.05)`,
                   },
-                  '&::-webkit-scrollbar-thumb': {
+                  "&::-webkit-scrollbar-thumb": {
                     backgroundColor: `RGB(240 138 135)`,
                     borderRadius: "20px",
-                    border: "6px solid transparent"
+                    border: "6px solid transparent",
                   },
-                  '&::-webkit-scrollbar-thumb:hover': {
-                    backgroundColor: "RGB(236 37 30)"
-                  }
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    backgroundColor: "RGB(236 37 30)",
+                  },
                 }}
               >
                 <Text
@@ -423,7 +470,7 @@ shuffleArray(premium_restaurant);
                 fontWeight="semibold"
                 marginBottom={["10px", "10px", "0px"]}
               >
-               Drinks & Nightlife Tags - All in New Delhi
+                Drinks & Nightlife Tags - All in New Delhi
               </Text>
               <div onChange={handleSort}>
                 <RadioGroup marginRight="20px">
@@ -493,8 +540,8 @@ shuffleArray(premium_restaurant);
                     backgroundColor="#ffffff"
                     borderRadius="5px"
                     boxShadow="md"
-                    onClick={()=>{
-                      navigate(`/singledetails/${el._id}`)
+                    onClick={() => {
+                      navigate(`/singledetails/${el._id}`);
                     }}
                   >
                     <Box

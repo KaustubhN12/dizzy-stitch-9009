@@ -4,7 +4,6 @@ import GiftCards from "../Pages/GiftCards";
 import Admin from "../Pages/Admin";
 import Login from "../Pages/Login";
 import Home from "../Pages/Homepage/Home";
-
 import Payment from "../Pages/Payment/Payment";
 import PremiumRestaurant from "../Pages/Restaurant/PremiumRestaurant";
 import RestaurantHome from "../Pages/Restaurant/RestaurantHome";
@@ -15,8 +14,6 @@ import SingleCompany from "../Pages/SingleCompany";
 import SingleHealthAdmin from "../Pages/SingleHealthAdmin";
 import SingleSalonAdmin from "../Pages/SingleSalonAdmin";
 import SingleGiftAdmin from "../Pages/SingleGiftAdmin";
-
-
 import Health from "../Pages/Health";
 import NightLife from "../Pages/NightLife";
 import Orders from "../Pages/UserAccount/Orders";
@@ -29,7 +26,6 @@ import Salon from "../Pages/salon";
 import Singledetails from "../Pages/Singledetails";
 import OrderSuccess from "../Pages/OrderSuccess";
 import Singledetailsalon from "../Pages/SingledetailsSalon";
-
 
 const AllRoutes = () => {
   return (
@@ -46,17 +42,20 @@ const AllRoutes = () => {
       <Route path="/updatehealth/:id" element={<SingleHealthAdmin />} />
       <Route path="/updatesalon/:id" element={<SingleSalonAdmin />} />
       <Route path="/updategift/:id" element={<SingleGiftAdmin />} />
-      <Route path="/restaurant/premium-restaurant" element={<PremiumRestaurant />}/>
-
-
       <Route
         path="/restaurant/premium-restaurant"
         element={<PremiumRestaurant />}
       />
-
+      <Route
+        path="/restaurant/premium-restaurant"
+        element={<PremiumRestaurant />}
+      />
       <Route path="/singledetails" element={<Singledetails />}></Route>
       <Route path="/singledetailsalon" element={<Singledetailsalon />}></Route>
-      <Route path="/singledetailsalon/:userID" element={<Singledetailsalon />}></Route>
+      <Route
+        path="/singledetailsalon/:userID"
+        element={<Singledetailsalon />}
+      ></Route>
       <Route path="/singledetails/:userID" element={<Singledetails />}></Route>
       <Route path="/giftcards" element={<GiftCards />} />
       <Route path="/health" element={<Health />} />

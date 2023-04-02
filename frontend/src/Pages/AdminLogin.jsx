@@ -45,23 +45,16 @@ export default function AdminLogin() {
         localStorage.setItem("admin-token", res.data.token);
         navigate("/admin");
       })
-      .catch((e) =>         
-      toast({
-        title:"Invalid Credentials",
-        status: "error",
-        isClosable: true,
-      }));
+      .catch((e) =>
+        toast({
+          title: "Invalid Credentials",
+          status: "error",
+          isClosable: true,
+        })
+      );
   };
 
   const handleAdminLoginForm = () => {
-    // const signupData = JSON.parse(localStorage.getItem("signupadmin"));
-    // if (signupData === null) {
-    //   toast({
-    //     title: "Please do SignUp first",
-    //     status: "error",
-    //     isClosable: true,
-    //   });
-    // } else
     if (AdminLoginData.email === "" || AdminLoginData.password === "") {
       toast({
         title: "Please fill all information",
@@ -69,41 +62,7 @@ export default function AdminLogin() {
         isClosable: true,
       });
     } else {
-      // if (
-      //   signupData.email === AdminLoginData.email &&
-      //   signupData.password === AdminLoginData.password
-      // ) {
       localStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
-      // toast({
-      //   title: "Login Successfully",
-      //   status: "success",
-      //   isClosable: true,
-      // });
-      // } else if (
-      //   signupData.email !== AdminLoginData.email &&
-      //   signupData.password === AdminLoginData.password
-      // ) {
-      //   toast({
-      //     title: "Please enter valid email",
-      //     status: "warning",
-      //     isClosable: true,
-      //   });
-      // } else if (
-      //   signupData.email === AdminLoginData.email &&
-      //   signupData.password !== AdminLoginData.password
-      // ) {
-      //   toast({
-      //     title: "Please enter valid password",
-      //     status: "warning",
-      //     isClosable: true,
-      //   });
-      // } else {
-      //   toast({
-      //     title: "Invalid Credentials",
-      //     status: "error",
-      //     isClosable: true,
-      //   });
-      // }
     }
   };
 
@@ -114,7 +73,7 @@ export default function AdminLogin() {
 
   return (
     <Flex
-    marginTop="-50px"
+      marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}

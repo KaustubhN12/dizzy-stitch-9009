@@ -22,7 +22,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-
 // const params_data = [
 //   {
 //     catageory: "BEAUTY SALON",
@@ -42,44 +41,37 @@ import { useParams } from "react-router-dom";
 function Singledetails() {
   const [title, settitle] = useState("");
   const [flag, setflag] = useState("");
-  
+
   const [recomenddata, setrecommendata] = useState([]);
   const order_data = useSelector((store) => store.Orderreducer.user);
   const [order, setorder] = useState([]);
-  const [singlepagedata,setsinglepagedata]=useState([])
+  const [singlepagedata, setsinglepagedata] = useState([]);
   const order_total = useSelector((store) => store.Orderreducer.totalPrice);
-  const singledata=useSelector((store)=>store.restaurantReducer.premium_restaurant)
+  const singledata = useSelector(
+    (store) => store.restaurantReducer.premium_restaurant
+  );
   // console.log(singledata[0]._id);
 
-  const navigator=useNavigate()
-  const {userID}=useParams()
+  const navigator = useNavigate();
+  const { userID } = useParams();
   // console.log(userID)
 
-  
   useEffect(() => {
     setorder(order_data);
     // console.log(order_data)
   }, [order_data]);
   // console.log("order",order)
 
-  useEffect(()=>{
+  useEffect(() => {
     // setsinglepagedata(singledata)
-    for(var i=0;i<singledata.length;i++){
-      if(singledata[i]._id==userID){
+    for (var i = 0; i < singledata.length; i++) {
+      if (singledata[i]._id == userID) {
         // console.log(singledata[i])
-        setsinglepagedata(singledata[i])
+        setsinglepagedata(singledata[i]);
       }
     }
-    
-  },[singledata])
+  }, [singledata]);
   // console.log(singlepagedata)
-
-
-  
-
-
-
-
 
   const handleabout = () => {
     setflag("about");
@@ -87,10 +79,12 @@ function Singledetails() {
   };
   const handlefetch = async () => {
     try {
-      let res = await axios.get(`https://good-puce-hummingbird-garb.cyclic.app/restDeal/get`).then((res) => {
-        console.log("recommend_msg",res.data.msg)
-        setrecommendata(res.data.msg);
-      });
+      let res = await axios
+        .get(`https://good-puce-hummingbird-garb.cyclic.app/restDeal/get`)
+        .then((res) => {
+          console.log("recommend_msg", res.data.msg);
+          setrecommendata(res.data.msg);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -110,102 +104,111 @@ function Singledetails() {
     settitle("This is Photo");
   };
 
-
-  const handleBuy=()=>{
-    navigator("/payment")
-  }
+  const handleBuy = () => {
+    navigator("/payment");
+  };
 
   return (
     <>
       {/* Upper Section  */}
       <HStack w={"100%"} h={["400px", "400px", "250px"]} border={""} p={4}>
-        
-          <>
-            <VStack w="50%" h="100%" display={"inline"}>
-              <Stack>
-                <h5
-                  style={{
-                    fontWeight: 700,
-                    color: "#999",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {singlepagedata.bought}
-                </h5>
-              </Stack>
-              <Stack display={"flex"} direction={["column", "column", "row"]}>
-                <Heading
-                  textTransform={"capitalize"}
-                  lineHeight={"30px"}
-                  fontWeight={700}
-                >
-                  {singlepagedata.Title}
-                </Heading>
+        <>
+          <VStack w="50%" h="100%" display={"inline"}>
+            <Stack>
+              <h5
+                style={{
+                  fontWeight: 700,
+                  color: "#999",
+                  textTransform: "uppercase",
+                }}
+              >
+                {singlepagedata.bought}
+              </h5>
+            </Stack>
+            <Stack display={"flex"} direction={["column", "column", "row"]}>
+              <Heading
+                textTransform={"capitalize"}
+                lineHeight={"30px"}
+                fontWeight={700}
+              >
+                {singlepagedata.Title}
+              </Heading>
+              <Box
+                style={{
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "5px",
+                  padding: "6px",
+
+                  display: "inline",
+                }}
+                w={["80%", "28%", "55%", "13%"]}
+              >
                 <Box
                   style={{
-                    border: "1px solid #e0e0e0",
-                    borderRadius: "5px",
-                    padding: "6px",
-                    
-                    display:"inline"
+                    color: "orange",
+                    marginRight: "10px",
+                    height: "1px",
+                    // padding: "10px",
+                    fontSize: "20px",
                   }}
-                  w={["80%", "28%", "55%","13%"]}
                 >
-                  <Box
+                  <img
+                    src="https://www.nearbuy.com/static/images/nb.png"
+                    alt="nb"
                     style={{
-                      color: "orange",
-                      marginRight: "10px",
-                      height: "1px",
-                      // padding: "10px",
-                      fontSize: "20px",
+                      height: "12px",
+                      marginRight: "6px",
+                      paddingRight: "6px",
                     }}
-                  >
-                    
-                    <img src="https://www.nearbuy.com/static/images/nb.png" alt="nb" style={{height:"12px",marginRight:"6px",paddingRight:"6px"}} />
-                  </Box>
-                  <Box ml={["40px", "27px"]} mt={["-5px","-4px"]} fontSize={["13px","15px"]} fontWeight={700}>
-                    {singlepagedata.rating}/5
-                  </Box>
+                  />
                 </Box>
-              </Stack>
-              <HStack>
-                <h4
-                  style={{
-                    fontWeight: 600,
-                    color: "#666",
-                    textTransform: "capitalize",
-                  }}
+                <Box
+                  ml={["40px", "27px"]}
+                  mt={["-5px", "-4px"]}
+                  fontSize={["13px", "15px"]}
+                  fontWeight={700}
                 >
-                  {singlepagedata.place}
-                </h4>
-              </HStack>
-            </VStack>
-
-            <Stack
-              display={"flex"}
-              direction={["column", "column", "row"]}
-              w={"50%"}
-              h={"100%"}
-            >
-              <Stack w="100%" h="100%">
-                <img
-                  src={singlepagedata.Image}
-                  alt="dummy"
-                  width={"100%"}
-                  height={"100%"}
-                />
-              </Stack>
-              <Box w="100%" h="100%">
-                <img
-                  src={singlepagedata.Image}
-                  alt="dummy"
-                  width={"100%"}
-                  height={"100%"}
-                />
+                  {singlepagedata.rating}/5
+                </Box>
               </Box>
             </Stack>
-          </>
-        
+            <HStack>
+              <h4
+                style={{
+                  fontWeight: 600,
+                  color: "#666",
+                  textTransform: "capitalize",
+                }}
+              >
+                {singlepagedata.place}
+              </h4>
+            </HStack>
+          </VStack>
+
+          <Stack
+            display={"flex"}
+            direction={["column", "column", "row"]}
+            w={"50%"}
+            h={"100%"}
+          >
+            <Stack w="100%" h="100%">
+              <img
+                src={singlepagedata.Image}
+                alt="dummy"
+                width={"100%"}
+                height={"100%"}
+              />
+            </Stack>
+            <Box w="100%" h="100%">
+              <img
+                src={singlepagedata.Image}
+                alt="dummy"
+                width={"100%"}
+                height={"100%"}
+              />
+            </Box>
+          </Stack>
+        </>
       </HStack>
 
       {/* Lower Section */}
@@ -228,7 +231,7 @@ function Singledetails() {
                   backgroundColor={"#e0e0e0"}
                   _hover={{
                     background: "white",
-                    borderBottomColor:"white"
+                    borderBottomColor: "white",
                   }}
                 >
                   Recommended
@@ -240,7 +243,7 @@ function Singledetails() {
                   backgroundColor={"#e0e0e0"}
                   _hover={{
                     background: "white",
-                    borderBottomColor:"white"
+                    borderBottomColor: "white",
                   }}
                 >
                   About
@@ -252,7 +255,7 @@ function Singledetails() {
                   backgroundColor={"#e0e0e0"}
                   _hover={{
                     background: "white",
-                    borderBottomColor:"white"
+                    borderBottomColor: "white",
                   }}
                 >
                   Photo
@@ -296,9 +299,13 @@ function Singledetails() {
               direction={"row"}
               justifyContent={"space-around"}
             >
-              <p style={{color:"#333",fontSize:"12px",}}>{el.Title}</p>
-              <p style={{color:"#333",fontSize:"12px",}}>X{el.count}</p>
-              <p style={{fontWeight:700,color:"#666" ,fontSize:".8125rem"}}>₹{el.price * el.count}</p>
+              <p style={{ color: "#333", fontSize: "12px" }}>{el.Title}</p>
+              <p style={{ color: "#333", fontSize: "12px" }}>X{el.count}</p>
+              <p
+                style={{ fontWeight: 700, color: "#666", fontSize: ".8125rem" }}
+              >
+                ₹{el.price * el.count}
+              </p>
             </Stack>
           ))}
 
@@ -308,11 +315,15 @@ function Singledetails() {
             justifyContent={"space-around"}
           >
             <p>Total:</p>
-            <p style={{fontWeight:900,color:"#666" ,fontSize:".8125rem"}}>₹{order_total}</p>
+            <p style={{ fontWeight: 900, color: "#666", fontSize: ".8125rem" }}>
+              ₹{order_total}
+            </p>
           </Stack>
 
           <Stack>
-            <Button colorScheme="red" onClick={handleBuy}>Buy Now</Button>
+            <Button colorScheme="red" onClick={handleBuy}>
+              Buy Now
+            </Button>
           </Stack>
         </Stack>
       </Stack>

@@ -48,12 +48,12 @@ export default function AdminSignup() {
         });
         navigate("/adminlogin");
       })
-      .catch((e) => 
-      toast({
-        title:e.message,
-        status: "error",
-        isClosable: true,
-      })
+      .catch((e) =>
+        toast({
+          title: e.message,
+          status: "error",
+          isClosable: true,
+        })
       );
   };
 
@@ -84,11 +84,6 @@ export default function AdminSignup() {
       });
     } else {
       localStorage.setItem("signupadmin", JSON.stringify(SignupData));
-      // toast({
-      //   title: `SignUp Successful ....`,
-      //   status: "success",
-      //   isClosable: true,
-      // });
     }
   };
 
@@ -99,7 +94,7 @@ export default function AdminSignup() {
 
   return (
     <Flex
-    marginTop="-50px"
+      marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}

@@ -47,24 +47,16 @@ export default function Login() {
         navigate("/");
         window.location.reload();
       })
-      .catch((e) => 
+      .catch((e) =>
         toast({
-            title:"Invalid Credentials",
-            status: "error",
-            isClosable: true,
-          })
+          title: "Invalid Credentials",
+          status: "error",
+          isClosable: true,
+        })
       );
   };
 
   const handleUserLoginForm = () => {
-    // const signupData = JSON.parse(localStorage.getItem("signupuser"));
-    // if (signupData === null) {
-    //   toast({
-    //     title: "Please do SignUp first",
-    //     status: "error",
-    //     isClosable: true,
-    //   });
-    // } else
     if (LoginData.email === "" || LoginData.password === "") {
       toast({
         title: "Please fill all information",
@@ -72,41 +64,7 @@ export default function Login() {
         isClosable: true,
       });
     } else {
-      // if (
-      //   signupData.email === LoginData.email &&
-      //   signupData.password === LoginData.password
-      // ) {
       localStorage.setItem("loginuser", JSON.stringify(LoginData));
-      // toast({
-      //   title: "Login Successfully Localstorage",
-      //   status: "success",
-      //   isClosable: true,
-      // });
-      // } else if (
-      //   signupData.email !== LoginData.email &&
-      //   signupData.password === LoginData.password
-      // ) {
-      //   toast({
-      //     title: "Please enter valid email",
-      //     status: "warning",
-      //     isClosable: true,
-      //   });
-      // } else if (
-      //   signupData.email === LoginData.email &&
-      //   signupData.password !== LoginData.password
-      // ) {
-      //   toast({
-      //     title: "Please enter valid password",
-      //     status: "warning",
-      //     isClosable: true,
-      //   });
-      // } else {
-      //   toast({
-      //     title: "Invalid Credentials",
-      //     status: "error",
-      //     isClosable: true,
-      //   });
-      // }
     }
   };
 
@@ -117,7 +75,7 @@ export default function Login() {
 
   return (
     <Flex
-    marginTop="-50px"
+      marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}

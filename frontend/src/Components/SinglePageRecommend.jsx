@@ -11,41 +11,35 @@ import { Orderreducer } from "../Redux/Order/reducer.order";
 
 function SinglePageRecommend({ recomenddata }) {
   const dispatch = useDispatch();
-  const order_data=useSelector((store)=>store.Orderreducer.user)
+  const order_data = useSelector((store) => store.Orderreducer.user);
   // console.log(recomenddata)
 
-
-  
-
   const [data, setdata] = useState([]);
- 
-  
+
   useEffect(() => {
     // console.log("Recommend")
     setdata(recomenddata);
-
   }, [recomenddata]);
-
 
   const handleadd = (_id) => {
     // console.log("filter", _id);
 
     data.filter((el) => {
-      for(let i=0;i<order_data.length;i++){
-        if(order_data[i]._id==el._id){
+      for (let i = 0; i < order_data.length; i++) {
+        if (order_data[i]._id == el._id) {
           console.log("item present in order");
-          return ;
+          return;
         }
       }
       if (el._id == _id) {
-        const payload={
-          id:el._id,
-          Title:el.Title,
-          price:Number(el.offerprice),
-          count:1
-        }
+        const payload = {
+          id: el._id,
+          Title: el.Title,
+          price: Number(el.offerprice),
+          count: 1,
+        };
         console.log(payload);
-        dispatch(addorder_redux(payload))
+        dispatch(addorder_redux(payload));
       }
     });
   };
@@ -54,7 +48,7 @@ function SinglePageRecommend({ recomenddata }) {
     order_data?.filter((el) => {
       if (el.id == id) {
         console.log(id);
-        dispatch(orderinc_redux(id));   
+        dispatch(orderinc_redux(id));
       }
     });
   };
@@ -63,11 +57,11 @@ function SinglePageRecommend({ recomenddata }) {
     order_data?.filter((el) => {
       if (el.id == id) {
         console.log(id);
-        dispatch(orderdec_redux(id))
+        dispatch(orderdec_redux(id));
       }
     });
   };
-  
+
   return (
     <>
       {data.map((el, i) => (
@@ -93,7 +87,7 @@ function SinglePageRecommend({ recomenddata }) {
               pb={"6px"}
               pr={"6px"}
               fontSize={"10px"}
-              w={["20%","20%","6%","7%"]}
+              w={["20%", "20%", "6%", "7%"]}
             >
               <p style={{ color: "#34a853" }}>{el.discount}</p>
             </Stack>
@@ -173,29 +167,29 @@ function SinglePageRecommend({ recomenddata }) {
             </HStack>
 
             <HStack>
-            <Button
-              onClick={() => {
-                handleInc(el._id);
-              }}
-            >
-              Inc
-            </Button>
-            <Button
-              colorScheme="red"
-              onClick={() => {
-                handleadd(el._id);
-              }}
-            >
-              Add
-            </Button>
-            <Button
-              onClick={() => {
-                handledec(el._id);
-              }}
-            >
-              Dec
-            </Button>
-            </HStack>           
+              <Button
+                onClick={() => {
+                  handleInc(el._id);
+                }}
+              >
+                Inc
+              </Button>
+              <Button
+                colorScheme="red"
+                onClick={() => {
+                  handleadd(el._id);
+                }}
+              >
+                Add
+              </Button>
+              <Button
+                onClick={() => {
+                  handledec(el._id);
+                }}
+              >
+                Dec
+              </Button>
+            </HStack>
           </Stack>
         </Stack>
       ))}

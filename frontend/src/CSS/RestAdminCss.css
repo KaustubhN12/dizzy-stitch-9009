@@ -1,211 +1,183 @@
+.container {
+  width: 100%;
+  background-color: rgb(231, 228, 228);
+}
+.maindiv {
+  margin: auto;
+  width: 60%;
+  background-color: rgb(231, 228, 228);
+  padding: 4rem 0;
+  /* border:1px solid black; */
+}
+.heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: rgb(234, 87, 83);
+  width: 50%;
+  margin: auto auto 1.8rem auto;
+}
+.input {
+  border: 2.2px solid rgb(234, 87, 83);
+  width: 80%;
+  height: 2.3rem;
+  border-radius: 0.5rem;
+  outline: none;
+}
+.label {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(234, 87, 83);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+.btn {
+  background-color: rgb(234, 87, 83);
+  color: white;
+  font-weight: 500;
+  font-size: 1.3rem;
+  border-radius: 0.6rem;
+  padding: 0.3rem 1.7rem;
+  margin-left: 40%;
+}
+.btn:hover {
+  background-color: rgb(231, 228, 228);
+  color: rgb(234, 87, 83);
+  border: 1px solid rgb(234, 87, 83);
+}
+.hr {
+  background-color: rgb(218, 216, 216);
+  height: 1.5px;
+  margin: 1rem 0;
+}
+.hr2 {
+  background-color: rgb(234, 87, 83);
+  height: 3px;
+}
+.midh1 {
+  color: rgb(234, 87, 83);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 2rem 0 0 2rem;
+}
+.mainmapdiv {
+  width: 80%;
+  margin: auto;
+  padding: 4rem 0;
+}
+.companydiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  border: 0.1rem solid rgb(234, 87, 83);
+  min-height: 3rem;
+  border-radius: 0.4rem;
+  margin: 0.9rem auto auto auto;
+  padding: 0 1rem;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgb(234, 87, 83);
+  min-height: 100%;
+}
+.btndiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+}
+.btn1 {
+  background-color: rgb(234, 87, 83);
+  color: white;
+  font-weight: 550;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  padding: 0.3rem 1.5rem;
+}
+.btn1:hover {
+  color: rgb(234, 87, 83);
+  background-color: white;
+  border: 1.5px solid rgb(234, 87, 83);
+}
 
-.container{
-    width: 100%;
-    background-color: rgb(231, 228, 228);
+.mainadmindiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(234, 87, 83);
+  height: 5rem;
 }
-.maindiv{
-    margin: auto;
-    width: 60%;
-    background-color: rgb(231, 228, 228);
-    padding: 4rem 0;
-    /* border:1px solid black; */
+.admindiv {
+  background-color: rgb(234, 87, 83);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.2rem 1rem;
+  border: 1px solid white;
+  border-radius: 0.4rem;
+  cursor: pointer;
 }
-.heading{
-    font-size: 1.8rem;
+.admindiv:hover {
+  background-color: white;
+  color: rgb(234, 87, 83);
+}
+
+@media all and (max-width: 1200px) {
+  .maindiv {
+    width: 90%;
+  }
+  .heading {
+    font-size: 1.5rem;
     font-weight: 700;
-    color: rgb(234,87,83);
+    color: rgb(234, 87, 83);
     width: 50%;
-    margin: auto auto 1.8rem auto;
-    
-}
-.input{
-    border: 2.2px solid rgb(234,87,83);
-    width: 80%;
-    height: 2.3rem;
-    border-radius: 0.5rem;
-    outline: none;
-    
-}
-.label{
-    display: flex;
-    justify-content: space-between;
-    color: rgb(234,87,83);
-    font-weight: 600;
-    font-size: 1.3rem;
-   
-   
-}
-.btn{
-    background-color:rgb(234,87,83) ;
-    color: white;
-    font-weight: 500;
-    font-size: 1.3rem;
-    border-radius: 0.6rem;
-    padding: 0.3rem 1.7rem;
-    margin-left: 40%;
- 
-}
-.btn:hover{
-    background-color: rgb(231, 228, 228);
-    color: rgb(234,87,83);
-    border: 1px solid rgb(234,87,83) ;
- 
-}
-.hr{
-    background-color: rgb(218, 216, 216);
-    height: 1.5px;
-    margin: 1rem 0;
-}
-.hr2{
-    background-color: rgb(234,87,83);
-    height: 3px;
-    
-}
-.midh1{
-    color: rgb(234,87,83);
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin: 2rem 0 0 2rem;
-}
-.mainmapdiv{
-    width: 80%;
-    margin: auto;
-    padding: 4rem 0;
-  
-}
-.companydiv{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    border:  0.1rem solid rgb(234,87,83); 
-    min-height: 3rem;
+  }
+  .companydiv {
+    width: 90%;
+  }
+  .title {
+    font-size: 1.1rem;
+  }
+  .btndiv {
+    width: 35%;
+  }
+  .btn1 {
+    font-weight: 400;
+    font-size: 0.9rem;
     border-radius: 0.4rem;
-    margin: 0.9rem auto auto auto;
-    padding: 0 1rem;
-
-
+    padding: 0.5rem 1rem;
+  }
 }
-.title{
-    font-size: 1.2rem;
-    font-weight: 500;
-    color:  rgb(234,87,83);
-    min-height: 100%;
 
-}
-.btndiv{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 30%;
- 
-}
-.btn1{
-    background-color:rgb(234,87,83) ;
-    color: white;
-    font-weight: 550;
+@media all and (max-width: 800px) {
+  .maindiv {
+    width: 95%;
+  }
+  .heading {
     font-size: 1rem;
-    border-radius: 0.6rem;
-    padding: 0.3rem 1.5rem;
-  
-}
-.btn1:hover{
-    color:rgb(234,87,83);
-    background-color: white;
-    border: 1.5px solid rgb(234,87,83);
-}
-
-.mainadmindiv{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color:rgb(234,87,83);
-    height: 5rem;
-}
-.admindiv{
-    background-color:rgb(234,87,83);
-    color:white;
-    font-size: 1.5rem;
-    font-weight: 600;
-    padding: 0.2rem 1rem ;
-    border: 1px solid white;
+    font-weight: 700;
+    color: rgb(234, 87, 83);
+    width: 50%;
+  }
+  .btn {
+    font-size: 1.3rem;
     border-radius: 0.4rem;
-    cursor: pointer;
-}
-.admindiv:hover{
-    background-color: white;
-    color:rgb(234,87,83) ;
-}
+    padding: 0.3rem 1.5rem;
+    margin-left: 30%;
+  }
 
-@media all and (max-width:1200px){
-
-    .maindiv{
-        width: 90%;
-    }
-    .heading{
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: rgb(234,87,83);
-        width: 50%;
-        
-    }
-    .companydiv{
-        width: 90%;
-    
-    }
-    .title{
-        font-size: 1.1rem;   
-
-    }
-    .btndiv{
-        width: 35%;
-    }
-    .btn1{
-        font-weight: 400;
-        font-size: 0.9rem;
-        border-radius: 0.4rem;
-        padding: 0.5rem 1rem;
-      
-    }
-
-}
-
-
-@media all and (max-width:800px){
-
-    .maindiv{
-        width: 95%;
-    }
-    .heading{
-        font-size: 1rem;
-        font-weight: 700;
-        color: rgb(234,87,83);
-        width: 50%;
-        
-    }
-    .btn{
-        font-size: 1.3rem;
-        border-radius: 0.4rem;
-        padding: 0.3rem 1.5rem;
-        margin-left: 30%;
-     
-    }
-
-    .companydiv{
-        flex-direction: column;
-        width: 80%;
-        min-height: 6rem;
-      
-    
-    }
-    .title{
-        font-size: 1.2rem;   
-
-    }
-    .btndiv{
-        justify-content: space-around;
-        width: 80%;
-        margin: 0.7rem 0;
-    }
-
+  .companydiv {
+    flex-direction: column;
+    width: 80%;
+    min-height: 6rem;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+  .btndiv {
+    justify-content: space-around;
+    width: 80%;
+    margin: 0.7rem 0;
+  }
 }

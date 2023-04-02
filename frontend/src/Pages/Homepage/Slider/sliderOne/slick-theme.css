@@ -1,34 +1,30 @@
 /* my css--------------------------------------------------------------- */
 .slick-prev::before,
 .slick-next::before {
-    color: black;
-    background-color: #457efe;
-    opacity: 1;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding: 10px;
-    z-index: 10;
-
+  color: black;
+  background-color: #457efe;
+  opacity: 1;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+  z-index: 10;
 }
 
 .slick-prev::before {
-    border-top-right-radius: 50%;
-    border-bottom-right-radius: 50%;
-    margin-left: -20px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  margin-left: -20px;
 }
 
 .slick-next::before {
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
 }
-
 
 .slick-prev::after,
 .slick-next::after {
-    background-color: red;
-    border: 1px solid red;
-    border-radius: 50%;
-    padding: 10px;
-    z-index: 10;
-
+  background-color: red;
+  border: 1px solid red;
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 10;
 }

@@ -9,7 +9,7 @@ import {
   Stack,
   Radio,
   Input,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPremiumRestaurant } from "../../Redux/Restaurants/Action";
@@ -19,8 +19,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import { useToast } from '@chakra-ui/react';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const PremiumRestaurant = () => {
@@ -91,7 +91,7 @@ const PremiumRestaurant = () => {
       dynamicFilter[premium_restaurant[i].place]++;
     }
   }
-  
+
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
       <ChevronLeftIcon
@@ -135,7 +135,7 @@ const PremiumRestaurant = () => {
           slidesToScroll: 1,
           infinite: true,
           dots: false,
-          arrows:false
+          arrows: false,
         },
       },
       {
@@ -145,7 +145,7 @@ const PremiumRestaurant = () => {
           slidesToScroll: 1,
           initialSlide: 2,
           dots: false,
-          arrows:false
+          arrows: false,
         },
       },
       {
@@ -154,7 +154,7 @@ const PremiumRestaurant = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           dots: false,
-          arrows:false
+          arrows: false,
         },
       },
     ],
@@ -219,11 +219,30 @@ const PremiumRestaurant = () => {
     },
   ];
 
-  const localFilter=['Connaught Place', 'Aerocity', 'Outer Ring Road, Paschim Vihar', 'Mayur Vihar Phase 1', 'Soul City Mall, Sector 13 Dwarka', 'IGI T3 Road, Mahipalpur', 'Mahipalpur', 'Nelson Mandela Road, Vasant Kunj Sector C', 'Samalka', 'Sector 10 Dwarka', 'Bijwasan Road, Kapashera', '\n araja Surajmal Road, Surajmal Vihar', '', 'Maharaja Surajmal Road, Surajmal Vihar']
+  const localFilter = [
+    "Connaught Place",
+    "Aerocity",
+    "Outer Ring Road, Paschim Vihar",
+    "Mayur Vihar Phase 1",
+    "Soul City Mall, Sector 13 Dwarka",
+    "IGI T3 Road, Mahipalpur",
+    "Mahipalpur",
+    "Nelson Mandela Road, Vasant Kunj Sector C",
+    "Samalka",
+    "Sector 10 Dwarka",
+    "Bijwasan Road, Kapashera",
+    "\n araja Surajmal Road, Surajmal Vihar",
+    "",
+    "Maharaja Surajmal Road, Surajmal Vihar",
+  ];
 
   return (
     <div
-      style={{ backgroundColor: "#e1e9ec", height: "auto" , paddingBottom:"30px" }}
+      style={{
+        backgroundColor: "#e1e9ec",
+        height: "auto",
+        paddingBottom: "30px",
+      }}
       className={"container"}
     >
       <Box
@@ -244,10 +263,7 @@ const PremiumRestaurant = () => {
           display={"flex"}
           flexDirection={["column", "column", "initial"]}
         >
-          <Box
-            className={"sidebar"}
-            width={["100%", "100%", "24%"]}
-          >
+          <Box className={"sidebar"} width={["100%", "100%", "24%"]}>
             <Box
               className={"sidebar-info"}
               paddingTop="10px"
@@ -266,8 +282,8 @@ const PremiumRestaurant = () => {
                 height="200px"
                 backgroundColor="#ffffff"
                 width={["auto", "50%", "auto"]}
-                marginBottom={["20px","initial","initial"]}
-                marginRight={["initial","20px","initial"]}
+                marginBottom={["20px", "initial", "initial"]}
+                marginRight={["initial", "20px", "initial"]}
               >
                 <Slider {...settings}>
                   {coupons.map((el, index) => {
@@ -275,25 +291,57 @@ const PremiumRestaurant = () => {
                       <div key={index}>
                         <Box>
                           <Box padding="15px">
-                          <Text fontWeight="bold" fontStyle="sans-serif" fontSize="17px">{el.discount}</Text>
-                          <Text fontWeight="semibold" fontSize="xs" marginTop="35px">{el.title}</Text>
-                          <Box display={"flex"} marginTop="10px" >
-                            <Input size="sm" width="100px" value={el.code} color="#66aadc"/>
-                            <CopyToClipboard text={el.code}>
-                              <Button size="sm" onClick={()=>{
-                                toast({
-                                  title: 'Code copied.',
-                                  description:el.code ,
-                                  status: 'success',
-                                  duration: 3000,
-                                  isClosable: true,
-                                })
-                              }}>Copy</Button>
-                            </CopyToClipboard>
+                            <Text
+                              fontWeight="bold"
+                              fontStyle="sans-serif"
+                              fontSize="17px"
+                            >
+                              {el.discount}
+                            </Text>
+                            <Text
+                              fontWeight="semibold"
+                              fontSize="xs"
+                              marginTop="35px"
+                            >
+                              {el.title}
+                            </Text>
+                            <Box display={"flex"} marginTop="10px">
+                              <Input
+                                size="sm"
+                                width="100px"
+                                value={el.code}
+                                color="#66aadc"
+                              />
+                              <CopyToClipboard text={el.code}>
+                                <Button
+                                  size="sm"
+                                  onClick={() => {
+                                    toast({
+                                      title: "Code copied.",
+                                      description: el.code,
+                                      status: "success",
+                                      duration: 3000,
+                                      isClosable: true,
+                                    });
+                                  }}
+                                >
+                                  Copy
+                                </Button>
+                              </CopyToClipboard>
+                            </Box>
                           </Box>
-                          </Box>
-                          <Box className="hr-line" border="1px solid #e8e8e8"></Box>
-                          <Text fontWeight="semibold" fontSize="xs" marginTop="4px" marginLeft={"15px"}>{el.validity}</Text>
+                          <Box
+                            className="hr-line"
+                            border="1px solid #e8e8e8"
+                          ></Box>
+                          <Text
+                            fontWeight="semibold"
+                            fontSize="xs"
+                            marginTop="4px"
+                            marginLeft={"15px"}
+                          >
+                            {el.validity}
+                          </Text>
                         </Box>
                       </div>
                     );
@@ -309,19 +357,19 @@ const PremiumRestaurant = () => {
                 overflowY={["scroll", "scroll", "scroll"]}
                 paddingBottom="10px"
                 sx={{
-                  '&::-webkit-scrollbar': {
-                    width: '5px',
-                    borderRadius: '26px',
+                  "&::-webkit-scrollbar": {
+                    width: "5px",
+                    borderRadius: "26px",
                     backgroundColor: `rgba(0, 0, 0, 0.05)`,
                   },
-                  '&::-webkit-scrollbar-thumb': {
+                  "&::-webkit-scrollbar-thumb": {
                     backgroundColor: `RGB(240 138 135)`,
                     borderRadius: "20px",
-                    border: "6px solid transparent"
+                    border: "6px solid transparent",
                   },
-                  '&::-webkit-scrollbar-thumb:hover': {
-                    backgroundColor: "RGB(236 37 30)"
-                  }
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    backgroundColor: "RGB(236 37 30)",
+                  },
                 }}
               >
                 <Text
@@ -480,9 +528,9 @@ const PremiumRestaurant = () => {
                     backgroundColor="#ffffff"
                     borderRadius="5px"
                     boxShadow="md"
-                    onClick={()=>{
-                      navigate(`/singledetails/${el._id}`)
-                  }}
+                    onClick={() => {
+                      navigate(`/singledetails/${el._id}`);
+                    }}
                   >
                     <Box
                       maxW="sm"
@@ -594,4 +642,3 @@ const PremiumRestaurant = () => {
 };
 
 export default PremiumRestaurant;
-

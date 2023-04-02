@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Image, Text, Badge } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { SliderBanner } from "../Homepage/Slider/sliderOne/Slider";
 import { Link } from "react-router-dom";
@@ -134,7 +133,7 @@ const RestaurantHome = () => {
       image: "https://img4.nbstatic.in/tr:w-2800/63bfd78f8db992000b7a185a.jpg",
       alt: "",
     },
-  ]
+  ];
 
   const quickBites = [
     {
@@ -186,18 +185,18 @@ const RestaurantHome = () => {
 
   const coupons = [
     {
-      img:"https://img4.nbstatic.in/tr:w-700/6299bae13b031b000ba75db4.jpeg",
-      validity:"Valid Till 31 Dec 2023"
+      img: "https://img4.nbstatic.in/tr:w-700/6299bae13b031b000ba75db4.jpeg",
+      validity: "Valid Till 31 Dec 2023",
     },
     {
-      img:"https://img4.nbstatic.in/tr:w-700/6294bbe1b3c621000b366b85.jpeg",
-      validity:"Valid Till 04 Apr 2023"
+      img: "https://img4.nbstatic.in/tr:w-700/6294bbe1b3c621000b366b85.jpeg",
+      validity: "Valid Till 04 Apr 2023",
     },
     {
-      img:"https://img4.nbstatic.in/tr:w-700/64273aff8db992000bb67914.jpg",
-      validity:"Valid Till 04 Apr 2023"
-    }
-  ]
+      img: "https://img4.nbstatic.in/tr:w-700/64273aff8db992000bb67914.jpg",
+      validity: "Valid Till 04 Apr 2023",
+    },
+  ];
 
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <Box position="absolute" marginTop="80px" marginLeft="25px">
@@ -267,25 +266,25 @@ const RestaurantHome = () => {
         >
           {deals.map((el) => {
             return (
-             <Link to={el.route}>
-              <Box
-                alignItems={"center"}
-                justifyContent="center"
-                padding="20px"
-                _hover={{ backgroundColor: "#f1f1f1" }}
-                textAlign={"center"}
-              >
-                <Image
-                  width="25%"
-                  src={el.img}
-                  marginLeft={"35px"}
-                  marginBottom={"5px"}
-                />
-                <Text fontSize="12px" fontWeight="semibold">
-                  {el.title}
-                </Text>
-              </Box>
-             </Link>
+              <Link to={el.route}>
+                <Box
+                  alignItems={"center"}
+                  justifyContent="center"
+                  padding="20px"
+                  _hover={{ backgroundColor: "#f1f1f1" }}
+                  textAlign={"center"}
+                >
+                  <Image
+                    width="25%"
+                    src={el.img}
+                    marginLeft={"35px"}
+                    marginBottom={"5px"}
+                  />
+                  <Text fontSize="12px" fontWeight="semibold">
+                    {el.title}
+                  </Text>
+                </Box>
+              </Link>
             );
           })}
         </Box>
@@ -337,13 +336,13 @@ const RestaurantHome = () => {
           Dine At 5 Star Hotels
         </Text>
         <Box display="grid" gridTemplateColumns="repeat(5,1fr)" gap={"20px"}>
-          {
-            fiveStartHotels.map((el)=>{
-              return <Box padding={"10px"}>
-                <Image src={el.img}/>
+          {fiveStartHotels.map((el) => {
+            return (
+              <Box padding={"10px"}>
+                <Image src={el.img} />
               </Box>
-            })
-          }
+            );
+          })}
         </Box>
       </Box>
 
@@ -355,19 +354,29 @@ const RestaurantHome = () => {
         <Text fontWeight="bold" fontSize="23px" marginTop="30px">
           Dine At 5 Star Hotels
         </Text>
-        <Box display="grid" gridTemplateColumns={["repeat(1,1fr)","repeat(2,1fr)","repeat(3,1fr)"]} gap={"20px"}>
-          {
-            coupons.map((el)=>{
-              return <Box padding={"10px"} border={"1px solid #e8e8e8"}>
+        <Box
+          display="grid"
+          gridTemplateColumns={[
+            "repeat(1,1fr)",
+            "repeat(2,1fr)",
+            "repeat(3,1fr)",
+          ]}
+          gap={"20px"}
+        >
+          {coupons.map((el) => {
+            return (
+              <Box padding={"10px"} border={"1px solid #e8e8e8"}>
                 <Box>
-                <Image src={el.img}/>
+                  <Image src={el.img} />
                 </Box>
                 <Box>
-                  <Text fontSize="xs" fontWeight="semibold" marginLeft="20px">{el.validity}</Text>
+                  <Text fontSize="xs" fontWeight="semibold" marginLeft="20px">
+                    {el.validity}
+                  </Text>
                 </Box>
               </Box>
-            })
-          }
+            );
+          })}
         </Box>
       </Box>
     </div>

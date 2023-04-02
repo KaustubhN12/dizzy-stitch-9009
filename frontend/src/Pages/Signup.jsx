@@ -48,12 +48,12 @@ export default function Signup() {
         });
         navigate("/login");
       })
-      .catch((e) => 
-      toast({
-        title:e.message,
-        status: "error",
-        isClosable: true,
-      })
+      .catch((e) =>
+        toast({
+          title: e.message,
+          status: "error",
+          isClosable: true,
+        })
       );
   };
 
@@ -84,11 +84,6 @@ export default function Signup() {
       });
     } else {
       localStorage.setItem("signupuser", JSON.stringify(SignupData));
-      // toast({
-      //   title: `SignUp Successful LocalStorage ....`,
-      //   status: "success",
-      //   isClosable: true,
-      // });
     }
   };
 
@@ -99,7 +94,7 @@ export default function Signup() {
 
   return (
     <Flex
-    marginTop="-50px"
+      marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}
