@@ -21,11 +21,13 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 
 
 const NightLife = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchparams, setSearchParams] = useSearchParams();
   const initialState = searchparams.getAll("place");
   const initialOrder = searchparams.get("order");
@@ -81,17 +83,6 @@ const NightLife = () => {
     (store) => store.restaurantReducer.premium_restaurant
   );
 
-  // for (let i = 0; i < premium_restaurant.length; i++) {
-  //   if (premium_restaurant[i].place == "Aerocity") {
-  //     Aerocity++;
-  //   } else if (premium_restaurant[i].place == "Connaught Place") {
-  //     connaught++;
-  //   } else if (premium_restaurant[i].place == "Mahipalpur") {
-  //     Mahipalpur++;
-  //   }
-  //   Restaurants++;
-  // }
-
   const shuffleArray = (array) => {
     let len = array.length,
         currentIndex;
@@ -113,7 +104,7 @@ shuffleArray(premium_restaurant);
       dynamicFilter[premium_restaurant[i].place]++;
     }
   }
-  
+
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
       <ChevronLeftIcon
@@ -240,6 +231,8 @@ shuffleArray(premium_restaurant);
       validity: "Valid till 31 Dec 2023",
     },
   ];
+
+  const localFilter=['Connaught Place', 'Aerocity', 'Mahipalpur', 'Soul City Mall, Sector 13 Dwarka', 'Mayur Vihar Phase 1', 'Sector 10 Dwarka', 'IGI T3 Road, Mahipalpur', 'Bijwasan Road, Kapashera', 'Maharaja Surajmal Road, Surajmal Vihar', 'Samalka', 'Nelson Mandela Road, Vasant Kunj Sector C', '\n araja Surajmal Road, Surajmal Vihar', 'Outer Ring Road, Paschim Vihar', '']
 
   return (
     <div
@@ -382,7 +375,7 @@ shuffleArray(premium_restaurant);
                 >
                   New Delhi
                 </Text>
-                {filterArray.map((el) => {
+                {localFilter.map((el) => {
                   return (
                     <Box
                       className={"places"}
@@ -500,6 +493,9 @@ shuffleArray(premium_restaurant);
                     backgroundColor="#ffffff"
                     borderRadius="5px"
                     boxShadow="md"
+                    onClick={()=>{
+                      navigate(`/singledetails/${el._id}`)
+                    }}
                   >
                     <Box
                       maxW="sm"

@@ -20,7 +20,28 @@ export function SliderBanner(props) {
         centerPadding: "100px",
         className: "center",
         centerMode: true,
+        responsive: [
+           
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                   
+                    dots: false,
 
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: false,
+
+                },
+            },
+        ],
     };
     return (
         <div style={{ width: "95%", backgroundColor: "#f1f1f1", paddingBlock: "30px", margin: "auto" }} >
@@ -28,7 +49,7 @@ export function SliderBanner(props) {
                 {data && data.map((item) => {
                     return <Container centerContent overflow={"hidden"} maxW={"fit-content"} key={item.title}>
                         <Box backgroundColor={"#f1f1f1"} height={"200px"} width={"100%"} margin={'auto'}>
-                            <Img borderRadius={"6px"} height={["100%"]} src={item.image} alt={item.alt} />
+                            <Img borderRadius={["2px","4px","6px"]} height={[ "50%","80%","100%"]} src={item.image} alt={item.alt} />
                         </Box>
                     </Container>
                 })}
