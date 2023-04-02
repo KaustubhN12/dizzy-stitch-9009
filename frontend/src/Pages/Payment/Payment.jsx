@@ -15,24 +15,18 @@ import {
 } from "@chakra-ui/react";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
+import { clear_order } from "../../Redux/Order/action.order";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
-  const total = useSelector(
-    (store) => console.log("Store", store.Orderreducer.user.price)
-    // store.Orderreducer.user.price;
-  );
-
-  const count = useSelector(
-    (store) => console.log("Store", store.Orderreducer.user.count)
-    // store.Orderreducer.user.count;
-  );
-
-  const title = useSelector(
-    (store) => console.log("Store", store.Orderreducer.user.title)
-    // store.Orderreducer.user.title;
-  );
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const total = useSelector((store) => store.Orderreducer.totalPrice);
+  const count = useSelector((store) => store.Orderreducer);
+  const title = useSelector((store) => store.Orderreducer.user.title);
+  const order = useSelector((store)=> store.Orderreducer.user);
+// console.log(order);
   let subTotal = 0;
 
   if (total < 500) {
@@ -42,6 +36,24 @@ const Payment = () => {
   }
 
   const final_total = subTotal + 20;
+
+  const postOrder = async() =>{
+    
+   await  fetch("https://good-puce-hummingbird-garb.cyclic.app/order/add",{
+      method:"POST",
+      body:JSON.stringify({user:order}),
+      headers:{
+        "Authorization":`${localStorage.getItem("user-token")}`,
+        "Content-Type":"application/json"
+      }
+     }).then((data)=>{
+      dispatch(clear_order);
+      console.log(order);
+     }).catch((err)=>{
+      console.log(err);
+     });
+     navigate("/ordersuccess");
+  }
 
   return (
     <Stack
@@ -68,21 +80,21 @@ const Payment = () => {
             <Text>connaught place, delhi</Text>
           </Box>
           <Box>
-            <Text>product name</Text>
-            {/* <Text>${title}</Text> */}
+            {/* <Text>product name</Text> */}
+            <Text>{title}</Text>
           </Box>
           <HStack justifyContent="space-evenly">
-            <Text fontWeight="bold">Qty: 5</Text>
-            {/* <Text fontWeight="bold">Qty: ${count}</Text> */}
-            <Text fontWeight="bold">₹ 1500</Text>
-            {/* <Text fontWeight="bold">₹ ${total}</Text> */}
+            {/* <Text fontWeight="bold">Qty: 5</Text> */}
+            <Text fontWeight="bold">Qty: {count.user.length}</Text>
+            {/* <Text fontWeight="bold">₹ 1500</Text> */}
+            <Text fontWeight="bold">Amount: ₹ {total}</Text>
           </HStack>
         </Box>
         <Box m="10px" w="90%" p="10px" border="1px solid black">
           <HStack pb="15px" justifyContent="space-between">
             <Text>Subtotal</Text>
-            <Text fontWeight="bold">₹ 1000</Text>
-            {/* <Text fontWeight="bold">₹ ${subTotal}</Text> */}
+            {/* <Text fontWeight="bold">₹ 1000</Text> */}
+            <Text fontWeight="bold">₹ {subTotal}</Text>
           </HStack>
           <hr />
           <HStack pb="15px" justifyContent="space-between">
@@ -92,8 +104,8 @@ const Payment = () => {
           <hr />
           <HStack pb="15px" justifyContent="space-between">
             <Text>Total</Text>
-            <Text fontWeight="bold">₹ 1020</Text>
-            {/* <Text fontWeight="bold">₹ ${final_total} </Text> */}
+            {/* <Text fontWeight="bold">₹ 1020</Text> */}
+            <Text fontWeight="bold">₹ {final_total} </Text>
           </HStack>
           <hr />
         </Box>
@@ -146,6 +158,7 @@ const Payment = () => {
                     color: "white",
                   }}
                   width={{ base: "100%", md: "230px", lg: "250px" }}
+                  onClick={postOrder}
                 >
                   PAY NOW
                 </Button>
@@ -208,6 +221,7 @@ const Payment = () => {
                     color: "white",
                   }}
                   width={{ base: "100%", md: "230px", lg: "250px" }}
+                  onClick={postOrder}
                 >
                   PAY NOW
                 </Button>
@@ -270,6 +284,7 @@ const Payment = () => {
                     color: "white",
                   }}
                   width={{ base: "100%", md: "230px", lg: "250px" }}
+                  onClick={postOrder}
                 >
                   PAY NOW
                 </Button>
@@ -407,6 +422,7 @@ const Payment = () => {
                   marginTop: "30px",
                 }}
                 width={{ base: "100%", md: "230px", lg: "250px" }}
+                onClick={postOrder}
               >
                 PAY NOW
               </Button>

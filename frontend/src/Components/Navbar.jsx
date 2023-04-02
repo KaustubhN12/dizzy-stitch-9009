@@ -1,9 +1,21 @@
-import { SearchIcon, UnlockIcon } from '@chakra-ui/icons'
-import { Box, Button, Grid, GridItem, HStack, Icon, Img, Input, Text } from '@chakra-ui/react'
+import { SearchIcon, UnlockIcon, } from '@chakra-ui/icons'
+
+import { Box, Button, Grid, GridItem, HStack, Icon, Img, Input, MenuButton, Text, Menu, MenuList, MenuItem, } from '@chakra-ui/react'
 import React from 'react'
 import { ImLocation } from 'react-icons/im'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("user-token");
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    window.location.reload();
+    navigate("/")
+  }
+
   return (
     <Box width={"100%"} borderBottom={"1px solid RGB(226 226 226)"}>
       <Grid
@@ -27,7 +39,7 @@ export const Navbar = () => {
         <GridItem bg='#f1f1f1' area={'location'} alignItems={'center'} >
           <HStack pl={['0px', '0px', "140px"]} fontSize={"12px"} py={"auto"} height={"100%"}>
             <ImLocation color='#889a9d' />
-            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"}  color={"#889a9d"}  >Select Location</Text>
+            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#889a9d"}  >Select Location</Text>
           </HStack>
         </GridItem>
 
@@ -37,19 +49,48 @@ export const Navbar = () => {
             <Text fontWeight={"600"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#EF534E"}>We're hiring! &#x7C;</Text>
             <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}> How it Works &#x7C;</Text>
             <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}> List your Business &#x7C;</Text>
-            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}> <UnlockIcon /> Login / Sign Up</Text>
+            <Text fontWeight={"400"} fontSize={"11px"} fontFamily={"sans-serif"} color={"#333333"}>
+
+              {token ? <Menu  >
+
+                <MenuButton> My Account
+                </MenuButton>
+                <MenuList>
+                <Link to="/orders"><MenuItem>My Orders</MenuItem></Link>
+                <Link to="/credits"><MenuItem>My Credits</MenuItem></Link>
+                <Link to="/profile"><MenuItem>My Profile</MenuItem></Link>
+                <Link to="/newsletter"><MenuItem>My Newsletters</MenuItem></Link>
+                <Link to="/refer"><MenuItem>Refer a friend</MenuItem></Link>
+                <Link to="/promotion"><MenuItem>My Proms</MenuItem></Link>
+                  <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
+
+                </MenuList>
+              </Menu>
+                :
+                <Link to="/login">
+                <Text >
+                  <UnlockIcon />
+                  Login / Sign Up
+                </Text>
+                </Link>
+
+              }
+
+            </Text>
           </HStack>
         </GridItem>
 
 
         <GridItem bg='white' area={'logo'}>
+          <Link to={"/"}>
           <Box pl={['0px', '0px', "140px"]} py={"5px"} width={"100%"}><Img width={["150px", "150px", "250px"]} height={["45px", "45px", "55px"]} src={"https://i.ibb.co/nQRNKjQ/nearBuy.png"} /></Box>
+          </Link>
         </GridItem>
 
 
         <GridItem bg='white' pr={['0px', '0px', '140px']} area={'search'} my={'auto'}>
           <HStack gap={"0"} width={["100%"]} >
-            <Input backgroundColor={'white'} borderRadius={"2"} type='text' placeholder=' Search restaurants, spa, events' />
+            <Input width={["70%", "80%", "100%"]} backgroundColor={'white'} borderRadius={"2"} type='text' placeholder=' Search restaurants, spa, events' />
             <Button colorScheme='red' color={'white'} borderRadius={"2"} >Search</Button>
           </HStack>
         </GridItem>

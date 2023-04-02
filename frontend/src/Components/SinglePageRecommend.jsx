@@ -12,7 +12,7 @@ import { Orderreducer } from "../Redux/Order/reducer.order";
 function SinglePageRecommend({ recomenddata }) {
   const dispatch = useDispatch();
   const order_data=useSelector((store)=>store.Orderreducer.user)
-  // console.log(order_data);
+  // console.log(recomenddata)
 
 
   
@@ -21,38 +21,39 @@ function SinglePageRecommend({ recomenddata }) {
  
   
   useEffect(() => {
+    // console.log("Recommend")
     setdata(recomenddata);
-  
-    
-  }, [data]);
+
+  }, [recomenddata]);
 
 
-  const handleadd = (id) => {
-    // console.log("filter", id);
+  const handleadd = (_id) => {
+    // console.log("filter", _id);
 
     data.filter((el) => {
       for(let i=0;i<order_data.length;i++){
-        if(order_data[i].id==el.id){
+        if(order_data[i]._id==el._id){
           console.log("item present in order");
           return ;
         }
       }
-      if (el.id == id) {
+      if (el._id == _id) {
         const payload={
-          id:el.id,
-          title:el.title,
-          price:el.price,
+          id:el._id,
+          Title:el.Title,
+          price:Number(el.offerprice),
           count:1
         }
+        console.log(payload);
         dispatch(addorder_redux(payload))
       }
     });
   };
 
   const handleInc = (id) => {
-    console.log(id);
     order_data?.filter((el) => {
       if (el.id == id) {
+        console.log(id);
         dispatch(orderinc_redux(id));   
       }
     });
@@ -61,6 +62,7 @@ function SinglePageRecommend({ recomenddata }) {
   const handledec = (id) => {
     order_data?.filter((el) => {
       if (el.id == id) {
+        console.log(id);
         dispatch(orderdec_redux(id))
       }
     });
@@ -91,9 +93,9 @@ function SinglePageRecommend({ recomenddata }) {
               pb={"6px"}
               pr={"6px"}
               fontSize={"10px"}
-              w={["20%","20%","6%","6%"]}
+              w={["20%","20%","6%","7%"]}
             >
-              <p style={{ color: "#34a853" }}>{el.discount}%off</p>
+              <p style={{ color: "#34a853" }}>{el.discount}</p>
             </Stack>
           </Stack>
 
@@ -113,9 +115,9 @@ function SinglePageRecommend({ recomenddata }) {
             >
               {/* Choice of Full Body Massage (with Organic Cold-Pressed Oil) (50
                 mins) + Shower (10 mins) */}
-              {el.servicename}
+              {el.Title}
             </h3>
-            <p style={{ fontWeight: "700" }}>₹{el.price}</p>
+            <p style={{ fontWeight: "700" }}>₹{el.offerprice}</p>
           </Stack>
           <Stack
             display={"flex"}
@@ -173,7 +175,7 @@ function SinglePageRecommend({ recomenddata }) {
             <HStack>
             <Button
               onClick={() => {
-                handleInc(el.id);
+                handleInc(el._id);
               }}
             >
               Inc
@@ -181,14 +183,14 @@ function SinglePageRecommend({ recomenddata }) {
             <Button
               colorScheme="red"
               onClick={() => {
-                handleadd(el.id);
+                handleadd(el._id);
               }}
             >
               Add
             </Button>
             <Button
               onClick={() => {
-                handledec(el.id);
+                handledec(el._id);
               }}
             >
               Dec

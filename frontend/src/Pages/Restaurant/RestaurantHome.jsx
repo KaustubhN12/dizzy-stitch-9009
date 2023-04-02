@@ -6,33 +6,34 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { SliderBanner } from "../Homepage/Slider/sliderOne/Slider";
+import { Link } from "react-router-dom";
 
 const RestaurantHome = () => {
   const deals = [
     {
       img: "https://img4.nbstatic.in/tr:w-/636ce20122156b000b884b63.png",
       title: "Buffet Deals",
-      route: "",
+      route: "/restaurant/premium-restaurant",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5f7d8150b7b01c000b8d348c.png",
       title: "Premium Restaurants",
-      route: "",
+      route: "/restaurant/premium-restaurant",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5f7c375cb7b01c000b8d3118.png",
       title: "Deals on Nightlife",
-      route: "",
+      route: "/nightlife",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5f7d81ceb7b01c000b8d3492.png",
       title: "Set Menu Meals",
-      route: "",
+      route: "/nightlife",
     },
     {
       img: "https://img4.nbstatic.in/tr:w-/5fa225165cc6f2000bcb6dbb.png",
       title: "Buffet Deals",
-      route: "",
+      route: "/restaurant/premium-restaurant",
     },
   ];
 
@@ -183,6 +184,21 @@ const RestaurantHome = () => {
     },
   ];
 
+  const coupons = [
+    {
+      img:"https://img4.nbstatic.in/tr:w-700/6299bae13b031b000ba75db4.jpeg",
+      validity:"Valid Till 31 Dec 2023"
+    },
+    {
+      img:"https://img4.nbstatic.in/tr:w-700/6294bbe1b3c621000b366b85.jpeg",
+      validity:"Valid Till 04 Apr 2023"
+    },
+    {
+      img:"https://img4.nbstatic.in/tr:w-700/64273aff8db992000bb67914.jpg",
+      validity:"Valid Till 04 Apr 2023"
+    }
+  ]
+
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <Box position="absolute" marginTop="80px" marginLeft="25px">
       <BiChevronLeft color={"black"} {...props} />
@@ -251,6 +267,7 @@ const RestaurantHome = () => {
         >
           {deals.map((el) => {
             return (
+             <Link to={el.route}>
               <Box
                 alignItems={"center"}
                 justifyContent="center"
@@ -268,6 +285,7 @@ const RestaurantHome = () => {
                   {el.title}
                 </Text>
               </Box>
+             </Link>
             );
           })}
         </Box>
@@ -331,6 +349,26 @@ const RestaurantHome = () => {
 
       <Box>
         <SliderBanner data={bannerSlider3} />
+      </Box>
+
+      <Box width="83%" margin="auto" marginBottom="30px">
+        <Text fontWeight="bold" fontSize="23px" marginTop="30px">
+          Dine At 5 Star Hotels
+        </Text>
+        <Box display="grid" gridTemplateColumns={["repeat(1,1fr)","repeat(2,1fr)","repeat(3,1fr)"]} gap={"20px"}>
+          {
+            coupons.map((el)=>{
+              return <Box padding={"10px"} border={"1px solid #e8e8e8"}>
+                <Box>
+                <Image src={el.img}/>
+                </Box>
+                <Box>
+                  <Text fontSize="xs" fontWeight="semibold" marginLeft="20px">{el.validity}</Text>
+                </Box>
+              </Box>
+            })
+          }
+        </Box>
       </Box>
     </div>
   );

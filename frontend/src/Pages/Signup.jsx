@@ -13,12 +13,14 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Signup() {
   const toast = useToast();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
@@ -32,7 +34,24 @@ export default function Signup() {
     password: password,
   };
 
-  const handleSignupForm = () => {
+  const AddNewUser = () => {
+    axios
+      .post(
+        `https://good-puce-hummingbird-garb.cyclic.app/user/register`,
+        SignupData
+      )
+      .then((res) => {
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+        navigate("/login");
+      })
+      .catch((e) => console.log("Signup-Error:", e));
+  };
+
+  const handleUserSignupForm = () => {
     let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
       SignupData.name === "" ||
@@ -59,16 +78,22 @@ export default function Signup() {
       });
     } else {
       localStorage.setItem("signupuser", JSON.stringify(SignupData));
-      toast({
-        title: `SignUp Successful ....`,
-        status: "success",
-        isClosable: true,
-      });
+      // toast({
+      //   title: `SignUp Successful LocalStorage ....`,
+      //   status: "success",
+      //   isClosable: true,
+      // });
     }
+  };
+
+  const CallFunctions = () => {
+    AddNewUser();
+    handleUserSignupForm();
   };
 
   return (
     <Flex
+    marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}
@@ -150,7 +175,7 @@ export default function Signup() {
                 _hover={{
                   bg: "#e7818c",
                 }}
-                onClick={handleSignupForm}
+                onClick={CallFunctions}
               >
                 Sign up
               </Button>

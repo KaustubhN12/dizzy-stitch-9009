@@ -12,7 +12,7 @@ import {
   Button
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPremiumRestaurant } from "../../Redux/Restaurants/Action";
+import {  getSalon } from "../Redux/Restaurants/Action";
 import { StarIcon } from "@chakra-ui/icons";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Slider from "react-slick";
@@ -23,7 +23,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
 
-const PremiumRestaurant = () => {
+
+const Salon = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const PremiumRestaurant = () => {
   const [order, setOrder] = useState(initialOrder || "");
   const toast = useToast();
   const page_info =
-    "NEARBUY > DEALS IN NEW DELHI > PREMIUM MERCHANTS - FNB IN NEW DELHI";
+    "NEARBUY > DEALS IN NEW DELHI > ALL HAIRCUT OFFERS IN NEW DELHI";
   let Restaurants = 0;
 
   let dynamicFilter = {};
@@ -65,7 +66,7 @@ const PremiumRestaurant = () => {
   };
 
   useEffect(() => {
-    dispatch(getPremiumRestaurant(obj));
+    dispatch(getSalon(obj));
   }, [location.search]);
 
   useEffect(() => {
@@ -78,19 +79,20 @@ const PremiumRestaurant = () => {
     setSearchParams(params);
   }, [place, order]);
 
-  const premium_restaurant = useSelector(
-    (store) => store.restaurantReducer.premium_restaurant
+  const salonData = useSelector(
+    (store) => store.restaurantReducer.salon
   );
 
-  for (let i = 0; i < premium_restaurant.length; i++) {
+  for (let i = 0; i < salonData.length; i++) {
     Restaurants++;
-    if (dynamicFilter[premium_restaurant[i].place] == undefined) {
-      dynamicFilter[premium_restaurant[i].place] = 1;
-      filterArray.push(premium_restaurant[i].place);
+    if (dynamicFilter[salonData[i].place] == undefined) {
+      dynamicFilter[salonData[i].place] = 1;
+      filterArray.push(salonData[i].place);
     } else {
-      dynamicFilter[premium_restaurant[i].place]++;
+      dynamicFilter[salonData[i].place]++;
     }
   }
+
   
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     <Box position="absolute" marginTop="95px" marginLeft="10px" zIndex={1}>
@@ -219,7 +221,7 @@ const PremiumRestaurant = () => {
     },
   ];
 
-  const localFilter=['Connaught Place', 'Aerocity', 'Outer Ring Road, Paschim Vihar', 'Mayur Vihar Phase 1', 'Soul City Mall, Sector 13 Dwarka', 'IGI T3 Road, Mahipalpur', 'Mahipalpur', 'Nelson Mandela Road, Vasant Kunj Sector C', 'Samalka', 'Sector 10 Dwarka', 'Bijwasan Road, Kapashera', '\n araja Surajmal Road, Surajmal Vihar', '', 'Maharaja Surajmal Road, Surajmal Vihar']
+  const localFilter=['Shankar Road, New Rajendra Nagar', 'Vikas Surya Shopping Mall, Manglam Place Rohini', 'Central Market Lajpat Nagar 2, Lajpat Nagar 2', 'Malviya Nagar Corner Market, Malviya Nagar', 'Vegas Mall, Sector 14 Dwarka', 'Kalkaji', 'Funcity Mall, Rohini Sector 14', 'Rajouri Garden', 'Vasant Kunj Sector B', 'Gurudwara Road, Tilak Nagar', 'Club Road Market, Punjabi Bagh West', 'Mahavir Enclave', 'Shaheed Rajguru Marg, Vikaspuri', 'Lajpat Nagar 2', 'Chattarpur', 'Hauz Khas Village, HKV', 'Nehru Market, Rajouri Garden Extension', 'Maharaja Surajmal Road, Surajmal Vihar', 'Acharya Niketan', 'Malviya Nagar', 'Ajmal Khan Road, Karol Bagh', 'Rohini Sector 24', 'Pyarelal Road, Karol Bagh', 'Rajouri Garden Main Market, Rajouri Garden', 'Patel Road, Patel Nagar East', 'Maharaja Agrasen Marg, Rohini Sector 7', 'Sector 4 Dwarka', 'CR Park Main Road, Chittaranjan Park', 'Ramphal Chowk Road, Palam Village', 'Karkar Duma', 'Subhash Nagar', 'Gurudwara Road, Bhagwan Nagar', 'Sector 7 Market, Palam Village', 'Veer Savarkar Marg, Lajpat Nagar 2', 'Patel Nagar West', 'Gole Market, Bhagat Singh Market', 'Palam', 'New Ashok Nagar', 'Malviya Nagar Road, Panchsheel Extension', 'Club Road, Punjabi Bagh West', 'Azad Nagar', '       Spark Mall, Kamla Nagar', 'Rohini Sector 5', 'Greater Kailash 2', 'Lala Lajpat Rai Road, Jangpura Extension', 'Ram Vihar', 'Ramesh Nagar', 'East of Kailash', 'Jawahar Nagar', 'Paschim Vihar', 'Pitampura', '       Madhu Vihar', 'Vikaspuri', 'Lajpat Nagar 4', 'Connaught Place', 'Om Vihar', 'Janakpuri', 'Palam - Dabri Marg, Dabri', 'Rajouri Garden Extension', 'Club Road Market, Punjabi Bagh Extension', 'Rohini Sector 7', 'Mayur Vihar Phase 1', 'Inderpuri', 'Hospital Road, Jangpura Extension', 'PUSA Road, Old Rajendra Nagar', 'MGF Metropolitan Mall, Saket', '          Vikas Marg, New Rajdhani Enclave', 'Najafgarh Road, Janakpuri', 'Uttam Nagar', 'Samalka', 'Desh Bandhu Gupta Road, Karol Bagh', 'Vasant Square Mall, Vasant Kunj Sector B', 'Rohini Sector 4', 'Mahavir Enclave 1', 'Karol Bagh', 'Lajpat Nagar 1', 'MG Road, Sultanpur', 'Patel Nagar East', 'Hauz Rani', 'Model Town 2', 'Govindpuri', 'Vikas Marg, Preet Vihar']
 
   return (
     <div
@@ -346,7 +348,7 @@ const PremiumRestaurant = () => {
                       marginTop={"10px"}
                       marginBottom="5px"
                     >
-                      Restaurants
+                      Beauty & Salon
                     </Text>
                   </Box>
                   <Box>
@@ -410,7 +412,7 @@ const PremiumRestaurant = () => {
                 fontWeight="semibold"
                 marginBottom={["10px", "10px", "0px"]}
               >
-                Premium Merchants - FNB in New Delhi
+                All Haircut Offers in New Delhi
               </Text>
               <div onChange={handleSort}>
                 <RadioGroup marginRight="20px">
@@ -474,15 +476,15 @@ const PremiumRestaurant = () => {
                 "repeat(3,1fr)",
               ]}
             >
-              {premium_restaurant.map((el) => {
+              {salonData.map((el) => {
                 return (
                   <Box
                     backgroundColor="#ffffff"
                     borderRadius="5px"
                     boxShadow="md"
                     onClick={()=>{
-                      navigate(`/singledetails/${el._id}`)
-                  }}
+                        navigate(`/singledetailsalon/${el._id}`)
+                    }}
                   >
                     <Box
                       maxW="sm"
@@ -593,5 +595,5 @@ const PremiumRestaurant = () => {
   );
 };
 
-export default PremiumRestaurant;
+export default Salon;
 

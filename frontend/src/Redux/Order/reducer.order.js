@@ -62,6 +62,12 @@ export const Orderreducer = (state = initialState, { type, payload }) => {
         ...state,totalPrice:price
       };
     }
+    case types.ORDER_CLEAR:{
+      console.log("inside order_clear");
+      return {
+        ...state,user:initialState.user,totalPrice:initialState.totalPrice
+      }
+    }
     default:
       return state;
   }

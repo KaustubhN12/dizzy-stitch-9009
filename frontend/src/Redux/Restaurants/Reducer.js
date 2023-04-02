@@ -1,4 +1,4 @@
-import { GET_GIFT_CARD_REQUEST, GET_HEALTH_REQUEST, GET_PREMIUM_RESTAURANT_REQUEST, PRODUCT_FAILURE, PRODUCT_REQUEST } from "./ActionType"
+import { GET_GIFT_CARD_REQUEST, GET_HEALTH_REQUEST, GET_PREMIUM_RESTAURANT_REQUEST, GET_SALON_REQUEST, PRODUCT_FAILURE, PRODUCT_REQUEST } from "./ActionType"
 
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
     premium_restaurant:[],
     giftCards:[],
     health:[],
+    salon:[],
 }
 
 export const reducer = (state=initialState,{type,payload}) => {
@@ -28,10 +29,15 @@ export const reducer = (state=initialState,{type,payload}) => {
             return {
                 ...state,isLoading:false,giftCards:payload
             }
+        case GET_SALON_REQUEST:
+            return {
+                ...state,isLoading:false,salon:payload
+            }
         case GET_HEALTH_REQUEST:
             return {
                 ...state,isLoading:false,health:payload
-            }                 
+            }   
+                      
         default:
             return state;
     }

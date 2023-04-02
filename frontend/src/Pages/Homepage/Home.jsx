@@ -1,7 +1,8 @@
-import { Box, Divider, HStack, Img, Text, VStack } from "@chakra-ui/react";
+import { Box, Divider, HStack, Image, Img, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { SliderBanner } from "./Slider/sliderOne/Slider";
 import { SliderCategories, SliderHangout, SliderNearBuy, SliderTopCompanies } from "./Slider/sliderTwo/Slider2";
+import { Link } from "react-router-dom";
 // import { SliderBanner } from "./Slider/Slider";
 // import { SliderCategories, SliderHangout, SliderNearBuy, SliderTopCompanies } from "./Slider/Slider2";
 
@@ -551,51 +552,73 @@ const Home = () => {
     getcategory()
   },[])
 
-   const getcategory=async()=>{
 
-       await fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+
+
+   const getcategory= async()=>{
+
+     await  fetch("https://good-puce-hummingbird-garb.cyclic.app/category/get",{
+
          "Content-type":"application/json"
        }).then((res)=>res.json())
          .then((res)=>setcategory(res.msg))
          .catch((err)=>console.log("err"))
-
    }
 
-  
+
 
   return (
     <Box>
 
-
-       <HStack  >
-
-        {
-          category.map((el)=>{
-            return <Box key={el._id} >
-                     <Img src={el.img} height={"80px"} width={"100%"} alt="pic" />
-                     <p>{el.title}</p>
-                  </Box>
-          })
-        }
- 
-
-       </HStack>
-
+<Box className={"deals-route"} borderBottom="1px solid RGB(226 226 226)">
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(8,1fr)"
+          alignItems="left"
+          marginLeft="120px"
+        >
+          {category?.map((el) => {
+            return (
+              <Link to={el.route?el.route:"/"}>
+              <Box
+                alignItems={"center"}
+                justifyContent="center"
+                padding="20px"
+                _hover={{ backgroundColor: "#f1f1f1" }}
+                textAlign={"center"}
+              >
+                <Image
+                  width="25%"
+                  src={el.img}
+                  marginLeft={"35px"}
+                  marginBottom={"5px"}
+                />
+                <Text fontSize="12px" fontWeight="semibold">
+                  {el.title}
+                </Text>
+              </Box>
+              </Link>
+            );
+          })}
+        </Box>
+      </Box>
 
 
       <Box
-        width={"100%"}
+
+        // border={"2px solid red"}
         backgroundColor={"#f1f1f1"}
       >
         <SliderBanner data={bannerSlider} />
       </Box>
       <br />
       <Box
-        width={"88%"}
+        width={["5%", "40%", "88%"]}
+
         margin="auto"
       >
         <Img
-          borderRadius="6px"
+          borderRadius={["2px", "4px", "6px"]}
           src="https://img4.nbstatic.in/tr:w-2800/6409c9d58db992000b50b90d.jpg"
           alt="" />
       </Box>
@@ -667,6 +690,7 @@ const Home = () => {
           fontFamily="sans-serif"
         // marginLeft={"40px"}
         >Popular Hangouts</Text>
+        <br />
         < SliderHangout data={hangOut} />
       </Box>
       <br />
@@ -828,8 +852,9 @@ const Home = () => {
         </HStack>
       </Box>
 
-
+      <br />
     </Box>
+
   );
 };
 
