@@ -9,15 +9,18 @@ import {
   Stack,
   Button,
   Heading,
-  Text,
   useColorModeValue,
   useToast,
+  Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function AdminLogin() {
   const toast = useToast();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +28,24 @@ export default function AdminLogin() {
   const AdminLoginData = {
     email: email,
     password: password,
+  };
+
+  const CheckAdmin = () => {
+    axios
+      .post(
+        `https://good-puce-hummingbird-garb.cyclic.app/admin/login`,
+        AdminLoginData
+      )
+      .then((res) => {
+        toast({
+          title: res.data.msg,
+          status: "success",
+          isClosable: true,
+        });
+        localStorage.setItem("admin-token", res.data.token);
+        navigate("/admin");
+      })
+      .catch((e) => console.log("Login-Error:", e));
   };
 
   const handleAdminLoginForm = () => {
@@ -47,11 +68,11 @@ export default function AdminLogin() {
         signupData.password === AdminLoginData.password
       ) {
         localStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
-        toast({
-          title: "Login Successfully",
-          status: "success",
-          isClosable: true,
-        });
+        // toast({
+        //   title: "Login Successfully",
+        //   status: "success",
+        //   isClosable: true,
+        // });
       } else if (
         signupData.email !== AdminLoginData.email &&
         signupData.password === AdminLoginData.password
@@ -78,6 +99,11 @@ export default function AdminLogin() {
         });
       }
     }
+  };
+
+  const CallFunctions = () => {
+    CheckAdmin();
+    handleAdminLoginForm();
   };
 
   return (
@@ -144,10 +170,21 @@ export default function AdminLogin() {
                 _hover={{
                   bg: "#e7818c",
                 }}
-                onClick={handleAdminLoginForm}
+                onClick={CallFunctions}
               >
                 Login
               </Button>
+            </Stack>
+            <Stack pt={2}>
+              <Text align={"center"}>
+                Are you new Admin ?{" "}
+                <Link
+                  to="/adminsignup"
+                  style={{ color: "blue", fontWeight: "bold" }}
+                >
+                  Signup
+                </Link>
+              </Text>
             </Stack>
           </Stack>
         </Box>
