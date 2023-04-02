@@ -111,6 +111,7 @@ export default function Login() {
 
   return (
     <Flex
+    marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}
@@ -121,7 +122,7 @@ export default function Login() {
         spacing={8}
         mx={"auto"}
         maxW={"lg"}
-        py={12}
+        py={4}
         px={6}
       >
         <Stack align={"center"}>

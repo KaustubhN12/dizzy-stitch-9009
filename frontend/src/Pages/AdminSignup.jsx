@@ -93,6 +93,7 @@ export default function AdminSignup() {
 
   return (
     <Flex
+    marginTop="-50px"
       minH={"100vh"}
       align={"center"}
       justify={"center"}

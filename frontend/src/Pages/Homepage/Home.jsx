@@ -572,7 +572,7 @@ const Home = () => {
           alignItems="left"
           marginLeft="120px"
         >
-          {category.map((el) => {
+          {category?.map((el) => {
             return (
               <Link to={el.route?el.route:"/"}>
               <Box

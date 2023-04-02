@@ -4,9 +4,18 @@ import { Box, Button, Grid, GridItem, HStack, Icon, Img, Input, MenuButton, Text
 import React from 'react'
 import { ImLocation } from 'react-icons/im'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("user-token");
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    window.location.reload();
+    navigate("/")
+  }
+
   return (
     <Box width={"100%"} borderBottom={"1px solid RGB(226 226 226)"}>
       <Grid
@@ -53,7 +62,7 @@ export const Navbar = () => {
                 <Link to="/newsletter"><MenuItem>My Newsletters</MenuItem></Link>
                 <Link to="/refer"><MenuItem>Refer a friend</MenuItem></Link>
                 <Link to="/promotion"><MenuItem>My Proms</MenuItem></Link>
-                  <MenuItem>Sign Out</MenuItem>
+                  <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
 
                 </MenuList>
               </Menu>
