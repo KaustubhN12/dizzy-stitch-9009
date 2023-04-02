@@ -40,6 +40,7 @@ const AllRoutes = () => {
       <Route path="/updatehealth/:id" element={<SingleHealthAdmin />} />
       <Route path="/updatesalon/:id" element={<SingleSalonAdmin />} />
       <Route path="/updategift/:id" element={<SingleGiftAdmin />} />
+      <Route path="/restaurant/premium-restaurant" element={<PremiumRestaurant />}/>
       <Route
         path="/restaurant/premium-restaurant"
         element={<PremiumRestaurant />}
