@@ -483,7 +483,7 @@ const Salon = () => {
                     borderRadius="5px"
                     boxShadow="md"
                     onClick={()=>{
-                        navigate(`/singledetails/${el._id}`)
+                        navigate(`/singledetailsalon/${el._id}`)
                     }}
                   >
                     <Box
