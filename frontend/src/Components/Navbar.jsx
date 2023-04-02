@@ -6,7 +6,7 @@ import { ImLocation } from 'react-icons/im'
 import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
-  const token = true;
+  const token = localStorage.getItem("user-token");
   return (
     <Box width={"100%"} borderBottom={"1px solid RGB(226 226 226)"}>
       <Grid
@@ -58,10 +58,12 @@ export const Navbar = () => {
                 </MenuList>
               </Menu>
                 :
-                <Text>
+                <Link to="/login">
+                <Text >
                   <UnlockIcon />
                   Login / Sign Up
                 </Text>
+                </Link>
 
               }
 
