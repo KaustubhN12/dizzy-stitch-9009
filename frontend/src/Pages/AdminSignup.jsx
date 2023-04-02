@@ -14,69 +14,56 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-export default function AdminLogin() {
+export default function AdminSignup() {
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState();
 
-  const AdminLoginData = {
+  const SignupData = {
+    name: name,
+    phone: phone,
     email: email,
     password: password,
   };
 
-  const handleAdminLoginForm = () => {
-    const signupData = JSON.parse(localStorage.getItem("signupadmin"));
-    if (signupData === null) {
-      toast({
-        title: "Please do SignUp first",
-        status: "error",
-        isClosable: true,
-      });
-    } else if (AdminLoginData.email === "" || AdminLoginData.password === "") {
+  const handleSignupForm = () => {
+    let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (
+      SignupData.name === "" ||
+      SignupData.phone === "" ||
+      SignupData.email === "" ||
+      SignupData.password === ""
+    ) {
       toast({
         title: "Please fill all information",
         status: "warning",
         isClosable: true,
       });
+    } else if (SignupData.phone.length !== 10) {
+      toast({
+        title: "Please fill valid phone number",
+        status: "warning",
+        isClosable: true,
+      });
+    } else if (!SignupData.email.match(mailformat)) {
+      toast({
+        title: "Please fill valid email address",
+        status: "warning",
+        isClosable: true,
+      });
     } else {
-      if (
-        signupData.email === AdminLoginData.email &&
-        signupData.password === AdminLoginData.password
-      ) {
-        localStorage.setItem("loginuser", JSON.stringify(AdminLoginData));
-        toast({
-          title: "Login Successfully",
-          status: "success",
-          isClosable: true,
-        });
-      } else if (
-        signupData.email !== AdminLoginData.email &&
-        signupData.password === AdminLoginData.password
-      ) {
-        toast({
-          title: "Please enter valid email",
-          status: "warning",
-          isClosable: true,
-        });
-      } else if (
-        signupData.email === AdminLoginData.email &&
-        signupData.password !== AdminLoginData.password
-      ) {
-        toast({
-          title: "Please enter valid password",
-          status: "warning",
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Invalid Credentials",
-          status: "error",
-          isClosable: true,
-        });
-      }
+      localStorage.setItem("signupadmin", JSON.stringify(SignupData));
+      toast({
+        title: `SignUp Successful ....`,
+        status: "success",
+        isClosable: true,
+      });
     }
   };
 
@@ -97,7 +84,7 @@ export default function AdminLogin() {
       >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
-            Admin Login
+            Admin Sign Up
           </Heading>
         </Stack>
         <Box
@@ -107,6 +94,22 @@ export default function AdminLogin() {
           p={8}
         >
           <Stack spacing={4}>
+            <FormControl id="firstName" isRequired>
+              <FormLabel>Full Name</FormLabel>
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FormControl>
+            <FormControl id="phone" isRequired>
+              <FormLabel>Phone</FormLabel>
+              <Input
+                type="number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </FormControl>
             <FormControl id="email" isRequired>
               <FormLabel>Email</FormLabel>
               <Input
@@ -144,10 +147,21 @@ export default function AdminLogin() {
                 _hover={{
                   bg: "#e7818c",
                 }}
-                onClick={handleAdminLoginForm}
+                onClick={handleSignupForm}
               >
-                Login
+                Sign up
               </Button>
+            </Stack>
+            <Stack pt={6}>
+              <Text align={"center"}>
+                Already a admin ?{" "}
+                <Link
+                  to="/adminlogin"
+                  style={{ color: "blue", fontWeight: "bold" }}
+                >
+                  Login
+                </Link>
+              </Text>
             </Stack>
           </Stack>
         </Box>
