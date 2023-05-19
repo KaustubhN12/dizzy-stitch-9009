@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
+
 // const params_data = [
 //   {
 //     catageory: "BEAUTY SALON",
@@ -44,6 +45,7 @@ function Singledetails() {
 
   const [recomenddata, setrecommendata] = useState([]);
   const order_data = useSelector((store) => store.Orderreducer.user);
+  console.log("order_cart",order_data)
   const [order, setorder] = useState([]);
   const [singlepagedata, setsinglepagedata] = useState([]);
   const order_total = useSelector((store) => store.Orderreducer.totalPrice);

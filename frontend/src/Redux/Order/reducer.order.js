@@ -8,6 +8,7 @@ const initialState = {
 export const Orderreducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.ORDER_ADD: {
+
       return {
         ...state,
         user: [...state.user, payload],
@@ -38,19 +39,25 @@ export const Orderreducer = (state = initialState, { type, payload }) => {
     }
 
     case types.ORDER_DEC: {
+      let price = 0;
       for (let i = 0; i < state.user.length; i++) {
         if (payload == state.user[i].id) {
           if (state.user[i].count != 0) {
             state.user[i].count--;
+            
           }
+         
         }
       }
-      let price = 0;
+      
       for (let i = 0; i < state.user.length; i++) {
         if (state.user[i].count) {
           price += state.user[i].price * state.user[i].count;
         } else {
-          price += state.user[i].price;
+          price =price- state.user[i].price;
+          if(price<0){
+            price=0
+          }
         }
       }
       console.log("users", state.user);

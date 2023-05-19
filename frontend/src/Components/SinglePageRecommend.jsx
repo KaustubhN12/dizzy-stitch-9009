@@ -7,9 +7,11 @@ import {
   orderdec_redux,
   orderinc_redux,
 } from "../Redux/Order/action.order";
+import { useToast } from '@chakra-ui/react'
 import { Orderreducer } from "../Redux/Order/reducer.order";
 
 function SinglePageRecommend({ recomenddata }) {
+  const toast = useToast()
   const dispatch = useDispatch();
   const order_data = useSelector((store) => store.Orderreducer.user);
   // console.log(recomenddata)
@@ -17,37 +19,76 @@ function SinglePageRecommend({ recomenddata }) {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    // console.log("Recommend")
+    console.log("Recommend")
     setdata(recomenddata);
   }, [recomenddata]);
 
   const handleadd = (_id) => {
     // console.log("filter", _id);
+    console.log("data",data)
+    console.log("order_data",order_data)
 
-    data.filter((el) => {
-      for (let i = 0; i < order_data.length; i++) {
-        if (order_data[i]._id == el._id) {
-          console.log("item present in order");
-          return;
+    // data.filter((el) => {
+    //   for (let i = 0; i < order_data.length; i++) {
+    //     if (order_data[i].id == el._id) {
+    //       alert("item present in order");
+    //       return;
+    //     }
+    //   }
+    //   if (el._id == _id) {
+    //     const payload = {
+    //       id: el._id,
+    //       Title: el.Title,
+    //       price: Number(el.offerprice),
+    //       count: 1,
+    //     };
+    //     // console.log(payload);
+    //     dispatch(addorder_redux(payload));
+    //   }
+    // });
+
+    
+    let flg=true
+    if(order_data){
+      order_data.map((el,i)=>{
+        if(el.id==_id){
+          // alert('Item present')
+          toast({
+            title: 'Item Present',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+          flg=false
+          return 
         }
-      }
-      if (el._id == _id) {
-        const payload = {
-          id: el._id,
-          Title: el.Title,
-          price: Number(el.offerprice),
-          count: 1,
-        };
-        console.log(payload);
-        dispatch(addorder_redux(payload));
-      }
-    });
+      })
+    }
+
+    if(flg|| (order_data.length==0)){
+      data.map((el,i)=>{
+        if(el._id==_id){
+          const payload = {
+            id: el._id,
+            Title: el.Title,
+            price: Number(el.offerprice),
+            count: 1,
+          };
+          // console.log(payload);
+          dispatch(addorder_redux(payload));
+
+        }
+      })
+
+    }
+  
+
   };
 
   const handleInc = (id) => {
     order_data?.filter((el) => {
       if (el.id == id) {
-        console.log(id);
+        // console.log(id);
         dispatch(orderinc_redux(id));
       }
     });
